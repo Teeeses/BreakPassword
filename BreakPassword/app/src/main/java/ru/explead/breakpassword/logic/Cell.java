@@ -8,12 +8,13 @@ import android.widget.TextView;
 
 public class Cell {
 
+    public static int NO_ACTIVE = -1;
     private int value;
     private TextView tvCell;
 
     public Cell(TextView tvCell) {
         this.tvCell = tvCell;
-        this.value = -1;
+        this.value = NO_ACTIVE;
     }
 
     public TextView getTvCell() {
@@ -30,11 +31,11 @@ public class Cell {
     }
 
     public void setText() {
-        tvCell.setText((value != -1) ? Integer.toString(value) : "");
+        tvCell.setText((value != NO_ACTIVE) ? Integer.toString(value) : "");
     }
 
     public void plusOne() {
-        if(value != -1) {
+        if(value != NO_ACTIVE) {
             value = (value == 9) ? 0 : value + 1;
         } else {
             value = 1;

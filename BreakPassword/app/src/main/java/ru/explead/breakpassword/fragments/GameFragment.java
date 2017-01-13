@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import ru.explead.breakpassword.app.App;
 import ru.explead.breakpassword.logic.Cell;
 import ru.explead.breakpassword.logic.Controller;
 
+
 /**
  * Created by develop on 13.01.2017.
  */
@@ -25,6 +27,7 @@ import ru.explead.breakpassword.logic.Controller;
 public class GameFragment extends Fragment {
 
     private LinearLayout cellsLayout;
+    private Button btnHack;
     private Controller controller;
 
     @Override
@@ -39,6 +42,7 @@ public class GameFragment extends Fragment {
 
         controller = App.getController();
 
+        btnHack = (Button) view.findViewById(R.id.btnHack);
         cellsLayout = (LinearLayout) view.findViewById(R.id.cellsLayout);
 
         ViewTreeObserver vto = cellsLayout.getViewTreeObserver();
@@ -51,8 +55,17 @@ public class GameFragment extends Fragment {
             }
         });
 
+        btnHack.setOnClickListener(btnHackClick);
+
         return view;
     }
+
+    View.OnClickListener btnHackClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+        }
+    };
 
     public void createCells(int width) {
         ArrayList<Cell> cells = new ArrayList<>();
@@ -74,7 +87,7 @@ public class GameFragment extends Fragment {
             cell.getTvCell().setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    cell.setValue(-1);
+                    cell.setValue(Cell.NO_ACTIVE);
                     return false;
                 }
             });
