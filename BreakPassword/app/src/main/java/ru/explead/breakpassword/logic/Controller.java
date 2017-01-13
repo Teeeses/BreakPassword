@@ -17,7 +17,7 @@ public class Controller {
     private Random random = new Random();
 
     public Controller() {
-        numberCells = 100;
+        numberCells = 10;
         generatePassword(numberCells);
         for(int i = 0; i < password.size(); i++) {
             Log.d("TAG", Integer.toString(password.get(i)));
@@ -29,7 +29,7 @@ public class Controller {
         for(int i = 0; i < numberCells; i++) {
             int number;
             do {
-                number = random.nextInt(9);
+                number = random.nextInt(10);
             } while (password.contains(number));
             password.add(number);
         }
