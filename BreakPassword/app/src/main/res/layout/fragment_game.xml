@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/rootGameLayout"
-                android:clickable="true"
-                android:background="@color/colorPrimary">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rootGameLayout"
+    android:clickable="true"
+    android:background="@color/turquoise"
+    android:padding="@dimen/standard_margin">
 
-    <ru.explead.breakpassword.Surface
-        android:id="@+id/viewSurface"
+
+    <LinearLayout
+        android:id="@+id/cellsLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" />
+
 </RelativeLayout>

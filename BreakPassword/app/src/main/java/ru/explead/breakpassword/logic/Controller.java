@@ -14,14 +14,13 @@ public class Controller {
 
     private int numberCells;
     private ArrayList<Integer> password = new ArrayList<>();
+    private ArrayList<Cell> cells = new ArrayList<>();
     private Random random = new Random();
+    private int widthCell;
 
     public Controller() {
-        numberCells = 10;
+        numberCells = 4;
         generatePassword(numberCells);
-        for(int i = 0; i < password.size(); i++) {
-            Log.d("TAG", Integer.toString(password.get(i)));
-        }
     }
 
     public void generatePassword(int numberCells) {
@@ -35,6 +34,10 @@ public class Controller {
         }
     }
 
+    public ArrayList<Cell> getCells() {
+        return cells;
+    }
+
     public ArrayList<Integer> getPassword() {
         return password;
     }
@@ -45,5 +48,9 @@ public class Controller {
 
     public void setNumberCells(int numberCells) {
         this.numberCells = numberCells;
+    }
+
+    public void setCells(ArrayList<Cell> cells) {
+        this.cells = cells;
     }
 }

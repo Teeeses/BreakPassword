@@ -1,5 +1,7 @@
 package ru.explead.breakpassword.logic;
 
+import android.widget.TextView;
+
 /**
  * Created by develop on 13.01.2017.
  */
@@ -7,8 +9,16 @@ package ru.explead.breakpassword.logic;
 public class Cell {
 
     private int value;
+    private TextView tvCell;
 
-    private Cell() {}
+    public Cell(TextView tvCell) {
+        this.tvCell = tvCell;
+        this.value = -1;
+    }
+
+    public TextView getTvCell() {
+        return tvCell;
+    }
 
     public int getValue() {
         return value;
@@ -16,5 +26,15 @@ public class Cell {
 
     public void setValue(int value) {
         this.value = value;
+        tvCell.setText(Integer.toString(value));
+    }
+
+    public void plusOne() {
+        if(value != -1) {
+            value = (value == 9) ? 0 : value + 1;
+        } else {
+            value = 1;
+        }
+        tvCell.setText(Integer.toString(value));
     }
 }
