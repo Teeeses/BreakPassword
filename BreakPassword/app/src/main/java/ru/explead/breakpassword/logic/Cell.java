@@ -26,7 +26,11 @@ public class Cell {
 
     public void setValue(int value) {
         this.value = value;
-        tvCell.setText(Integer.toString(value));
+        setText();
+    }
+
+    public void setText() {
+        tvCell.setText((value != -1) ? Integer.toString(value) : "");
     }
 
     public void plusOne() {
@@ -35,6 +39,6 @@ public class Cell {
         } else {
             value = 1;
         }
-        tvCell.setText(Integer.toString(value));
+        setText();
     }
 }

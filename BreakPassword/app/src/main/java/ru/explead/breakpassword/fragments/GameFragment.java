@@ -70,6 +70,14 @@ public class GameFragment extends Fragment {
                     cell.plusOne();
                 }
             });
+
+            cell.getTvCell().setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    cell.setValue(-1);
+                    return false;
+                }
+            });
         }
         controller.setCells(cells);
     }

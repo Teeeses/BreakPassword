@@ -1,18 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/rootGameLayout"
     android:clickable="true"
     android:background="@color/turquoise"
-    android:padding="@dimen/standard_margin">
+    android:paddingLeft="@dimen/big_margin"
+    android:paddingRight="@dimen/big_margin"
+    android:paddingTop="@dimen/big_margin"
+    android:paddingBottom="@dimen/big_margin">
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/big_text"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:text="Пароль"/>
 
     <LinearLayout
         android:id="@+id/cellsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/standard_margin"
         android:orientation="horizontal" />
 
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:id="@+id/listLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:layout_marginTop="@dimen/big_margin"
+            android:layout_marginBottom="@dimen/big_margin"
+            android:layout_above="@+id/btnHack">
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btnHack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/big_text"
+                android:paddingTop="@dimen/mini_margin"
+                android:paddingBottom="@dimen/mini_margin"
+                android:paddingLeft="@dimen/big_margin"
+                android:textAllCaps="false"
+                android:paddingRight="@dimen/big_margin"
+                android:layout_centerHorizontal="true"
+                android:background="@color/colorAccent"
+                android:text="Взломать" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
