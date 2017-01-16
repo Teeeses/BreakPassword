@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">BreakPassword</string>
+    <string name="app_name">Взломай пароль</string>
 
     <string name="onPlace">Цифр на местах: %d</string>
     <string name="matches">Совпрадений: %d</string>
+    <string name="password">Пароль</string>
+    <string name="hack">Взломать</string>
+    <string name="committedAttempts">%d попыток взлома</string>
 </resources>

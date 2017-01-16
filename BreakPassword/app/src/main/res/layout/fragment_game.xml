@@ -19,7 +19,7 @@
         android:textSize="@dimen/big_text"
         android:gravity="center_horizontal"
         android:textStyle="bold"
-        android:text="Пароль"/>
+        android:text="@string/password"/>
 
     <LinearLayout
         android:id="@+id/cellsLayout"
@@ -45,11 +45,24 @@
             android:layout_marginBottom="@dimen/big_margin"
             android:layout_above="@+id/bottomLayout" />
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/bottomLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
             android:layout_alignParentBottom="true">
+
+            <TextView
+                android:id="@+id/tvAttempts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/more_standard_text"
+                android:gravity="center_horizontal"
+                android:layout_above="@+id/btnHack"
+                android:textStyle="bold"/>
+
 
             <Button
                 android:id="@+id/btnHack"
@@ -62,10 +75,10 @@
                 android:paddingLeft="@dimen/big_margin"
                 android:textAllCaps="false"
                 android:paddingRight="@dimen/big_margin"
-                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/standard_margin"
                 android:background="@color/colorPrimary"
-                android:text="Взломать" />
-        </RelativeLayout>
+                android:text="@string/hack" />
+        </LinearLayout>
 
     </RelativeLayout>
 

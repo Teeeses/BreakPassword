@@ -30,6 +30,8 @@ public class Controller {
      */
     private ArrayList<Data> data = new ArrayList<>();
 
+    private int numberAttempts = 0;
+
     private Random random = new Random();
 
 
@@ -61,6 +63,8 @@ public class Controller {
      * @return - объект Data
      */
     public Data toAttempt() {
+        numberAttempts++;
+
         ArrayList<Integer> resultOnPlace = getNumberOnPlace();
         ArrayList<Integer> resultMatches = new ArrayList<>();
 
@@ -123,6 +127,10 @@ public class Controller {
 
     public ArrayList<Data> getData() {
         return data;
+    }
+
+    public int getNumberAttempts() {
+        return numberAttempts;
     }
 
     public ArrayList<Integer> getPassword() {

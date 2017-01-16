@@ -38,6 +38,7 @@ public class GameFragment extends Fragment {
      */
     private LinearLayout cellsLayout;
     private Button btnHack;
+    private TextView tvAttempts;
 
     private ListView listView;
     private DataAdapter adapter;
@@ -49,6 +50,7 @@ public class GameFragment extends Fragment {
 
         controller = App.getController();
 
+        tvAttempts = (TextView) view.findViewById(R.id.tvAttempts);
         btnHack = (Button) view.findViewById(R.id.btnHack);
         cellsLayout = (LinearLayout) view.findViewById(R.id.cellsLayout);
         listView = (ListView) view.findViewById(R.id.listView);
@@ -67,6 +69,8 @@ public class GameFragment extends Fragment {
 
         btnHack.setOnClickListener(btnHackClick);
 
+        tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
+
         return view;
     }
 
@@ -76,9 +80,8 @@ public class GameFragment extends Fragment {
     View.OnClickListener btnHackClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Data data = controller.toAttempt();
-            System.out.println(Integer.toString(data.getOnPlace()) + "  " + Integer.toString(data.getMatches()));
-
+            controller.toAttempt();
+            tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
             adapter.notifyDataSetChanged();
         }
     };
