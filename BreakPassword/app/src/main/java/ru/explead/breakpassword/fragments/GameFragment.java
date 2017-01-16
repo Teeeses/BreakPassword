@@ -17,8 +17,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ru.explead.breakpassword.R;
+import ru.explead.breakpassword.adapters.DataAdapter;
 import ru.explead.breakpassword.app.App;
 import ru.explead.breakpassword.beans.Cell;
+import ru.explead.breakpassword.beans.Data;
 import ru.explead.breakpassword.logic.Controller;
 
 
@@ -36,13 +38,10 @@ public class GameFragment extends Fragment {
      */
     private LinearLayout cellsLayout;
     private Button btnHack;
+
     private ListView listView;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
+    private DataAdapter adapter;
+    private ArrayList<Data> data = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,6 +52,8 @@ public class GameFragment extends Fragment {
         btnHack = (Button) view.findViewById(R.id.btnHack);
         cellsLayout = (LinearLayout) view.findViewById(R.id.cellsLayout);
         listView = (ListView) view.findViewById(R.id.listView);
+        adapter = new DataAdapter(controller);
+        listView.setAdapter(adapter);
 
         ViewTreeObserver vto = cellsLayout.getViewTreeObserver();
         vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
@@ -75,13 +76,16 @@ public class GameFragment extends Fragment {
     View.OnClickListener btnHackClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            Data data = controller.toAttempt();
+            System.out.println(Integer.toString(data.getOnPlace()) + "  " + Integer.toString(data.getMatches()));
 
+            adapter.notifyDataSetChanged();
         }
     };
 
     /**
      * Создаем клетки
-     * @param width
+     * @param width - длина контейнера для клеток
      */
     public void createCells(int width) {
         float padding = getPadding();

@@ -15,9 +15,13 @@ public class Data {
      */
     private int matches;
 
-    public Data(int onPlace, int matches) {
+    private String probable;
+
+
+    public Data(int onPlace, int matches, String probable) {
         this.onPlace = onPlace;
         this.matches = matches;
+        this.probable = probable;
     }
 
     public int getOnPlace() {
@@ -26,5 +30,9 @@ public class Data {
 
     public int getMatches() {
         return matches;
+    }
+
+    public String getProbable() {
+        return probable;
     }
 }

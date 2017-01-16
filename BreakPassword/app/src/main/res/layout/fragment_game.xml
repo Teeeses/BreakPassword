@@ -41,7 +41,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:dividerHeight="@dimen/radius"
-            android:background="@color/colorPrimary"
             android:layout_marginTop="@dimen/big_margin"
             android:layout_marginBottom="@dimen/big_margin"
             android:layout_above="@+id/bottomLayout" />
