@@ -29,15 +29,25 @@ public class Controller {
      * Список информации по попыткам
      */
     private ArrayList<Data> data = new ArrayList<>();
-
     private int numberAttempts = 0;
-
     private Random random = new Random();
 
+    private int EASY = 3, MEDIUM = 4, HARD = 5, VERY_HARD = 6;
+    private int level;
 
 
     public Controller() {
-        numberCells = 4;
+        level = EASY;
+        numberCells = level;
+        generatePassword(numberCells);
+    }
+
+    public void restart() {
+        numberCells = level;
+        numberAttempts = 0;
+        password.clear();
+        data.clear();
+        cells.clear();
         generatePassword(numberCells);
     }
 
@@ -78,7 +88,7 @@ public class Controller {
             }
         }
         Data resultData = new Data(resultOnPlace.size(), resultMatches.size(), toStringPasswordProbable());
-        data.add(resultData);
+        data.add(0, resultData);
 
         return resultData;
     }
@@ -125,8 +135,29 @@ public class Controller {
         return builder.toString();
     }
 
+    /**
+     * Проврка на пустые клетки
+     * @return - true -если все заполнены
+     */
+    public boolean isEmptyCells() {
+        for(int i = 0; i < numberCells; i++) {
+            if(cells.get(i).getValue() == Cell.NO_ACTIVE) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public ArrayList<Data> getData() {
         return data;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public int getNumberAttempts() {

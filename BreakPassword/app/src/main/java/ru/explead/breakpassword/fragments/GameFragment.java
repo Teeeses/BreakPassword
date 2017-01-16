@@ -1,13 +1,18 @@
 package ru.explead.breakpassword.fragments;
 
+import android.app.Dialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -21,6 +26,7 @@ import ru.explead.breakpassword.adapters.DataAdapter;
 import ru.explead.breakpassword.app.App;
 import ru.explead.breakpassword.beans.Cell;
 import ru.explead.breakpassword.beans.Data;
+import ru.explead.breakpassword.dialog.DialogMenu;
 import ru.explead.breakpassword.logic.Controller;
 
 
@@ -39,10 +45,15 @@ public class GameFragment extends Fragment {
     private LinearLayout cellsLayout;
     private Button btnHack;
     private TextView tvAttempts;
+    private ImageView btnMenu;
 
     private ListView listView;
     private DataAdapter adapter;
-    private ArrayList<Data> data = new ArrayList<>();
+
+    /**
+     * Ширина контейнера под клетки
+     */
+    private int width;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,16 +63,26 @@ public class GameFragment extends Fragment {
 
         tvAttempts = (TextView) view.findViewById(R.id.tvAttempts);
         btnHack = (Button) view.findViewById(R.id.btnHack);
+        btnMenu = (ImageView) view.findViewById(R.id.btnMenu);
         cellsLayout = (LinearLayout) view.findViewById(R.id.cellsLayout);
         listView = (ListView) view.findViewById(R.id.listView);
         adapter = new DataAdapter(controller);
         listView.setAdapter(adapter);
 
+        btnMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogMenu dialog = new DialogMenu(getActivity());
+                dialog.show();
+            }
+        });
+
         ViewTreeObserver vto = cellsLayout.getViewTreeObserver();
         vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             public boolean onPreDraw() {
                 cellsLayout.getViewTreeObserver().removeOnPreDrawListener(this);
-                createCells(cellsLayout.getMeasuredWidth());
+                width = cellsLayout.getMeasuredWidth();
+                createCells();
                 addCellsOnLayout();
                 return true;
             }
@@ -80,17 +101,28 @@ public class GameFragment extends Fragment {
     View.OnClickListener btnHackClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            controller.toAttempt();
-            tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
-            adapter.notifyDataSetChanged();
+            if(controller.isEmptyCells()) {
+                controller.toAttempt();
+                tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
+                adapter.notifyDataSetChanged();
+            } else {
+                Snackbar customBar = Snackbar.make(view , getActivity().getResources().getString(R.string.cellIsEmpty), Snackbar.LENGTH_LONG);
+                customBar.setDuration(1000);
+                View viewSnackBar = customBar.getView();
+                TextView tvSnackBar = (TextView) viewSnackBar.findViewById(android.support.design.R.id.snackbar_text);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+                    tvSnackBar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                else
+                    tvSnackBar.setGravity(Gravity.CENTER_HORIZONTAL);
+                customBar.show();
+            }
         }
     };
 
     /**
      * Создаем клетки
-     * @param width - длина контейнера для клеток
      */
-    public void createCells(int width) {
+    public void createCells() {
         float padding = getPadding();
 
         ArrayList<Cell> cells = new ArrayList<>();
@@ -138,6 +170,18 @@ public class GameFragment extends Fragment {
     public float getPadding() {
         float size = getActivity().getResources().getDimension(R.dimen.radius);
         return size;
+    }
+
+    /**
+     * Начать заново
+     */
+    public void onRestart() {
+        cellsLayout.removeAllViews();
+        controller.restart();
+        createCells();
+        addCellsOnLayout();
+        adapter.notifyDataSetChanged();
+        tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
     }
 
 }

@@ -1,85 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/rootGameLayout"
     android:background="@android:color/transparent"
-    android:clickable="true"
-    android:paddingLeft="@dimen/big_margin"
-    android:paddingRight="@dimen/big_margin"
-    android:paddingTop="@dimen/big_margin"
-    android:paddingBottom="@dimen/big_margin">
+    android:clickable="true" >
 
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/big_text"
-        android:gravity="center_horizontal"
-        android:textStyle="bold"
-        android:text="@string/password"/>
+    <ImageView
+        android:id="@+id/btnMenu"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/menu"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/mini_margin"/>
 
     <LinearLayout
-        android:id="@+id/cellsLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/standard_margin"
-        android:orientation="horizontal" >
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/big_margin"
+        android:paddingRight="@dimen/big_margin"
+        android:paddingTop="@dimen/big_margin"
+        android:paddingBottom="@dimen/big_margin">
 
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-
-        <ListView
-            android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:dividerHeight="@dimen/radius"
-            android:layout_marginTop="@dimen/big_margin"
-            android:layout_marginBottom="@dimen/big_margin"
-            android:layout_above="@+id/bottomLayout" />
-
-        <LinearLayout
-            android:id="@+id/bottomLayout"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_alignParentBottom="true">
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/big_text"
+            android:gravity="center_horizontal"
+            android:textStyle="bold"
+            android:text="@string/password"/>
 
-            <TextView
-                android:id="@+id/tvAttempts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/more_standard_text"
-                android:gravity="center_horizontal"
-                android:layout_above="@+id/btnHack"
-                android:textStyle="bold"/>
+        <LinearLayout
+            android:id="@+id/cellsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:orientation="horizontal" >
 
 
-            <Button
-                android:id="@+id/btnHack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/big_text"
-                android:paddingTop="@dimen/mini_margin"
-                android:paddingBottom="@dimen/mini_margin"
-                android:paddingLeft="@dimen/big_margin"
-                android:textAllCaps="false"
-                android:paddingRight="@dimen/big_margin"
-                android:layout_marginTop="@dimen/standard_margin"
-                android:background="@color/colorPrimary"
-                android:text="@string/hack" />
         </LinearLayout>
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
-</LinearLayout>
+
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:dividerHeight="@dimen/radius"
+                android:layout_marginTop="@dimen/big_margin"
+                android:layout_marginBottom="@dimen/big_margin"
+                android:layout_above="@+id/bottomLayout" />
+
+            <LinearLayout
+                android:id="@+id/bottomLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/standard_margin">
+
+                <TextView
+                    android:id="@+id/tvAttempts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/more_standard_text"
+                    android:gravity="center_horizontal"
+                    android:layout_above="@+id/btnHack"
+                    android:textStyle="bold"/>
+
+
+                <Button
+                    android:id="@+id/btnHack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/big_text"
+                    android:paddingTop="@dimen/mini_margin"
+                    android:paddingBottom="@dimen/mini_margin"
+                    android:paddingLeft="@dimen/big_margin"
+                    android:textAllCaps="false"
+                    android:paddingRight="@dimen/big_margin"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/hack" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

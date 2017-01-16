@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="@dimen/standard_margin"
+    android:layout_marginLeft="@dimen/standard_margin"
+    android:padding="@dimen/standard_margin" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btnRestart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/more_standard_text"
+            android:textColor="@android:color/black"
+            android:textAllCaps="false"
+            android:padding="@dimen/mini_margin"
+            android:text="@string/restart" />
+
+    </LinearLayout>
+</RelativeLayout>
