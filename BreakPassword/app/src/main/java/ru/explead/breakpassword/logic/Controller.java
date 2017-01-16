@@ -1,9 +1,9 @@
 package ru.explead.breakpassword.logic;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Random;
+
+import ru.explead.breakpassword.beans.Cell;
 
 /**
  * Created by develop on 13.01.2017.
@@ -11,19 +11,34 @@ import java.util.Random;
 
 public class Controller {
 
-
+    /**
+     * Количество цифр в пароле
+     */
     private int numberCells;
+    /**
+     * Пароль
+     */
     private ArrayList<Integer> password = new ArrayList<>();
+    /**
+     * Массив клеток
+     */
     private ArrayList<Cell> cells = new ArrayList<>();
+
     private Random random = new Random();
-    private int widthCell;
+
+
 
     public Controller() {
         numberCells = 4;
         generatePassword(numberCells);
     }
 
+    /**
+     * Генерируем пароль
+     * @param numberCells - количество цифр
+     */
     public void generatePassword(int numberCells) {
+        password.clear();
         this.numberCells = numberCells;
         for(int i = 0; i < numberCells; i++) {
             int number;
@@ -32,6 +47,19 @@ public class Controller {
             } while (password.contains(number));
             password.add(number);
         }
+        System.out.println(toStringPassword());
+    }
+
+    /**
+     * Метод для вывода пароля
+     * @return - строка(пароль)
+     */
+    public String toStringPassword() {
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0; i < numberCells; i++) {
+            builder.append(password.get(i));
+        }
+        return builder.toString();
     }
 
     public ArrayList<Cell> getCells() {

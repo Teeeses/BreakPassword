@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="70dp"
-    android:layout_height="70dp"
-    android:textColor="@android:color/white"
-    android:background="@drawable/circle_bg"
+<RelativeLayout
+    android:id="@+id/root"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
     android:gravity="center"
-    android:textSize="@dimen/giant_text"
-    android:layout_centerInParent="true" />
+    android:paddingLeft="@dimen/radius"
+    android:paddingRight="@dimen/radius"
+    android:layout_weight="1"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/tvCell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:background="@drawable/circle_bg"
+        android:gravity="center"
+        android:textSize="@dimen/giant_text"
+        android:layout_centerInParent="true" />
+</RelativeLayout>
