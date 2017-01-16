@@ -53,7 +53,7 @@ public class Controller {
             } while (password.contains(number));
             password.add(number);
         }
-        System.out.println(toStringPassword());
+        System.out.println(arrayToString(password));
     }
 
     /**
@@ -66,7 +66,7 @@ public class Controller {
 
         for(int i = 0; i < numberCells; i++) {
             for(int j = 0; j < numberCells; j++) {
-                if(!resultOnPlace.contains(i) && !resultMatches.contains(cells.get(j))) {
+                if(!resultOnPlace.contains(i) && !resultMatches.contains(cells.get(j).getValue())) {
                     if(password.get(i) == cells.get(j).getValue()) {
                         resultMatches.add(cells.get(j).getValue());
                     }
@@ -97,10 +97,10 @@ public class Controller {
      * Метод для вывода пароля
      * @return - строка(пароль)
      */
-    public String toStringPassword() {
+    public String arrayToString(ArrayList<Integer> array) {
         StringBuilder builder = new StringBuilder();
-        for(int i = 0; i < numberCells; i++) {
-            builder.append(password.get(i));
+        for(int i = 0; i < array.size(); i++) {
+            builder.append(array.get(i));
         }
         return builder.toString();
     }
