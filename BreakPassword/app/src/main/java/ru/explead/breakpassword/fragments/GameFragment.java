@@ -184,4 +184,8 @@ public class GameFragment extends Fragment {
         tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
     }
 
+    public void openKeyboard() {
+
+    }
+
 }
