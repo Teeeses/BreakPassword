@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -51,6 +52,7 @@ public class GameFragment extends Fragment {
      * Главный слой клавиатуры
      */
     private LinearLayout rootKeyboard;
+    private RelativeLayout rootGameFragment;
     private Button btnHack;
     private TextView tvAttempts;
 
@@ -89,6 +91,21 @@ public class GameFragment extends Fragment {
         listView = (ListView) view.findViewById(R.id.listView);
         adapter = new DataAdapter(controller);
         listView.setAdapter(adapter);
+
+        rootGameFragment = (RelativeLayout) view.findViewById(R.id.rootGameFragment);
+        rootGameFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeKeyboard();
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                closeKeyboard();
+            }
+        });
 
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override

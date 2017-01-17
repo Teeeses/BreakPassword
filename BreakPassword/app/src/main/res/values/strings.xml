@@ -12,7 +12,7 @@
     <string name="committedAttempts">%d попыток взлома</string>
 
 
-    <string name="">Думаю вам лучше не подходить к компьютеру</string>
-    <string name="">Ваши попытки нечтожны, впрочем, как и вы сами</string>
-    <string name="">Лучше дай телефон человеку поумнее</string>
+    <string name="a">Думаю вам лучше не подходить к компьютеру</string>
+    <string name="aa">Ваши попытки нечтожны, впрочем, как и вы сами</string>
+    <string name="aaa">Лучше дай телефон человеку поумнее</string>
 </resources>
