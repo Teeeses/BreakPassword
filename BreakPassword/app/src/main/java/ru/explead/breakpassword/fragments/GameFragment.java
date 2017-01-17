@@ -54,7 +54,7 @@ public class GameFragment extends Fragment {
     private ListView listView;
     private DataAdapter adapter;
 
-    private boolean isShowKeyboard = false;
+    public static boolean isShowKeyboard = false;
 
     /**
      * Ширина контейнера под клетки
@@ -208,7 +208,7 @@ public class GameFragment extends Fragment {
     /**
      * Закрываем кастомную клавиатуру
      */
-    private void closeKeyboard() {
+    public void closeKeyboard() {
         if(isShowKeyboard) {
 
             controller.removeAllFocusCells();

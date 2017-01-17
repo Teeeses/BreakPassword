@@ -1,9 +1,12 @@
 package ru.explead.breakpassword;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -46,8 +49,35 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        finish();
+
+        if(GameFragment.isShowKeyboard) {
+            if(fragment instanceof GameFragment) {
+                ((GameFragment)fragment).closeKeyboard();
+            }
+        } else {
+            if (fragment instanceof GameFragment) {
+                //Диалог подтверждения выхода
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Действительно выйти из игры?");
+                builder.setPositiveButton("ДА", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("НЕТ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
+            } else {
+                super.onBackPressed();
+            }
+        }
+
     }
 
     public static Activity getActivity() {
