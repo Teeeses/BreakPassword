@@ -27,6 +27,7 @@ import ru.explead.breakpassword.adapters.DataAdapter;
 import ru.explead.breakpassword.app.App;
 import ru.explead.breakpassword.beans.Cell;
 import ru.explead.breakpassword.beans.KeyButton;
+import ru.explead.breakpassword.dialog.DialogMenu;
 import ru.explead.breakpassword.logic.Controller;
 
 
@@ -49,11 +50,13 @@ public class GameFragment extends Fragment {
     private LinearLayout rootKeyboard;
     private Button btnHack;
     private TextView tvAttempts;
-    private ImageView btnMenu;
 
     private ListView listView;
     private DataAdapter adapter;
 
+    /**
+     * Указывает - открыта кастомная клавиатура или нет
+     */
     public static boolean isShowKeyboard = false;
 
     /**
@@ -61,10 +64,14 @@ public class GameFragment extends Fragment {
      */
     private int width;
 
+    /**
+     * Массив кнопок из кстомной клавиатуры
+     */
     private KeyButton[] keyButtons;
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
         controller = App.getController();
@@ -72,7 +79,7 @@ public class GameFragment extends Fragment {
         rootKeyboard = (LinearLayout) view.findViewById(R.id.rootKeyboard);
         tvAttempts = (TextView) view.findViewById(R.id.tvAttempts);
         btnHack = (Button) view.findViewById(R.id.btnHack);
-        btnMenu = (ImageView) view.findViewById(R.id.btnMenu);
+        ImageView btnMenu = (ImageView) view.findViewById(R.id.btnMenu);
         cellsLayout = (LinearLayout) view.findViewById(R.id.cellsLayout);
         listView = (ListView) view.findViewById(R.id.listView);
         adapter = new DataAdapter(controller);
@@ -81,7 +88,8 @@ public class GameFragment extends Fragment {
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                closeKeyboard();
+                DialogMenu dialogMenu = new DialogMenu(getActivity(), controller);
+                dialogMenu.show();
             }
         });
 
@@ -144,14 +152,6 @@ public class GameFragment extends Fragment {
         keyButtons[7] = new KeyButton(7, (Button)view.findViewById(R.id.btn7));
         keyButtons[8] = new KeyButton(8, (Button)view.findViewById(R.id.btn8));
         keyButtons[9] = new KeyButton(9, (Button)view.findViewById(R.id.btn9));
-
-        /*Button btnRemove = (Button) view.findViewById(R.id.btnRemove);
-        btnRemove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                controller.getFocusCell().setValue(Cell.NO_ACTIVE);
-            }
-        });*/
 
         for(final KeyButton button : keyButtons) {
             button.getButton().setOnClickListener(new View.OnClickListener() {
