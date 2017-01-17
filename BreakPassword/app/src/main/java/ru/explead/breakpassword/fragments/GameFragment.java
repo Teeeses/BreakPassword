@@ -145,13 +145,13 @@ public class GameFragment extends Fragment {
         keyButtons[8] = new KeyButton(8, (Button)view.findViewById(R.id.btn8));
         keyButtons[9] = new KeyButton(9, (Button)view.findViewById(R.id.btn9));
 
-        Button btnRemove = (Button) view.findViewById(R.id.btnRemove);
+        /*Button btnRemove = (Button) view.findViewById(R.id.btnRemove);
         btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 controller.getFocusCell().setValue(Cell.NO_ACTIVE);
             }
-        });
+        });*/
 
         for(final KeyButton button : keyButtons) {
             button.getButton().setOnClickListener(new View.OnClickListener() {
