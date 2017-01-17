@@ -26,11 +26,14 @@ public class DialogMenu extends Dialog {
     private Button btnHard;
     private Button btnVeryHard;
 
+    private int changeLevel;
+
 
     public DialogMenu(Activity activity, Controller controller) {
         super(activity);
         this.activity = activity;
         this.controller = controller;
+        changeLevel = controller.getLevel();
     }
 
     @Override
@@ -38,11 +41,13 @@ public class DialogMenu extends Dialog {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_menu);
+        setCancelable(false);
 
         Button btnRestart = (Button) findViewById(R.id.btnRestart);
         btnRestart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                controller.setLevel(changeLevel);
                 ((GameFragment)MainActivity.getFragment()).onRestart();
                 dismiss();
             }
@@ -52,7 +57,7 @@ public class DialogMenu extends Dialog {
         btnEasy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controller.setLevel(controller.EASY);
+                changeLevel = controller.EASY;
                 returnBackgrounfColor();
                 setBackgroundColor();
             }
@@ -62,7 +67,7 @@ public class DialogMenu extends Dialog {
         btnMedium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controller.setLevel(controller.MEDIUM);
+                changeLevel = controller.MEDIUM;
                 returnBackgrounfColor();
                 setBackgroundColor();
 
@@ -73,7 +78,7 @@ public class DialogMenu extends Dialog {
         btnHard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controller.setLevel(controller.HARD);
+                changeLevel = controller.HARD;
                 returnBackgrounfColor();
                 setBackgroundColor();
             }
@@ -83,7 +88,7 @@ public class DialogMenu extends Dialog {
         btnVeryHard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controller.setLevel(controller.VERY_HARD);
+                changeLevel = controller.VERY_HARD;
                 returnBackgrounfColor();
                 setBackgroundColor();
             }

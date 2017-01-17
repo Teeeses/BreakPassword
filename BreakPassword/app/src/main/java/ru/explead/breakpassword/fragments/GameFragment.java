@@ -93,6 +93,7 @@ public class GameFragment extends Fragment {
             public void onClick(View view) {
                 DialogMenu dialogMenu = new DialogMenu(getActivity(), controller);
                 dialogMenu.show();
+                closeKeyboard();
             }
         });
 
