@@ -58,7 +58,7 @@ public class DialogMenu extends Dialog {
             @Override
             public void onClick(View view) {
                 changeLevel = controller.EASY;
-                returnBackgrounfColor();
+                returnBackgroundColor();
                 setBackgroundColor();
             }
         });
@@ -68,7 +68,7 @@ public class DialogMenu extends Dialog {
             @Override
             public void onClick(View view) {
                 changeLevel = controller.MEDIUM;
-                returnBackgrounfColor();
+                returnBackgroundColor();
                 setBackgroundColor();
 
             }
@@ -79,7 +79,7 @@ public class DialogMenu extends Dialog {
             @Override
             public void onClick(View view) {
                 changeLevel = controller.HARD;
-                returnBackgrounfColor();
+                returnBackgroundColor();
                 setBackgroundColor();
             }
         });
@@ -89,7 +89,7 @@ public class DialogMenu extends Dialog {
             @Override
             public void onClick(View view) {
                 changeLevel = controller.VERY_HARD;
-                returnBackgrounfColor();
+                returnBackgroundColor();
                 setBackgroundColor();
             }
         });
@@ -107,21 +107,21 @@ public class DialogMenu extends Dialog {
     }
 
     private void setBackgroundColor() {
-        if(controller.getLevel() == controller.EASY) {
+        if(changeLevel == controller.EASY) {
             btnEasy.setBackgroundColor(MainActivity.getRes().getColor(android.R.color.holo_green_dark));
         }
-        if(controller.getLevel() == controller.MEDIUM) {
+        if(changeLevel == controller.MEDIUM) {
             btnMedium.setBackgroundColor(MainActivity.getRes().getColor(android.R.color.holo_green_dark));
         }
-        if(controller.getLevel() == controller.HARD) {
+        if(changeLevel == controller.HARD) {
             btnHard.setBackgroundColor(MainActivity.getRes().getColor(android.R.color.holo_green_dark));
         }
-        if(controller.getLevel() == controller.VERY_HARD) {
+        if(changeLevel == controller.VERY_HARD) {
             btnVeryHard.setBackgroundColor(MainActivity.getRes().getColor(android.R.color.holo_green_dark));
         }
     }
 
-    private void returnBackgrounfColor() {
+    private void returnBackgroundColor() {
         btnEasy.setBackgroundColor(MainActivity.getRes().getColor(R.color.colorPrimary));
         btnMedium.setBackgroundColor(MainActivity.getRes().getColor(R.color.colorPrimary));
         btnHard.setBackgroundColor(MainActivity.getRes().getColor(R.color.colorPrimary));
