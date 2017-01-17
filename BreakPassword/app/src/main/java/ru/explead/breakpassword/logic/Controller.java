@@ -32,7 +32,7 @@ public class Controller {
     private int numberAttempts = 0;
     private Random random = new Random();
 
-    private int EASY = 3, MEDIUM = 4, HARD = 5, VERY_HARD = 6;
+    public static int EASY = 3, MEDIUM = 4, HARD = 5, VERY_HARD = 6;
     private int level;
 
     private Cell focusCell;

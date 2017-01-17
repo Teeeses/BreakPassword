@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import ru.explead.breakpassword.R;
 import ru.explead.breakpassword.adapters.DataAdapter;
 import ru.explead.breakpassword.app.App;
+import ru.explead.breakpassword.app.UtilsDesign;
 import ru.explead.breakpassword.beans.Cell;
 import ru.explead.breakpassword.beans.KeyButton;
 import ru.explead.breakpassword.dialog.DialogMenu;
@@ -39,6 +40,7 @@ public class GameFragment extends Fragment {
 
 
     private Controller controller;
+    private UtilsDesign utilsDesign;
 
     /**
      * Layout для клеток для ввода цифр
@@ -75,6 +77,7 @@ public class GameFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
         controller = App.getController();
+        utilsDesign = new UtilsDesign();
 
         rootKeyboard = (LinearLayout) view.findViewById(R.id.rootKeyboard);
         tvAttempts = (TextView) view.findViewById(R.id.tvAttempts);
@@ -167,15 +170,16 @@ public class GameFragment extends Fragment {
      * Создаем клетки
      */
     private void createCells() {
-        float padding = getPadding();
-
+        int padding = (int)utilsDesign.getMarginCells(controller.getLevel());
         ArrayList<Cell> cells = new ArrayList<>();
         int size = (int)(width - 2*padding*controller.getNumberCells() + 1)/controller.getNumberCells();
         for(int i = 0; i < controller.getNumberCells(); i++) {
             LayoutInflater inflater = getActivity().getLayoutInflater();
             View view = inflater.inflate(R.layout.cell, null, false);
             RelativeLayout layout = (RelativeLayout) view.findViewById(R.id.root);
+            layout.setPadding(padding, 0, padding, 0);
             TextView tvCell = (TextView) view.findViewById(R.id.tvCell);
+            tvCell.setTextSize(utilsDesign.getTextSize(controller.getLevel()));
             tvCell.setLayoutParams(new RelativeLayout.LayoutParams(size, size));
             final Cell cell = new Cell(layout, tvCell);
             cells.add(cell);
@@ -231,28 +235,16 @@ public class GameFragment extends Fragment {
     }
 
     /**
-     * Получаем отступы у layout клетки, для корректного отображения на экране
-     * @return - значение отступа
-     */
-    public float getPadding() {
-        float size = getActivity().getResources().getDimension(R.dimen.radius);
-        return size;
-    }
-
-    /**
      * Начать заново
      */
     public void onRestart() {
+        closeKeyboard();
         cellsLayout.removeAllViews();
         controller.restart();
         createCells();
         addCellsOnLayout();
         adapter.notifyDataSetChanged();
         tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
-    }
-
-    public void openKeyboard() {
-
     }
 
 }

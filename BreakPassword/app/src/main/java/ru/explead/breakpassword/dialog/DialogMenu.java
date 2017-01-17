@@ -21,6 +21,12 @@ public class DialogMenu extends Dialog {
     private Activity activity;
     private Controller controller;
 
+    private Button btnEasy;
+    private Button btnMedium;
+    private Button btnHard;
+    private Button btnVeryHard;
+
+
     public DialogMenu(Activity activity, Controller controller) {
         super(activity);
         this.activity = activity;
@@ -42,37 +48,78 @@ public class DialogMenu extends Dialog {
             }
         });
 
-        Button btnEasy = (Button) findViewById(R.id.btnEasy);
+        btnEasy = (Button) findViewById(R.id.btnEasy);
         btnEasy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controller.setLevel(3);
+                controller.setLevel(controller.EASY);
+                returnBackgrounfColor();
+                setBackgroundColor();
             }
         });
 
-        Button btnMedium = (Button) findViewById(R.id.btnMedium);
+        btnMedium = (Button) findViewById(R.id.btnMedium);
         btnMedium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controller.setLevel(4);
+                controller.setLevel(controller.MEDIUM);
+                returnBackgrounfColor();
+                setBackgroundColor();
+
             }
         });
 
-        Button btnHard = (Button) findViewById(R.id.btnHard);
+        btnHard = (Button) findViewById(R.id.btnHard);
         btnHard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controller.setLevel(5);
+                controller.setLevel(controller.HARD);
+                returnBackgrounfColor();
+                setBackgroundColor();
             }
         });
 
-        Button btnVeryHard = (Button) findViewById(R.id.btnVeryHard);
+        btnVeryHard = (Button) findViewById(R.id.btnVeryHard);
         btnVeryHard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controller.setLevel(6);
+                controller.setLevel(controller.VERY_HARD);
+                returnBackgrounfColor();
+                setBackgroundColor();
             }
         });
 
+        Button btnCancel = (Button) findViewById(R.id.btnCancel);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
+
+        setBackgroundColor();
+
+    }
+
+    private void setBackgroundColor() {
+        if(controller.getLevel() == controller.EASY) {
+            btnEasy.setBackgroundColor(MainActivity.getRes().getColor(android.R.color.holo_green_dark));
+        }
+        if(controller.getLevel() == controller.MEDIUM) {
+            btnMedium.setBackgroundColor(MainActivity.getRes().getColor(android.R.color.holo_green_dark));
+        }
+        if(controller.getLevel() == controller.HARD) {
+            btnHard.setBackgroundColor(MainActivity.getRes().getColor(android.R.color.holo_green_dark));
+        }
+        if(controller.getLevel() == controller.VERY_HARD) {
+            btnVeryHard.setBackgroundColor(MainActivity.getRes().getColor(android.R.color.holo_green_dark));
+        }
+    }
+
+    private void returnBackgrounfColor() {
+        btnEasy.setBackgroundColor(MainActivity.getRes().getColor(R.color.colorPrimary));
+        btnMedium.setBackgroundColor(MainActivity.getRes().getColor(R.color.colorPrimary));
+        btnHard.setBackgroundColor(MainActivity.getRes().getColor(R.color.colorPrimary));
+        btnVeryHard.setBackgroundColor(MainActivity.getRes().getColor(R.color.colorPrimary));
     }
 }
