@@ -10,4 +10,9 @@
     <string name="cellIsEmpty">Клетки не заполнены</string>
     <string name="changeValues">Поменяйте значения</string>
     <string name="committedAttempts">%d попыток взлома</string>
+
+
+    <string name="">Думаю вам лучше не подходить к компьютеру</string>
+    <string name="">Ваши попытки нечтожны, впрочем, как и вы сами</string>
+    <string name="">Лучше дай телефон человеку поумнее</string>
 </resources>
