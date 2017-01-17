@@ -1,6 +1,7 @@
 package ru.explead.breakpassword;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -17,12 +18,15 @@ public class MainActivity extends AppCompatActivity {
     private static Activity activity;
     private static Fragment fragment;
 
+    private static Resources res;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         activity = this;
+        res = this.getResources();
 
         DisplayMetrics displaymetrics = getResources().getDisplayMetrics();
         App.setWidthScreen(displaymetrics.widthPixels);
@@ -52,5 +56,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static Fragment getFragment() {
         return fragment;
+    }
+
+    public static Resources getRes() {
+        return res;
     }
 }

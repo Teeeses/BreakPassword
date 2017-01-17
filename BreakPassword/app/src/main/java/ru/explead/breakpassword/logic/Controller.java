@@ -35,6 +35,8 @@ public class Controller {
     private int EASY = 3, MEDIUM = 4, HARD = 5, VERY_HARD = 6;
     private int level;
 
+    private Cell focusCell;
+
 
     public Controller() {
         level = EASY;
@@ -146,6 +148,21 @@ public class Controller {
             }
         }
         return true;
+    }
+
+    public void setFocusCell(Cell focusCell) {
+        this.focusCell = focusCell;
+        focusCell.setFocus();
+    }
+
+    public Cell getFocusCell() {
+        return focusCell;
+    }
+
+    public void removeAllFocusCells() {
+        for(int i = 0; i < numberCells; i++) {
+            cells.get(i).removeFocus();
+        }
     }
 
     public ArrayList<Data> getData() {

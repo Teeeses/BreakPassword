@@ -1,7 +1,11 @@
 package ru.explead.breakpassword.beans;
 
+import android.content.res.Resources;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import ru.explead.breakpassword.MainActivity;
+import ru.explead.breakpassword.R;
 
 /**
  * Created by develop on 13.01.2017.
@@ -25,6 +29,7 @@ public class Cell {
      * Layout под клетку
      */
     private RelativeLayout layout;
+
 
     public Cell(RelativeLayout layout, TextView tvCell) {
         this.layout = layout;
@@ -66,5 +71,13 @@ public class Cell {
             value = 1;
         }
         setText();
+    }
+
+    public void setFocus() {
+        tvCell.setBackgroundDrawable(MainActivity.getRes().getDrawable(R.drawable.focus_circle_bg));
+    }
+
+    public void removeFocus() {
+        tvCell.setBackgroundDrawable(MainActivity.getRes().getDrawable(R.drawable.circle_bg));
     }
 }

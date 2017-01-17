@@ -1,6 +1,5 @@
 package ru.explead.breakpassword.fragments;
 
-import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,8 +26,7 @@ import ru.explead.breakpassword.R;
 import ru.explead.breakpassword.adapters.DataAdapter;
 import ru.explead.breakpassword.app.App;
 import ru.explead.breakpassword.beans.Cell;
-import ru.explead.breakpassword.beans.Data;
-import ru.explead.breakpassword.dialog.DialogMenu;
+import ru.explead.breakpassword.beans.KeyButton;
 import ru.explead.breakpassword.logic.Controller;
 
 
@@ -43,6 +43,10 @@ public class GameFragment extends Fragment {
      * Layout для клеток для ввода цифр
      */
     private LinearLayout cellsLayout;
+    /**
+     * Главный слой клавиатуры
+     */
+    private LinearLayout rootKeyboard;
     private Button btnHack;
     private TextView tvAttempts;
     private ImageView btnMenu;
@@ -50,10 +54,14 @@ public class GameFragment extends Fragment {
     private ListView listView;
     private DataAdapter adapter;
 
+    private boolean isShowKeyboard = false;
+
     /**
      * Ширина контейнера под клетки
      */
     private int width;
+
+    private KeyButton[] keyButtons;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,6 +69,7 @@ public class GameFragment extends Fragment {
 
         controller = App.getController();
 
+        rootKeyboard = (LinearLayout) view.findViewById(R.id.rootKeyboard);
         tvAttempts = (TextView) view.findViewById(R.id.tvAttempts);
         btnHack = (Button) view.findViewById(R.id.btnHack);
         btnMenu = (ImageView) view.findViewById(R.id.btnMenu);
@@ -72,8 +81,7 @@ public class GameFragment extends Fragment {
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogMenu dialog = new DialogMenu(getActivity());
-                dialog.show();
+                closeKeyboard();
             }
         });
 
@@ -89,8 +97,9 @@ public class GameFragment extends Fragment {
         });
 
         btnHack.setOnClickListener(btnHackClick);
-
         tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
+
+        createKeyboard(view);
 
         return view;
     }
@@ -120,9 +129,44 @@ public class GameFragment extends Fragment {
     };
 
     /**
+     * Создаем кастомную клавиатуру
+     * @param view - экранная view
+     */
+    private void createKeyboard(View view) {
+        keyButtons = new KeyButton[10];
+        keyButtons[0] = new KeyButton(0, (Button)view.findViewById(R.id.btn0));
+        keyButtons[1] = new KeyButton(1, (Button)view.findViewById(R.id.btn1));
+        keyButtons[2] = new KeyButton(2, (Button)view.findViewById(R.id.btn2));
+        keyButtons[3] = new KeyButton(3, (Button)view.findViewById(R.id.btn3));
+        keyButtons[4] = new KeyButton(4, (Button)view.findViewById(R.id.btn4));
+        keyButtons[5] = new KeyButton(5, (Button)view.findViewById(R.id.btn5));
+        keyButtons[6] = new KeyButton(6, (Button)view.findViewById(R.id.btn6));
+        keyButtons[7] = new KeyButton(7, (Button)view.findViewById(R.id.btn7));
+        keyButtons[8] = new KeyButton(8, (Button)view.findViewById(R.id.btn8));
+        keyButtons[9] = new KeyButton(9, (Button)view.findViewById(R.id.btn9));
+
+        Button btnRemove = (Button) view.findViewById(R.id.btnRemove);
+        btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                controller.getFocusCell().setValue(Cell.NO_ACTIVE);
+            }
+        });
+
+        for(final KeyButton button : keyButtons) {
+            button.getButton().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    controller.getFocusCell().setValue(button.getValue());
+                }
+            });
+        }
+    }
+
+    /**
      * Создаем клетки
      */
-    public void createCells() {
+    private void createCells() {
         float padding = getPadding();
 
         ArrayList<Cell> cells = new ArrayList<>();
@@ -139,19 +183,42 @@ public class GameFragment extends Fragment {
             cell.getTvCell().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    cell.plusOne();
-                }
-            });
-
-            cell.getTvCell().setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    cell.setValue(Cell.NO_ACTIVE);
-                    return false;
+                    controller.removeAllFocusCells();
+                    controller.setFocusCell(cell);
+                    showKeyboard();
                 }
             });
         }
         controller.setCells(cells);
+    }
+
+    /**
+     * Открываем кастомную клавиатуру
+     */
+    private void showKeyboard() {
+        if(!isShowKeyboard) {
+            Animation bottomUp = AnimationUtils.loadAnimation(getContext(),
+                    R.anim.slide_up_dialog);
+            rootKeyboard.startAnimation(bottomUp);
+            rootKeyboard.setVisibility(View.VISIBLE);
+            isShowKeyboard = true;
+        }
+    }
+
+    /**
+     * Закрываем кастомную клавиатуру
+     */
+    private void closeKeyboard() {
+        if(isShowKeyboard) {
+
+            controller.removeAllFocusCells();
+
+            Animation bottomUp = AnimationUtils.loadAnimation(getContext(),
+                    R.anim.slide_out_down);
+            rootKeyboard.startAnimation(bottomUp);
+            rootKeyboard.setVisibility(View.GONE);
+            isShowKeyboard = false;
+        }
     }
 
     /**
