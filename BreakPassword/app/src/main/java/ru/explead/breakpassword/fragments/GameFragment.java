@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import ru.explead.breakpassword.MainActivity;
 import ru.explead.breakpassword.R;
 import ru.explead.breakpassword.adapters.DataAdapter;
 import ru.explead.breakpassword.app.App;
@@ -71,6 +72,7 @@ public class GameFragment extends Fragment {
      */
     private KeyButton[] keyButtons;
 
+    private String lastAttempt = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -122,23 +124,30 @@ public class GameFragment extends Fragment {
     View.OnClickListener btnHackClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if(controller.isEmptyCells()) {
+            if(controller.toStringPasswordProbable().equals(lastAttempt)) {
+                showSnackBar(view, R.string.changeValues);
+            } else if(controller.isEmptyCells()) {
                 controller.toAttempt();
                 tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
                 adapter.notifyDataSetChanged();
+                lastAttempt = controller.toStringPasswordProbable();
             } else {
-                Snackbar customBar = Snackbar.make(view , getActivity().getResources().getString(R.string.cellIsEmpty), Snackbar.LENGTH_LONG);
-                customBar.setDuration(1000);
-                View viewSnackBar = customBar.getView();
-                TextView tvSnackBar = (TextView) viewSnackBar.findViewById(android.support.design.R.id.snackbar_text);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
-                    tvSnackBar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                else
-                    tvSnackBar.setGravity(Gravity.CENTER_HORIZONTAL);
-                customBar.show();
+                showSnackBar(view, R.string.cellIsEmpty);
             }
         }
     };
+
+    private void showSnackBar(View view, int id) {
+        Snackbar customBar = Snackbar.make(view , MainActivity.getRes().getString(id), Snackbar.LENGTH_LONG);
+        customBar.setDuration(1000);
+        View viewSnackBar = customBar.getView();
+        TextView tvSnackBar = (TextView) viewSnackBar.findViewById(android.support.design.R.id.snackbar_text);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+            tvSnackBar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        else
+            tvSnackBar.setGravity(Gravity.CENTER_HORIZONTAL);
+        customBar.show();
+    }
 
     /**
      * Создаем кастомную клавиатуру

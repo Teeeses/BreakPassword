@@ -8,5 +8,6 @@
     <string name="restart">Новая игра</string>
     <string name="cancel">Отменить</string>
     <string name="cellIsEmpty">Клетки не заполнены</string>
+    <string name="changeValues">Поменяйте значения</string>
     <string name="committedAttempts">%d попыток взлома</string>
 </resources>
