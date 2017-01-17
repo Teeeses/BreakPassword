@@ -154,6 +154,11 @@ public class GameFragment extends Fragment {
         }
     };
 
+    /**
+     * Показывает snackBar с сообщение об неверном действии или иной информации
+     * @param view - по этой вью и происходит событие
+     * @param id - идентификатор строки сообщения в ресурсах
+     */
     private void showSnackBar(View view, int id) {
         Snackbar customBar = Snackbar.make(view , MainActivity.getRes().getString(id), Snackbar.LENGTH_LONG);
         customBar.setDuration(1000);
@@ -262,7 +267,7 @@ public class GameFragment extends Fragment {
     }
 
     /**
-     * Начать заново
+     * Начать игру заново
      */
     public void onRestart() {
         closeKeyboard();
