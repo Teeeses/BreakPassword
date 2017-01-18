@@ -92,19 +92,19 @@ public class MainActivity extends AppCompatActivity {
      */
     public static void saveSettings(int level, int times) {
         SharedPreferences.Editor editor = sPref.edit();
-        if(level == Controller.EASY && times > sPref.getInt(Utils.BEST_EASY, 0)) {
+        if(level == Controller.EASY && times < sPref.getInt(Utils.BEST_EASY, 0)) {
             editor.putInt(Utils.BEST_EASY, times);
             editor.apply();
         }
-        if(level == Controller.MEDIUM && times > sPref.getInt(Utils.BEST_MEDIUM, 0)) {
+        if(level == Controller.MEDIUM && times < sPref.getInt(Utils.BEST_MEDIUM, 0)) {
             editor.putInt(Utils.BEST_MEDIUM, times);
             editor.apply();
         }
-        if(level == Controller.HARD && times > sPref.getInt(Utils.BEST_HARD, 0)) {
+        if(level == Controller.HARD && times < sPref.getInt(Utils.BEST_HARD, 0)) {
             editor.putInt(Utils.BEST_HARD, times);
             editor.apply();
         }
-        if(level == Controller.VERY_HARD && times > sPref.getInt(Utils.BEST_VERY_HARD, 0)) {
+        if(level == Controller.VERY_HARD && times < sPref.getInt(Utils.BEST_VERY_HARD, 0)) {
             editor.putInt(Utils.BEST_VERY_HARD, times);
             editor.apply();
         }
