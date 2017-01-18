@@ -2,6 +2,7 @@ package ru.explead.breakpassword;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 
 import ru.explead.breakpassword.app.App;
+import ru.explead.breakpassword.app.Utils;
 import ru.explead.breakpassword.fragments.GameFragment;
 import ru.explead.breakpassword.logic.Controller;
 
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private static Fragment fragment;
 
     private static Resources res;
+    private static SharedPreferences sPref;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         activity = this;
         res = this.getResources();
+        sPref = getSharedPreferences(Utils.APP_PREFERENCES, MODE_PRIVATE);
 
         DisplayMetrics displaymetrics = getResources().getDisplayMetrics();
         App.setWidthScreen(displaymetrics.widthPixels);
@@ -78,6 +83,35 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    /**
+     * Сохранение настроек
+     * @param level - уровень
+     * @param times - количество попыток
+     */
+    public static void saveSettings(int level, int times) {
+        SharedPreferences.Editor editor = sPref.edit();
+        if(level == Controller.EASY && times > sPref.getInt(Utils.BEST_EASY, 0)) {
+            editor.putInt(Utils.BEST_EASY, times);
+            editor.apply();
+        }
+        if(level == Controller.MEDIUM && times > sPref.getInt(Utils.BEST_MEDIUM, 0)) {
+            editor.putInt(Utils.BEST_MEDIUM, times);
+            editor.apply();
+        }
+        if(level == Controller.HARD && times > sPref.getInt(Utils.BEST_HARD, 0)) {
+            editor.putInt(Utils.BEST_HARD, times);
+            editor.apply();
+        }
+        if(level == Controller.VERY_HARD && times > sPref.getInt(Utils.BEST_VERY_HARD, 0)) {
+            editor.putInt(Utils.BEST_VERY_HARD, times);
+            editor.apply();
+        }
+    }
+
+    public static SharedPreferences getPref() {
+        return sPref;
     }
 
     public static Activity getActivity() {

@@ -155,6 +155,7 @@ public class GameFragment extends Fragment {
 
             if(controller.getStatus() == controller.FINISH) {
                 showSnackBar(view, UtilsWinText.getWinText(controller.getLevel(), controller.getNumberAttempts()));
+                MainActivity.saveSettings(controller.getLevel(), controller.getNumberAttempts());
             }
         }
     };

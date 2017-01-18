@@ -102,6 +102,15 @@ public class DialogMenu extends Dialog {
             }
         });
 
+        Button btnResults = (Button) findViewById(R.id.btnResults);
+        btnResults.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogResultGame dialog = new DialogResultGame(activity);
+                dialog.show();
+            }
+        });
+
         setBackgroundColor();
 
     }

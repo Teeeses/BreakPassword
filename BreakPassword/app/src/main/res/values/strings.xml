@@ -12,6 +12,18 @@
     <string name="committedAttempts">%d попыток взлома</string>
 
 
+    <string name="best_result">Лучшие результаты</string>
+    <string name="results">Результаты</string>
+    <string name="easy_level">Легкий уровень: %d</string>
+    <string name="empty_easy_level">Легкий уровень: пусто</string>
+    <string name="medium_level">Средний уровень: %d</string>
+    <string name="empty_medium_level">Средний уровень: пусто</string>
+    <string name="hard_level">Сложный уровень: %d</string>
+    <string name="empty_hard_level">Сложный уровень: пусто</string>
+    <string name="very_hard_level">Очень сложный уровень: %d</string>
+    <string name="empty_very_hard_level">Очень сложный уровень: пусто</string>
+
+
     <string name="win_5">Какой же вы взломщик...Пятилетний ребенок и то справился бы быстрее!</string>
     <string name="win_6">Вы справились, но ваши попытки были нечтожны, впрочем, как и вы сами...</string>
     <string name="win_7">Кажется для вас это было слишком сложно, лучше отдайте телефон человеку поумнее!</string>

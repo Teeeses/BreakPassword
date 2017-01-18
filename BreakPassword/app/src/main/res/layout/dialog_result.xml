@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:background="@color/colorPrimary"
+              android:padding="@dimen/more_standard_margin" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/more_standard_text"
+        android:gravity="center_horizontal"
+        android:text="@string/best_result"/>
+
+    <TextView
+        android:id="@+id/tvEasyResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:textSize="@dimen/standard_text"/>
+
+    <TextView
+        android:id="@+id/tvMediumResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:textSize="@dimen/standard_text"/>
+
+    <TextView
+        android:id="@+id/tvHardResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:textSize="@dimen/standard_text"/>
+
+    <TextView
+        android:id="@+id/tvVeryHardResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:textSize="@dimen/standard_text"/>
+</LinearLayout>
