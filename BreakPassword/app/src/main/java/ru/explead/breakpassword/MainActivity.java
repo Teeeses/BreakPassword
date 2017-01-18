@@ -14,6 +14,7 @@ import android.util.DisplayMetrics;
 
 import ru.explead.breakpassword.app.App;
 import ru.explead.breakpassword.app.Utils;
+import ru.explead.breakpassword.fragments.BannerFragment;
 import ru.explead.breakpassword.fragments.GameFragment;
 import ru.explead.breakpassword.logic.Controller;
 
@@ -42,12 +43,19 @@ public class MainActivity extends AppCompatActivity {
 
         App.setController(new Controller());
 
-        openGameFragment();
+        openBannerFragment();
     }
 
     public void openGameFragment() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         fragment = new GameFragment();
+        transaction.replace(R.id.fragmentContainer, fragment);
+        transaction.commit();
+    }
+
+    public void openBannerFragment() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        fragment = new BannerFragment();
         transaction.replace(R.id.fragmentContainer, fragment);
         transaction.commit();
     }

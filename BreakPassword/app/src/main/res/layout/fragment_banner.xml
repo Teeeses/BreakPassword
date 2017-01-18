@@ -2,6 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:padding="@dimen/giant_margin"
+              android:gravity="center_vertical"
+    android:background="@color/colorPrimary">
 
+
+    <TextView
+        android:id="@+id/companyName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        android:text="Explead"/>
+
+    <TextView
+        android:id="@+id/companySurname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="50sp"
+        android:gravity="right"
+        android:textStyle="bold"
+        android:text="Studio"/>
 </LinearLayout>
