@@ -37,14 +37,19 @@ public class Controller {
 
     private Cell focusCell;
 
+    public static int NO_ACTIVE = 0, ACTIVE = 1, FINISH = 2;
+    private int status;
+
 
     public Controller() {
         level = EASY;
+        status = ACTIVE;
         numberCells = level;
         generatePassword(numberCells);
     }
 
     public void restart() {
+        status = ACTIVE;
         numberCells = level;
         numberAttempts = 0;
         password.clear();
@@ -92,7 +97,15 @@ public class Controller {
         Data resultData = new Data(resultOnPlace.size(), resultMatches.size(), toStringPasswordProbable());
         data.add(0, resultData);
 
+        checkWin();
+
         return resultData;
+    }
+
+    public void checkWin() {
+        if(numberCells == data.get(0).getOnPlace()) {
+            status = FINISH;
+        }
     }
 
     /**
@@ -163,6 +176,10 @@ public class Controller {
         for(int i = 0; i < numberCells; i++) {
             cells.get(i).removeFocus();
         }
+    }
+
+    public int getStatus() {
+        return status;
     }
 
     public ArrayList<Data> getData() {

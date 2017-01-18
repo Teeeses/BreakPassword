@@ -32,6 +32,7 @@ import ru.explead.breakpassword.beans.Cell;
 import ru.explead.breakpassword.beans.KeyButton;
 import ru.explead.breakpassword.dialog.DialogMenu;
 import ru.explead.breakpassword.logic.Controller;
+import ru.explead.breakpassword.logic.UtilsWinText;
 
 
 /**
@@ -142,14 +143,18 @@ public class GameFragment extends Fragment {
         @Override
         public void onClick(View view) {
             if(controller.toStringPasswordProbable().equals(lastAttempt)) {
-                showSnackBar(view, R.string.changeValues);
+                showSnackBar(view, MainActivity.getRes().getString(R.string.changeValues));
             } else if(controller.isEmptyCells()) {
                 controller.toAttempt();
                 tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
                 adapter.notifyDataSetChanged();
                 lastAttempt = controller.toStringPasswordProbable();
             } else {
-                showSnackBar(view, R.string.cellIsEmpty);
+                showSnackBar(view, MainActivity.getRes().getString(R.string.cellIsEmpty));
+            }
+
+            if(controller.getStatus() == controller.FINISH) {
+                showSnackBar(view, UtilsWinText.getWinText(controller.getLevel(), controller.getNumberAttempts()));
             }
         }
     };
@@ -157,10 +162,10 @@ public class GameFragment extends Fragment {
     /**
      * Показывает snackBar с сообщение об неверном действии или иной информации
      * @param view - по этой вью и происходит событие
-     * @param id - идентификатор строки сообщения в ресурсах
+     * @param str - строка
      */
-    private void showSnackBar(View view, int id) {
-        Snackbar customBar = Snackbar.make(view , MainActivity.getRes().getString(id), Snackbar.LENGTH_LONG);
+    private void showSnackBar(View view, String str) {
+        Snackbar customBar = Snackbar.make(view , str, Snackbar.LENGTH_LONG);
         customBar.setDuration(1000);
         View viewSnackBar = customBar.getView();
         TextView tvSnackBar = (TextView) viewSnackBar.findViewById(android.support.design.R.id.snackbar_text);

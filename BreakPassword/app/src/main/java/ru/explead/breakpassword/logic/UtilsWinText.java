@@ -14,7 +14,7 @@ import ru.explead.breakpassword.R;
 public class UtilsWinText {
 
 
-    public String getWinText(int level, int times) {
+    public static String getWinText(int level, int times) {
         Random rand = new Random();
         Resources res = MainActivity.getRes();
 
