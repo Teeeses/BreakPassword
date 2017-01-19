@@ -1,5 +1,7 @@
 package ru.explead.breakpassword.fragments;
 
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -76,6 +78,7 @@ public class GameFragment extends Fragment {
     private KeyButton[] keyButtons;
 
     private String lastAttempt = "";
+    private SoundPool soundPool;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -83,6 +86,9 @@ public class GameFragment extends Fragment {
 
         controller = App.getController();
         utilsDesign = new UtilsDesign();
+
+        soundPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 100);
+        soundPool.load(getActivity(), R.raw.one, 1);
 
         rootKeyboard = (LinearLayout) view.findViewById(R.id.rootKeyboard);
         tvAttempts = (TextView) view.findViewById(R.id.tvAttempts);
@@ -142,6 +148,10 @@ public class GameFragment extends Fragment {
     View.OnClickListener btnHackClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            if(controller.getStatus() == controller.FINISH) {
+                onRestart();
+                return;
+            }
             if(controller.toStringPasswordProbable().equals(lastAttempt)) {
                 showSnackBar(view, MainActivity.getRes().getString(R.string.changeValues));
             } else if(controller.isEmptyCells()) {
@@ -154,6 +164,7 @@ public class GameFragment extends Fragment {
             }
 
             if(controller.getStatus() == controller.FINISH) {
+                btnHack.setText(MainActivity.getRes().getString(R.string.new_game));
                 showSnackBar(view, UtilsWinText.getWinText(controller.getLevel(), controller.getNumberAttempts()));
                 MainActivity.saveSettings(controller.getLevel(), controller.getNumberAttempts());
             }
@@ -198,6 +209,7 @@ public class GameFragment extends Fragment {
             button.getButton().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    soundPool.play(1, 0.5f, 0.5f, 1, 0, 1f);
                     controller.getFocusCell().setValue(button.getValue());
                 }
             });
@@ -276,6 +288,7 @@ public class GameFragment extends Fragment {
      * Начать игру заново
      */
     public void onRestart() {
+        btnHack.setText(MainActivity.getRes().getString(R.string.hack));
         closeKeyboard();
         cellsLayout.removeAllViews();
         controller.restart();

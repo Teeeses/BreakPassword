@@ -6,6 +6,7 @@
     <string name="matches">Совпрадений: %d</string>
     <string name="password">Пароль</string>
     <string name="hack">Взломать</string>
+    <string name="new_game">Новая игра</string>
     <string name="restart">Новая игра</string>
     <string name="cancel">Отменить</string>
     <string name="cellIsEmpty">Клетки не заполнены</string>

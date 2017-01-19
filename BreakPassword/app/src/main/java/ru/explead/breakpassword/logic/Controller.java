@@ -42,7 +42,7 @@ public class Controller {
 
 
     public Controller() {
-        level = EASY;
+        level = MEDIUM;
         status = ACTIVE;
         numberCells = level;
         generatePassword(numberCells);
