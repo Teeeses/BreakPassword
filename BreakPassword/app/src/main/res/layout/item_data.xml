@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/mini_margin"
-    android:background="@color/colorAccent">
+    android:background="@color/purple">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:id="@+id/tvpProbablePassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/big_text"
+            android:textSize="@dimen/more_standard_text"
             android:padding="@dimen/radius"
             android:textColor="@android:color/white"/>
     </RelativeLayout>

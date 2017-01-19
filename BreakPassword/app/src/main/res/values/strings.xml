@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Взломай пароль</string>
+    <string name="app_name">Взломщик</string>
     <string name="company">Explead Studio</string>
 
     <string name="onPlace">Цифр на местах: %d</string>

@@ -20,6 +20,10 @@
     <dimen name="text_level_hard">18sp</dimen>
     <dimen name="text_level_very_hard">14sp</dimen>
 
+
+    <dimen name="company_name_text">52sp</dimen>
+    <dimen name="company_surname_text">46sp</dimen>
+
     //Марнжины у клеток
     <dimen name="level_margin_easy">6dp</dimen>
     <dimen name="level_margin_medium">4dp</dimen>
