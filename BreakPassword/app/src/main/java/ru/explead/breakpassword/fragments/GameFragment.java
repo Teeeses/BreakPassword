@@ -58,6 +58,7 @@ public class GameFragment extends Fragment {
     private RelativeLayout rootGameFragment;
     private Button btnHack;
     private TextView tvAttempts;
+    private TextView tvPassword;
 
     private ListView listView;
     private DataAdapter adapter;
@@ -90,6 +91,8 @@ public class GameFragment extends Fragment {
         soundPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 100);
         soundPool.load(getActivity(), R.raw.one, 1);
 
+
+        tvPassword = (TextView) view.findViewById(R.id.tvPassword);
         rootKeyboard = (LinearLayout) view.findViewById(R.id.rootKeyboard);
         tvAttempts = (TextView) view.findViewById(R.id.tvAttempts);
         btnHack = (Button) view.findViewById(R.id.btnHack);
@@ -161,6 +164,11 @@ public class GameFragment extends Fragment {
                 lastAttempt = controller.toStringPasswordProbable();
             } else {
                 showSnackBar(view, MainActivity.getRes().getString(R.string.cellIsEmpty));
+            }
+
+            if(controller.getStatus() == controller.ACTIVE) {
+                Animation wrong = AnimationUtils.loadAnimation(getContext(), R.anim.wrong);
+                tvPassword.startAnimation(wrong);
             }
 
             if(controller.getStatus() == controller.FINISH) {

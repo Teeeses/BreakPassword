@@ -10,7 +10,7 @@
         android:id="@+id/btnMenu"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/menu"
+        android:src="@drawable/menuxa"
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/standard_margin"/>
 
@@ -24,6 +24,7 @@
         android:paddingBottom="@dimen/big_margin">
 
         <TextView
+            android:id="@+id/tvPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
