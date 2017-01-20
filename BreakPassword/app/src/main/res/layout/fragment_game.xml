@@ -292,5 +292,37 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/layoutWin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_gradient"
+        android:alpha="0.9"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/ivWin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/win"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="@dimen/giant_margin"
+            android:layout_marginLeft="@dimen/giant_margin"
+            android:layout_marginRight="@dimen/giant_margin"/>
+
+        <TextView
+            android:id="@+id/tvWin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_margin="@dimen/standard_margin"
+            android:textSize="@dimen/more_standard_text" />
+    </LinearLayout>
+
+
 </RelativeLayout>
 

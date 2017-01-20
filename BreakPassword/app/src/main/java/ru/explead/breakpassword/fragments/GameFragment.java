@@ -59,6 +59,9 @@ public class GameFragment extends Fragment {
     private Button btnHack;
     private TextView tvAttempts;
     private TextView tvPassword;
+    private LinearLayout layoutWin;
+    private TextView tvWin;
+    private ImageView ivWin;
 
     private ListView listView;
     private DataAdapter adapter;
@@ -91,7 +94,15 @@ public class GameFragment extends Fragment {
         soundPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 100);
         soundPool.load(getActivity(), R.raw.one, 1);
 
-
+        layoutWin = (LinearLayout) view.findViewById(R.id.layoutWin);
+        layoutWin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                layoutWin.setVisibility(View.GONE);
+            }
+        });
+        tvWin = (TextView) view.findViewById(R.id.tvWin);
+        ivWin = (ImageView) view.findViewById(R.id.ivWin);
         tvPassword = (TextView) view.findViewById(R.id.tvPassword);
         rootKeyboard = (LinearLayout) view.findViewById(R.id.rootKeyboard);
         tvAttempts = (TextView) view.findViewById(R.id.tvAttempts);
@@ -175,11 +186,23 @@ public class GameFragment extends Fragment {
 
             if(controller.getStatus() == controller.FINISH) {
                 btnHack.setText(MainActivity.getRes().getString(R.string.new_game));
-                showSnackBar(view, UtilsWinText.getWinText(controller.getLevel(), controller.getNumberAttempts()));
+                //showSnackBar(view, UtilsWinText.getWinText(controller.getLevel(), controller.getNumberAttempts()));
                 MainActivity.saveSettings(controller.getLevel(), controller.getNumberAttempts());
+                setVisibilityLayoutWin();
             }
         }
     };
+
+    /**
+     * Показывает победный слой
+     */
+    public void setVisibilityLayoutWin() {
+        tvWin.setText(UtilsWinText.getWinText(controller.getLevel(), controller.getNumberAttempts()));
+        layoutWin.setVisibility(View.VISIBLE);
+
+        Animation win = AnimationUtils.loadAnimation(getContext(), R.anim.image_win_animation);
+        ivWin.startAnimation(win);
+    }
 
     /**
      * Показывает snackBar с сообщение об неверном действии или иной информации
