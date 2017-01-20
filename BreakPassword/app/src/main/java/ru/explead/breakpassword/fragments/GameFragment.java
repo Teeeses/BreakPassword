@@ -157,6 +157,7 @@ public class GameFragment extends Fragment {
             }
             if(controller.toStringPasswordProbable().equals(lastAttempt)) {
                 showSnackBar(view, MainActivity.getRes().getString(R.string.changeValues));
+                return;
             } else if(controller.isEmptyCells()) {
                 controller.toAttempt();
                 tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
@@ -164,6 +165,7 @@ public class GameFragment extends Fragment {
                 lastAttempt = controller.toStringPasswordProbable();
             } else {
                 showSnackBar(view, MainActivity.getRes().getString(R.string.cellIsEmpty));
+                return;
             }
 
             if(controller.getStatus() == controller.ACTIVE) {
@@ -219,6 +221,11 @@ public class GameFragment extends Fragment {
                 public void onClick(View view) {
                     soundPool.play(1, 0.5f, 0.5f, 1, 0, 1f);
                     controller.getFocusCell().setValue(button.getValue());
+                    controller.removeAllFocusCells();
+                    controller.changeFocusCell();
+                    if(controller.getIdFocusCell() == controller.NO_ACTIVE) {
+                        closeKeyboard();
+                    }
                 }
             });
         }
@@ -230,7 +237,7 @@ public class GameFragment extends Fragment {
     private void createCells() {
         int padding = (int)utilsDesign.getMarginCells(controller.getLevel());
         ArrayList<Cell> cells = new ArrayList<>();
-        int size = (int)(width - 2*padding*controller.getNumberCells() + 1)/controller.getNumberCells();
+        int size = (width - 2*padding*controller.getNumberCells() + 1)/controller.getNumberCells();
         for(int i = 0; i < controller.getNumberCells(); i++) {
             LayoutInflater inflater = getActivity().getLayoutInflater();
             View view = inflater.inflate(R.layout.cell, null, false);
@@ -239,7 +246,7 @@ public class GameFragment extends Fragment {
             TextView tvCell = (TextView) view.findViewById(R.id.tvCell);
             tvCell.setTextSize(utilsDesign.getTextSize(controller.getLevel()));
             tvCell.setLayoutParams(new RelativeLayout.LayoutParams(size, size));
-            final Cell cell = new Cell(layout, tvCell);
+            final Cell cell = new Cell(i, layout, tvCell);
             cells.add(cell);
 
             cell.getTvCell().setOnClickListener(new View.OnClickListener() {
@@ -273,6 +280,7 @@ public class GameFragment extends Fragment {
     public void closeKeyboard() {
         if(isShowKeyboard) {
 
+            controller.setIdFocusCell(controller.NO_ACTIVE);
             controller.removeAllFocusCells();
 
             Animation bottomUp = AnimationUtils.loadAnimation(getContext(),

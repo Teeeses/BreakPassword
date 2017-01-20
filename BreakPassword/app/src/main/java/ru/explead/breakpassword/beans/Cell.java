@@ -13,6 +13,7 @@ import ru.explead.breakpassword.R;
 
 public class Cell {
 
+    private int id;
     /**
      * Цифра не введена
      */
@@ -31,7 +32,8 @@ public class Cell {
     private RelativeLayout layout;
 
 
-    public Cell(RelativeLayout layout, TextView tvCell) {
+    public Cell(int id, RelativeLayout layout, TextView tvCell) {
+        this.id = id;
         this.layout = layout;
         this.tvCell = tvCell;
         this.value = NO_ACTIVE;
@@ -79,5 +81,9 @@ public class Cell {
 
     public void removeFocus() {
         tvCell.setBackgroundDrawable(MainActivity.getRes().getDrawable(R.drawable.circle_bg));
+    }
+
+    public int getId() {
+        return id;
     }
 }

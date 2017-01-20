@@ -6,6 +6,8 @@ import java.util.Random;
 import ru.explead.breakpassword.beans.Cell;
 import ru.explead.breakpassword.beans.Data;
 
+import static android.R.attr.id;
+
 /**
  * Created by develop on 13.01.2017.
  */
@@ -36,6 +38,7 @@ public class Controller {
     private int level;
 
     private Cell focusCell;
+    private int idFocusCell;
 
     public static int NO_ACTIVE = 0, ACTIVE = 1, FINISH = 2;
     private int status;
@@ -102,6 +105,17 @@ public class Controller {
         return resultData;
     }
 
+    /**
+     * При нажатие на кнопку клавиатуры фокусная клатка сдвигается на единичку
+     */
+    public void changeFocusCell() {
+        if(idFocusCell >= 0 && idFocusCell <=  numberCells - 2) {
+            setFocusCell(cells.get(idFocusCell + 1));
+        } else if(idFocusCell == numberCells - 1) {
+            idFocusCell = NO_ACTIVE;
+        }
+    }
+
     public void checkWin() {
         if(numberCells == data.get(0).getOnPlace()) {
             status = FINISH;
@@ -164,6 +178,7 @@ public class Controller {
     }
 
     public void setFocusCell(Cell focusCell) {
+        idFocusCell = focusCell.getId();
         this.focusCell = focusCell;
         focusCell.setFocus();
     }
@@ -212,5 +227,13 @@ public class Controller {
 
     public void setCells(ArrayList<Cell> cells) {
         this.cells = cells;
+    }
+
+    public int getIdFocusCell() {
+        return idFocusCell;
+    }
+
+    public void setIdFocusCell(int idFocusCell) {
+        this.idFocusCell = idFocusCell;
     }
 }
