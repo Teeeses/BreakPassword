@@ -3,7 +3,7 @@
     <string name="company">Explead Studio</string>
 
     <string name="onPlace">Цифр на местах: %d</string>
-    <string name="matches">Совпрадений: %d</string>
+    <string name="matches">Совпадений: %d</string>
     <string name="password">Пароль</string>
     <string name="hack">Взломать</string>
     <string name="new_game">Новая игра</string>

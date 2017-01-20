@@ -252,9 +252,11 @@ public class GameFragment extends Fragment {
             cell.getTvCell().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    controller.removeAllFocusCells();
-                    controller.setFocusCell(cell);
-                    showKeyboard();
+                    if(controller.getStatus() == controller.ACTIVE) {
+                        controller.removeAllFocusCells();
+                        controller.setFocusCell(cell);
+                        showKeyboard();
+                    }
                 }
             });
         }
