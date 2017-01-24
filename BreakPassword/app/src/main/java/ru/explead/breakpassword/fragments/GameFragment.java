@@ -164,6 +164,19 @@ public class GameFragment extends Fragment {
         public void onClick(View view) {
             if(controller.getStatus() == controller.FINISH) {
                 onRestart();
+
+                String str = "";
+                if(controller.getLevel() == controller.EASY)
+                    str = "easy";
+                if(controller.getLevel() == controller.MEDIUM)
+                    str = "medium";
+                if(controller.getLevel() == controller.HARD)
+                    str = "hard";
+                if(controller.getLevel() == controller.VERY_HARD)
+                    str = "very hard";
+
+                ((MainActivity)getActivity()).sendAction("New Game " + str);
+
                 return;
             }
             if(controller.toStringPasswordProbable().equals(lastAttempt)) {

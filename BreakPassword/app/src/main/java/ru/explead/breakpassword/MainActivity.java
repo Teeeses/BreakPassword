@@ -12,6 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import ru.explead.breakpassword.app.App;
 import ru.explead.breakpassword.app.Utils;
 import ru.explead.breakpassword.fragments.BannerFragment;
@@ -27,15 +30,20 @@ public class MainActivity extends AppCompatActivity {
     private static Resources res;
     private static SharedPreferences sPref;
 
+    private Tracker mTracker;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         activity = this;
         res = this.getResources();
         sPref = getSharedPreferences(Utils.APP_PREFERENCES, MODE_PRIVATE);
+
+        // Получение экземпляра общедоступного счетчика.
+        App application = (App) getApplication();
+        mTracker = application.getDefaultTracker();
 
         DisplayMetrics displaymetrics = getResources().getDisplayMetrics();
         App.setWidthScreen(displaymetrics.widthPixels);
@@ -132,5 +140,23 @@ public class MainActivity extends AppCompatActivity {
 
     public static Resources getRes() {
         return res;
+    }
+
+    @Override
+    protected void onResume() {
+        mTracker.setScreenName("Image~" + "MainActivity");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        super.onResume();
+    }
+
+    public Tracker getTracker() {
+        return mTracker;
+    }
+
+    public void sendAction(String str) {
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Action")
+                .setAction(str)
+                .build());
     }
 }

@@ -49,6 +49,17 @@ public class DialogMenu extends Dialog {
             public void onClick(View view) {
                 controller.setLevel(changeLevel);
                 ((GameFragment)MainActivity.getFragment()).onRestart();
+
+                String str = "";
+                if(changeLevel == controller.EASY)
+                    str = "easy";
+                if(changeLevel == controller.MEDIUM)
+                    str = "medium";
+                if(changeLevel == controller.HARD)
+                    str = "hard";
+                if(changeLevel == controller.VERY_HARD)
+                    str = "very hard";
+                ((MainActivity)activity).sendAction("New Game " + str);
                 dismiss();
             }
         });
