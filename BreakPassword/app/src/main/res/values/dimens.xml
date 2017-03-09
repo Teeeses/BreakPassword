@@ -15,10 +15,10 @@
     <dimen name="giant_text">40sp</dimen>
 
     //Текст в клетках
-    <dimen name="text_level_easy">24sp</dimen>
-    <dimen name="text_level_medium">22sp</dimen>
-    <dimen name="text_level_hard">18sp</dimen>
-    <dimen name="text_level_very_hard">14sp</dimen>
+    <dimen name="text_level_easy">22sp</dimen>
+    <dimen name="text_level_medium">20sp</dimen>
+    <dimen name="text_level_hard">16sp</dimen>
+    <dimen name="text_level_very_hard">12sp</dimen>
 
 
     <dimen name="company_name_text">52sp</dimen>

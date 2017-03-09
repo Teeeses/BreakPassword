@@ -1,47 +1,47 @@
 <resources>
-    <string name="app_name">Взломщик</string>
+    <string name="app_name">Hacker</string>
     <string name="company">Explead Studio</string>
 
-    <string name="onPlace">Цифр на местах: %d</string>
-    <string name="matches">Совпадений: %d</string>
-    <string name="password">Пароль</string>
-    <string name="hack">Взломать</string>
-    <string name="new_game">Новая игра</string>
-    <string name="restart">Новая игра</string>
-    <string name="cancel">Отменить</string>
-    <string name="cellIsEmpty">Клетки не заполнены</string>
-    <string name="changeValues">Поменяйте значения</string>
-    <string name="committedAttempts">%d попыток взлома</string>
+    <string name="onPlace">Figures on the spot: %d</string>
+    <string name="matches">Matches: %d</string>
+    <string name="password">Password</string>
+    <string name="hack">Hack</string>
+    <string name="new_game">New Game</string>
+    <string name="restart">New Game</string>
+    <string name="cancel">Cancel</string>
+    <string name="cellIsEmpty">Cells are empty</string>
+    <string name="changeValues">Change the numbers</string>
+    <string name="committedAttempts">%d attempts to hack</string>
 
 
-    <string name="best_result">Лучшие результаты</string>
-    <string name="results">Результаты</string>
-    <string name="easy_level">Легкий уровень: %d</string>
-    <string name="empty_easy_level">Легкий уровень: пусто</string>
-    <string name="medium_level">Средний уровень: %d</string>
-    <string name="empty_medium_level">Средний уровень: пусто</string>
-    <string name="hard_level">Сложный уровень: %d</string>
-    <string name="empty_hard_level">Сложный уровень: пусто</string>
-    <string name="very_hard_level">Очень сложный уровень: %d</string>
-    <string name="empty_very_hard_level">Очень сложный уровень: пусто</string>
+    <string name="best_result">The best results</string>
+    <string name="results">Results</string>
+    <string name="easy_level">Easy level: %d</string>
+    <string name="empty_easy_level">Easy level: empty</string>
+    <string name="medium_level">Average level: %d</string>
+    <string name="empty_medium_level">Average level: empty</string>
+    <string name="hard_level">Hard level: %d</string>
+    <string name="empty_hard_level">Hard level: empty</string>
+    <string name="very_hard_level">Very hard level: %d</string>
+    <string name="empty_very_hard_level">Very hard level: empty</string>
 
 
-    <string name="win_5">Какой же вы взломщик...Пятилетний ребенок и то справился бы быстрее!</string>
-    <string name="win_6">Вы справились, но ваши попытки были нечтожны, впрочем, как и вы сами...</string>
-    <string name="win_7">Кажется для вас это было слишком сложно, лучше отдайте телефон человеку поумнее!</string>
+    <string name="win_5">A child of five would do it faster!</string>
+    <string name="win_6">Your efforts were worthless as you are...</string>
+    <string name="win_7">Will you stop it? Just agree that you are stupid!</string>
 
 
-    <string name="win_1">Вы это серьезно? Один вопрос - как??? Как вы это сделали с одного раза? Вы мой герой!</string>
-    <string name="win_2">Это невероятно...У вас потрясающе развита интуиция, лишь единицы могут угадать пароль с %d раз!!</string>
+    <string name="win_1">You are a fucking genius!!!!</string>
+    <string name="win_2">You are a fucking genius!</string>
 
 
-    <string name="win_3">Это было шикарно! Сразу видно - за делом профи, а слабо улучшить свой результат?</string>
-    <string name="win_4">Вы приложили много усилий чтобы добиться такого результата, но, мне кажется, вы способны на большее</string>
+    <string name="win_3">Are you a professional?? It was probably difficult...</string>
+    <string name="win_4">It was cool, great, incredible...</string>
 
 
-    <string name="win_8">Это было достаточно долго, но не растраивайтесь, опыт приходит не сразу!</string>
-    <string name="win_9">Вам нужно больше тренироваться и вы улучшите свой результат</string>
-    <string name="win_10">Взломщиком вас назвать сложно, но не растраивайтесь, может вы человек хороший...</string>
+    <string name="win_8">It was a long, very bad!</string>
+    <string name="win_9">Train more to improve the result!</string>
+    <string name="win_10">You are not a hacker...</string>
 
-    <string name="win_0">Неплохо сыграно, но явно можно лучше!</string>
+    <string name="win_0">Well, but you can do better!</string>
 </resources>
