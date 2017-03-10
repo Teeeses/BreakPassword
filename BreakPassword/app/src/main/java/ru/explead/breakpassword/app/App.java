@@ -1,6 +1,9 @@
 package ru.explead.breakpassword.app;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
@@ -12,7 +15,7 @@ import ru.explead.breakpassword.logic.Controller;
  * Created by develop on 13.01.2017.
  */
 
-public class App extends Application {
+public class App extends MultiDexApplication {
 
     private static float widthScreen;
     private static float heightScreen;
@@ -25,6 +28,12 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     /**
