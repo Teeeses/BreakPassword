@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import ru.explead.breakpassword.MainActivity;
 import ru.explead.breakpassword.R;
+import ru.explead.breakpassword.app.Utils;
 import ru.explead.breakpassword.fragments.GameFragment;
 import ru.explead.breakpassword.logic.Controller;
 
@@ -44,6 +45,7 @@ public class DialogMenu extends Dialog {
         setCancelable(false);
 
         Button btnRestart = (Button) findViewById(R.id.btnRestart);
+        btnRestart.setTypeface(Utils.getTypeFaceLevel());
         btnRestart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,6 +108,7 @@ public class DialogMenu extends Dialog {
         });
 
         Button btnCancel = (Button) findViewById(R.id.btnCancel);
+        btnCancel.setTypeface(Utils.getTypeFaceLevel());
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,7 +126,15 @@ public class DialogMenu extends Dialog {
         });
 
         setBackgroundColor();
+        setTypeFace();
 
+    }
+
+    private void setTypeFace() {
+        btnEasy.setTypeface(Utils.getTypeFaceLevel());
+        btnMedium.setTypeface(Utils.getTypeFaceLevel());
+        btnHard.setTypeface(Utils.getTypeFaceLevel());
+        btnVeryHard.setTypeface(Utils.getTypeFaceLevel());
     }
 
     private void setBackgroundColor() {

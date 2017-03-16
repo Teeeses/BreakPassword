@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import ru.explead.breakpassword.MainActivity;
 import ru.explead.breakpassword.R;
+import ru.explead.breakpassword.app.Utils;
 import ru.explead.breakpassword.beans.Data;
 import ru.explead.breakpassword.logic.Controller;
 
@@ -56,6 +57,10 @@ public class DataAdapter extends BaseAdapter {
         viewHolder.tvMatches.setText(String.format(res.getString(R.string.matches), object.getMatches()));
 
         viewHolder.tvpProbablePassword.setText(object.getProbable());
+
+        viewHolder.tvpProbablePassword.setTypeface(Utils.getTypeFaceLevel());
+        viewHolder.tvOnPlace.setTypeface(Utils.getTypeFaceLevel());
+        viewHolder.tvMatches.setTypeface(Utils.getTypeFaceLevel());
 
         return convertView;
     }

@@ -11,7 +11,9 @@
     <string name="cancel">Cancel</string>
     <string name="cellIsEmpty">Cells are empty</string>
     <string name="changeValues">Change the numbers</string>
-    <string name="committedAttempts">%d attempts to hack</string>
+
+    <string name="committedAttempts">Attempts to hack: %d</string>
+    <string name="committedAttemptsAndBest">Attempts to hack: %1$d \n(Best result: %2$d)</string>
 
 
     <string name="best_result">The best results</string>
@@ -44,4 +46,10 @@
     <string name="win_10">You are not a hacker...</string>
 
     <string name="win_0">Well, but you can do better!</string>
+
+    <string name="how_play">How to play?</string>
+    <string name="example">Example: unknown password 8426</string>
+    <string name="example_you_input">You entered: 6328</string>
+    <string name="example_on_place">Figures on the spot: \n1 (2)</string>
+    <string name="example_matches">Matches: \n2 (6, 8)</string>
 </resources>

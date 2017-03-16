@@ -11,7 +11,8 @@
     <string name="cancel">Отменить</string>
     <string name="cellIsEmpty">Клетки не заполнены</string>
     <string name="changeValues">Поменяйте значения</string>
-    <string name="committedAttempts">%d попыток взлома</string>
+    <string name="committedAttempts">Попыток взлома: %d</string>
+    <string name="committedAttemptsAndBest">Попыток взлома: %1$d \n(Лучший результат: %2$d)</string>
 
 
     <string name="best_result">Лучшие результаты</string>
@@ -44,4 +45,11 @@
     <string name="win_10">Взломщиком вас назвать сложно, но не растраивайтесь, может вы человек хороший...</string>
 
     <string name="win_0">Неплохо сыграно, но явно можно лучше!</string>
+
+
+    <string name="how_play">Как играть?</string>
+    <string name="example">Пример: загадан пароль 8426</string>
+    <string name="example_you_input">Вы ввели: 6328</string>
+    <string name="example_on_place">На месте: \n1 (2)</string>
+    <string name="example_matches">Совпадений: \n2 (6, 8)</string>
 </resources>

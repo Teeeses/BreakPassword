@@ -29,6 +29,7 @@ import ru.explead.breakpassword.MainActivity;
 import ru.explead.breakpassword.R;
 import ru.explead.breakpassword.adapters.DataAdapter;
 import ru.explead.breakpassword.app.App;
+import ru.explead.breakpassword.app.Utils;
 import ru.explead.breakpassword.app.UtilsDesign;
 import ru.explead.breakpassword.beans.Cell;
 import ru.explead.breakpassword.beans.KeyButton;
@@ -149,11 +150,63 @@ public class GameFragment extends Fragment {
         });
 
         btnHack.setOnClickListener(btnHackClick);
-        tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
 
+        final RelativeLayout layoutHelper = (RelativeLayout) view.findViewById(R.id.layoutHelper);
+        layoutHelper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                layoutHelper.setVisibility(View.GONE);
+            }
+        });
+
+
+        setBestResult();
         createKeyboard(view);
+        setTypeFace();
 
         return view;
+    }
+
+    private  void setBestResult() {
+        if(App.getController().getLevel() == Controller.EASY) {
+            int easy = MainActivity.getPref().getInt(Utils.BEST_EASY, 0);
+            if(easy != 0) {
+                tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttemptsAndBest), controller.getNumberAttempts(), easy));
+            } else {
+                tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
+            }
+        }
+        if(App.getController().getLevel() == Controller.MEDIUM) {
+            int medium = MainActivity.getPref().getInt(Utils.BEST_MEDIUM, 0);
+            if(medium != 0) {
+                tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttemptsAndBest), controller.getNumberAttempts(), medium));
+            } else {
+                tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
+            }
+        }
+        if(App.getController().getLevel() == Controller.HARD) {
+            int hard = MainActivity.getPref().getInt(Utils.BEST_HARD, 0);
+            if(hard != 0) {
+                tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttemptsAndBest), controller.getNumberAttempts(), hard));
+            } else {
+                tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
+            }
+        }
+        if(App.getController().getLevel() == Controller.VERY_HARD) {
+            int veryHard = MainActivity.getPref().getInt(Utils.BEST_VERY_HARD, 0);
+            if(veryHard != 0) {
+                tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttemptsAndBest), controller.getNumberAttempts(), veryHard));
+            } else {
+                tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
+            }
+        }
+    }
+
+    private void setTypeFace() {
+        btnHack.setTypeface(Utils.getTypeFaceLevel());
+        tvAttempts.setTypeface(Utils.getTypeFaceLevel());
+        tvPassword.setTypeface(Utils.getTypeFaceLevel());
+        tvWin.setTypeface(Utils.getTypeFaceLevel());
     }
 
     /**
@@ -184,7 +237,7 @@ public class GameFragment extends Fragment {
                 return;
             } else if(controller.isEmptyCells()) {
                 controller.toAttempt();
-                tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
+                setBestResult();
                 adapter.notifyDataSetChanged();
                 lastAttempt = controller.toStringPasswordProbable();
             } else {
@@ -252,6 +305,7 @@ public class GameFragment extends Fragment {
         keyButtons[9] = new KeyButton(9, (Button)view.findViewById(R.id.btn9));
 
         for(final KeyButton button : keyButtons) {
+            button.getButton().setTypeface(Utils.getTypeFaceLevel());
             button.getButton().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -285,6 +339,8 @@ public class GameFragment extends Fragment {
             final Cell cell = new Cell(i, layout, tvCell);
             cells.add(cell);
 
+
+            cell.getTvCell().setTypeface(Utils.getTypeFaceLevel());
             cell.getTvCell().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -349,7 +405,7 @@ public class GameFragment extends Fragment {
         createCells();
         addCellsOnLayout();
         adapter.notifyDataSetChanged();
-        tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
+        setBestResult();
     }
 
 }
