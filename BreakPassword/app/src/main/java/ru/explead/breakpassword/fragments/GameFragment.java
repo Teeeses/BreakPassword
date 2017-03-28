@@ -23,6 +23,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
+import com.appodeal.ads.Appodeal;
+
 import java.util.ArrayList;
 
 import ru.explead.breakpassword.MainActivity;
@@ -89,6 +91,11 @@ public class GameFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
+
+        if(Appodeal.isLoaded(Appodeal.INTERSTITIAL)) {
+            Appodeal.show(getActivity(), Appodeal.INTERSTITIAL);
+        }
+
         controller = App.getController();
         utilsDesign = new UtilsDesign();
 
@@ -100,6 +107,9 @@ public class GameFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 layoutWin.setVisibility(View.GONE);
+                if(Appodeal.isLoaded(Appodeal.NON_SKIPPABLE_VIDEO)) {
+                    Appodeal.show(getActivity(), Appodeal.NON_SKIPPABLE_VIDEO);
+                }
             }
         });
         tvWin = (TextView) view.findViewById(R.id.tvWin);
@@ -209,6 +219,18 @@ public class GameFragment extends Fragment {
         tvWin.setTypeface(Utils.getTypeFaceLevel());
     }
 
+    public String getStringLevel() {
+        if(controller.getLevel() == Controller.EASY)
+            return "easy";
+        if(controller.getLevel() == Controller.MEDIUM)
+            return "medium";
+        if(controller.getLevel() == Controller.HARD)
+            return "hard";
+        if(controller.getLevel() == Controller.VERY_HARD)
+            return "very hard";
+        return "";
+    }
+
     /**
      * Обработчик нажатия на кнопку попытки взлома
      */
@@ -217,18 +239,7 @@ public class GameFragment extends Fragment {
         public void onClick(View view) {
             if(controller.getStatus() == controller.FINISH) {
                 onRestart();
-
-                String str = "";
-                if(controller.getLevel() == controller.EASY)
-                    str = "easy";
-                if(controller.getLevel() == controller.MEDIUM)
-                    str = "medium";
-                if(controller.getLevel() == controller.HARD)
-                    str = "hard";
-                if(controller.getLevel() == controller.VERY_HARD)
-                    str = "very hard";
-
-                ((MainActivity)getActivity()).sendAction("New Game " + str);
+                ((MainActivity)getActivity()).sendAction("New Game " + getStringLevel());
 
                 return;
             }
@@ -268,6 +279,7 @@ public class GameFragment extends Fragment {
 
         Animation win = AnimationUtils.loadAnimation(getContext(), R.anim.image_win_animation);
         ivWin.startAnimation(win);
+        ((MainActivity)getActivity()).sendAction("Win " + getStringLevel());
     }
 
     /**
@@ -406,6 +418,14 @@ public class GameFragment extends Fragment {
         addCellsOnLayout();
         adapter.notifyDataSetChanged();
         setBestResult();
+
+        if(Appodeal.isLoaded(Appodeal.BANNER_VIEW)) {
+            Appodeal.show(getActivity(), Appodeal.INTERSTITIAL);
+        }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
 }

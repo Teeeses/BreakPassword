@@ -6,12 +6,12 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 
+import com.appodeal.ads.Appodeal;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
@@ -36,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        Appodeal.disableNetwork(this, "cheetah");
+        String appKey = "4b89eb3c54472eb7feb0577f0a463c6fc72415bd402aab9f";
+        Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL);
+        Appodeal.initialize(this, appKey, Appodeal.NON_SKIPPABLE_VIDEO);
 
         activity = this;
         res = this.getResources();

@@ -7,8 +7,8 @@ android {
         applicationId "ru.explead.breakpassword"
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode 5
-        versionName "1.4"
+        versionCode 7
+        versionName "1.4.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
@@ -27,13 +27,22 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.1.0'
+    compile project(':cheetah-mobile-3.4.7')
     testCompile 'junit:junit:4.12'
     compile 'org.androidannotations:androidannotations:4.2.0'
-    compile 'com.google.android.gms:play-services-analytics:10.0.1'
-    compile 'com.google.android.gms:play-services:10.0.1'
-
+    compile 'com.google.android.gms:play-services-analytics:10.2.1'
+    compile 'com.google.android.gms:play-services:10.2.1'
+    compile 'com.google.android.gms:play-services-ads:10.2.1'
+    compile 'com.google.android.gms:play-services-location:10.2.1'
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.android.support:design:25.1.0'
+    compile files('libs/applovin-6.3.0.jar')
+    compile files('libs/appodeal-1.15.9.jar')
+    compile files('libs/chartboost-6.6.1.jar')
+    compile files('libs/flurry-analytics-6.5.0.jar')
+    compile files('libs/my-target-4.5.10.jar')
+    compile files('libs/unity-ads-2.0.4.jar')
+    compile files('libs/yandex-metrica-2.62.jar')
 }
 
 apply plugin: 'com.google.gms.google-services'
