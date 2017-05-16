@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     android:id="@+id/root"
-    android:layout_width="0dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/radius"
-    android:paddingRight="@dimen/radius"
-    android:layout_weight="1"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:auto="http://schemas.android.com/apk/res-auto">
+    android:padding="@dimen/radius"
+    android:background="@android:color/transparent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <me.grantland.widget.AutofitTextView
+    <TextView
         android:id="@+id/tvCell"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:textColor="@android:color/white"
         android:background="@drawable/circle_bg"
         android:gravity="center"
         android:textSize="@dimen/giant_text"
-        auto:minTextSize="@dimen/standard_text"
         android:layout_centerInParent="true" />
 </RelativeLayout>

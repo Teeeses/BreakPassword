@@ -348,17 +348,15 @@ public class GameFragment extends Fragment implements HackCallback {
      * Создаем клетки
      */
     private void createCells() {
-        int padding = (int)utilsDesign.getMarginCells(controller.getLevel());
         ArrayList<Cell> cells = new ArrayList<>();
-        int size = (width - 2*padding*controller.getNumberCells() + 1)/controller.getNumberCells();
+        int size = width/controller.getNumberCells();
         for(int i = 0; i < controller.getNumberCells(); i++) {
             LayoutInflater inflater = getActivity().getLayoutInflater();
             View view = inflater.inflate(R.layout.cell, null, false);
             RelativeLayout layout = (RelativeLayout) view.findViewById(R.id.root);
-            layout.setPadding(padding, 0, padding, 0);
+            layout.setLayoutParams(new RelativeLayout.LayoutParams(size, size));
             TextView tvCell = (TextView) view.findViewById(R.id.tvCell);
             tvCell.setTextSize(utilsDesign.getTextSize(controller.getLevel()));
-            tvCell.setLayoutParams(new RelativeLayout.LayoutParams(size, size));
             final Cell cell = new Cell(i, layout, tvCell);
             cells.add(cell);
 

@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal" >
 
         <RelativeLayout
@@ -24,7 +25,7 @@
                 android:padding="@dimen/radius"
                 android:textColor="@android:color/white"
                 android:background="@color/colorPrimary"
-                android:textSize="@dimen/mini_text"
+                android:textSize="@dimen/standard_text"
                 android:text="Easy" />
         </RelativeLayout>
 
@@ -43,7 +44,7 @@
                 android:padding="@dimen/radius"
                 android:textColor="@android:color/white"
                 android:background="@color/colorPrimary"
-                android:textSize="@dimen/mini_text"
+                android:textSize="@dimen/standard_text"
                 android:text="Medium" />
         </RelativeLayout>
 
@@ -62,7 +63,7 @@
                 android:padding="@dimen/radius"
                 android:textColor="@android:color/white"
                 android:background="@color/colorPrimary"
-                android:textSize="@dimen/mini_text"
+                android:textSize="@dimen/standard_text"
                 android:text="Hard" />
         </RelativeLayout>
 
@@ -80,7 +81,7 @@
                 android:textColor="@android:color/white"
                 android:background="@color/colorPrimary"
                 android:padding="@dimen/radius"
-                android:textSize="@dimen/mini_text"
+                android:textSize="@dimen/standard_text"
                 android:text="Very hard" />
         </RelativeLayout>
     </LinearLayout>

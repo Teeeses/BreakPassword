@@ -2,4 +2,9 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
        android:shape="oval">
     <solid android:color="@color/turquoise"/>
+
+    <padding android:bottom="@dimen/mini_margin"
+             android:left="@dimen/mini_margin"
+             android:right="@dimen/mini_margin"
+             android:top="@dimen/mini_margin" />
 </shape>

@@ -9,16 +9,10 @@
     <dimen name="radius">4dp</dimen>
     <dimen name="big_text">28sp</dimen>
     <dimen name="mini_text">10sp</dimen>
-    <dimen name="more_mini_text">13sp</dimen>
+    <dimen name="more_mini_text">12sp</dimen>
     <dimen name="standard_text">16sp</dimen>
     <dimen name="more_standard_text">20sp</dimen>
     <dimen name="giant_text">40sp</dimen>
-
-    //Текст в клетках
-    <dimen name="text_level_easy">22sp</dimen>
-    <dimen name="text_level_medium">20sp</dimen>
-    <dimen name="text_level_hard">16sp</dimen>
-    <dimen name="text_level_very_hard">12sp</dimen>
 
 
     <dimen name="company_name_text">52sp</dimen>
@@ -33,4 +27,6 @@
 
     <dimen name="height_line">1dp</dimen>
     <dimen name="fat_height_line">2dp</dimen>
+
+    <dimen name="key_size">48dp</dimen>
 </resources>

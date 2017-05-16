@@ -1,6 +1,5 @@
 package ru.explead.breakpassword.beans;
 
-import android.content.res.Resources;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 

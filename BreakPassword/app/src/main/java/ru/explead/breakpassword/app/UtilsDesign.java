@@ -15,17 +15,18 @@ public class UtilsDesign {
     private int textSize;
     private int marginCells;
 
-
     public float getTextSize(int level) {
         Resources res = MainActivity.getRes();
         if(level == Controller.EASY)
-            return res.getDimension(R.dimen.text_level_easy);
+            return res.getDimension(R.dimen.more_standard_text);
+        if(level == Controller.MEDIUM)
+            return res.getDimension(R.dimen.standard_text);
         if(level  == Controller.HARD)
-            return res.getDimension(R.dimen.text_level_hard);
+            return res.getDimension(R.dimen.more_mini_text);
         if(level  == Controller.VERY_HARD)
-            return res.getDimension(R.dimen.text_level_very_hard);
+            return res.getDimension(R.dimen.mini_text);
 
-        return res.getDimension(R.dimen.text_level_medium);
+        return res.getDimension(R.dimen.giant_text);
     }
 
     public float getMarginCells(int level) {

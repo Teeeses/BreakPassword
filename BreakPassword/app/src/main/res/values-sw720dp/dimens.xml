@@ -1,0 +1,31 @@
+<resources>
+    <dimen name="standard_margin">24dp</dimen>
+    <dimen name="big_margin">48dp</dimen>
+    <dimen name="giant_margin">96dp</dimen>
+
+
+    <dimen name="more_standard_margin">36dp</dimen>
+    <dimen name="mini_margin">12dp</dimen>
+    <dimen name="radius">6dp</dimen>
+    <dimen name="big_text">42sp</dimen>
+    <dimen name="mini_text">14sp</dimen>
+    <dimen name="more_mini_text">18sp</dimen>
+    <dimen name="standard_text">24sp</dimen>
+    <dimen name="more_standard_text">30sp</dimen>
+    <dimen name="giant_text">60sp</dimen>
+
+
+    <dimen name="company_name_text">78sp</dimen>
+    <dimen name="company_surname_text">72sp</dimen>
+
+    //Марнжины у клеток
+    <dimen name="level_margin_easy">10dp</dimen>
+    <dimen name="level_margin_medium">6dp</dimen>
+    <dimen name="level_margin_hard">4dp</dimen>
+    <dimen name="level_margin_very_hard">3dp</dimen>
+
+    <dimen name="height_line">2dp</dimen>
+    <dimen name="fat_height_line">3dp</dimen>
+
+    <dimen name="key_size">84dp</dimen>
+</resources>
