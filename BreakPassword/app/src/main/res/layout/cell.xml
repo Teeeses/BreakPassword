@@ -3,13 +3,13 @@
     android:id="@+id/root"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:gravity="center"
     android:paddingLeft="@dimen/radius"
     android:paddingRight="@dimen/radius"
     android:layout_weight="1"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:auto="http://schemas.android.com/apk/res-auto">
 
-    <TextView
+    <me.grantland.widget.AutofitTextView
         android:id="@+id/tvCell"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,5 +17,6 @@
         android:background="@drawable/circle_bg"
         android:gravity="center"
         android:textSize="@dimen/giant_text"
+        auto:minTextSize="@dimen/standard_text"
         android:layout_centerInParent="true" />
 </RelativeLayout>

@@ -27,6 +27,7 @@ import com.appodeal.ads.Appodeal;
 
 import java.util.ArrayList;
 
+import ru.explead.breakpassword.HackCallback;
 import ru.explead.breakpassword.MainActivity;
 import ru.explead.breakpassword.R;
 import ru.explead.breakpassword.adapters.DataAdapter;
@@ -44,7 +45,7 @@ import ru.explead.breakpassword.logic.UtilsWinText;
  * Created by develop on 13.01.2017.
  */
 
-public class GameFragment extends Fragment {
+public class GameFragment extends Fragment implements HackCallback {
 
 
     private Controller controller;
@@ -87,16 +88,19 @@ public class GameFragment extends Fragment {
     private String lastAttempt = "";
     private SoundPool soundPool;
 
+    private Animation wrong;
+
+    private int countClick = 0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
+        controller = new Controller(this);
+        App.setController(controller);
 
-        if(Appodeal.isLoaded(Appodeal.INTERSTITIAL)) {
-            Appodeal.show(getActivity(), Appodeal.INTERSTITIAL);
-        }
+        wrong = AnimationUtils.loadAnimation(getContext(), R.anim.wrong);
 
-        controller = App.getController();
         utilsDesign = new UtilsDesign();
 
         soundPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 100);
@@ -109,6 +113,7 @@ public class GameFragment extends Fragment {
                 layoutWin.setVisibility(View.GONE);
                 if(Appodeal.isLoaded(Appodeal.NON_SKIPPABLE_VIDEO)) {
                     Appodeal.show(getActivity(), Appodeal.NON_SKIPPABLE_VIDEO);
+                    countClick = 0;
                 }
             }
         });
@@ -185,24 +190,21 @@ public class GameFragment extends Fragment {
             } else {
                 tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
             }
-        }
-        if(App.getController().getLevel() == Controller.MEDIUM) {
+        } else if(App.getController().getLevel() == Controller.MEDIUM) {
             int medium = MainActivity.getPref().getInt(Utils.BEST_MEDIUM, 0);
             if(medium != 0) {
                 tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttemptsAndBest), controller.getNumberAttempts(), medium));
             } else {
                 tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
             }
-        }
-        if(App.getController().getLevel() == Controller.HARD) {
+        }else if(App.getController().getLevel() == Controller.HARD) {
             int hard = MainActivity.getPref().getInt(Utils.BEST_HARD, 0);
             if(hard != 0) {
                 tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttemptsAndBest), controller.getNumberAttempts(), hard));
             } else {
                 tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
             }
-        }
-        if(App.getController().getLevel() == Controller.VERY_HARD) {
+        } else if(App.getController().getLevel() == Controller.VERY_HARD) {
             int veryHard = MainActivity.getPref().getInt(Utils.BEST_VERY_HARD, 0);
             if(veryHard != 0) {
                 tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttemptsAndBest), controller.getNumberAttempts(), veryHard));
@@ -237,10 +239,17 @@ public class GameFragment extends Fragment {
     View.OnClickListener btnHackClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            countClick++;
+            /*if(Appodeal.isLoaded(Appodeal.INTERSTITIAL) && countClick % 5 == 0) {
+                Appodeal.show(getActivity(), Appodeal.INTERSTITIAL);
+            }*/
+            if(countClick % 5 == 0) {
+                ((MainActivity) getContext()).openAdvertiseFragment();
+            }
+
             if(controller.getStatus() == controller.FINISH) {
                 onRestart();
                 ((MainActivity)getActivity()).sendAction("New Game " + getStringLevel());
-
                 return;
             }
             if(controller.toStringPasswordProbable().equals(lastAttempt)) {
@@ -249,26 +258,26 @@ public class GameFragment extends Fragment {
             } else if(controller.isEmptyCells()) {
                 controller.toAttempt();
                 setBestResult();
-                adapter.notifyDataSetChanged();
                 lastAttempt = controller.toStringPasswordProbable();
+                adapter.notifyDataSetChanged();
             } else {
                 showSnackBar(view, MainActivity.getRes().getString(R.string.cellIsEmpty));
                 return;
             }
-
-            if(controller.getStatus() == controller.ACTIVE) {
-                Animation wrong = AnimationUtils.loadAnimation(getContext(), R.anim.wrong);
-                tvPassword.startAnimation(wrong);
-            }
-
-            if(controller.getStatus() == controller.FINISH) {
-                btnHack.setText(MainActivity.getRes().getString(R.string.new_game));
-                //showSnackBar(view, UtilsWinText.getWinText(controller.getLevel(), controller.getNumberAttempts()));
-                MainActivity.saveSettings(controller.getLevel(), controller.getNumberAttempts());
-                setVisibilityLayoutWin();
-            }
         }
     };
+
+    @Override
+    public void win() {
+        btnHack.setText(MainActivity.getRes().getString(R.string.new_game));
+        MainActivity.saveSettings(controller.getLevel(), controller.getNumberAttempts());
+        setVisibilityLayoutWin();
+    }
+
+    @Override
+    public void wrong() {
+        tvPassword.startAnimation(wrong);
+    }
 
     /**
      * Показывает победный слой
@@ -321,12 +330,14 @@ public class GameFragment extends Fragment {
             button.getButton().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    soundPool.play(1, 0.5f, 0.5f, 1, 0, 1f);
-                    controller.getFocusCell().setValue(button.getValue());
-                    controller.removeAllFocusCells();
-                    controller.changeFocusCell();
-                    if(controller.getIdFocusCell() == controller.NO_ACTIVE) {
-                        closeKeyboard();
+                    if(isShowKeyboard) {
+                        soundPool.play(1, 0.5f, 0.5f, 1, 0, 1f);
+                        controller.getFocusCell().setValue(button.getValue());
+                        controller.removeAllFocusCells();
+                        controller.changeFocusCell();
+                        if (controller.getIdFocusCell() == controller.NO_ACTIVE) {
+                            closeKeyboard();
+                        }
                     }
                 }
             });
@@ -372,11 +383,11 @@ public class GameFragment extends Fragment {
      */
     private void showKeyboard() {
         if(!isShowKeyboard) {
+            isShowKeyboard = true;
             Animation bottomUp = AnimationUtils.loadAnimation(getContext(),
                     R.anim.slide_up_dialog);
             rootKeyboard.startAnimation(bottomUp);
             rootKeyboard.setVisibility(View.VISIBLE);
-            isShowKeyboard = true;
         }
     }
 
@@ -385,7 +396,7 @@ public class GameFragment extends Fragment {
      */
     public void closeKeyboard() {
         if(isShowKeyboard) {
-
+            isShowKeyboard = false;
             controller.setIdFocusCell(controller.NO_ACTIVE);
             controller.removeAllFocusCells();
 
@@ -393,7 +404,6 @@ public class GameFragment extends Fragment {
                     R.anim.slide_out_down);
             rootKeyboard.startAnimation(bottomUp);
             rootKeyboard.setVisibility(View.GONE);
-            isShowKeyboard = false;
         }
     }
 

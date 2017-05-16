@@ -18,10 +18,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingLeft="@dimen/big_margin"
-        android:paddingRight="@dimen/big_margin"
-        android:paddingTop="@dimen/big_margin"
-        android:paddingBottom="@dimen/big_margin">
+        android:paddingLeft="@dimen/standard_margin"
+        android:paddingRight="@dimen/standard_margin"
+        android:paddingTop="@dimen/standard_margin"
+        android:paddingBottom="@dimen/standard_margin">
 
         <TextView
             android:id="@+id/tvPassword"
@@ -53,8 +53,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:dividerHeight="@dimen/radius"
-                android:layout_marginTop="@dimen/big_margin"
-                android:layout_marginBottom="@dimen/big_margin"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:layout_marginBottom="@dimen/standard_margin"
                 android:layout_above="@+id/bottomLayout" />
 
             <LinearLayout

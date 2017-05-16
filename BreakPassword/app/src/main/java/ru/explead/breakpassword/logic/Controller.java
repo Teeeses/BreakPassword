@@ -3,6 +3,7 @@ package ru.explead.breakpassword.logic;
 import java.util.ArrayList;
 import java.util.Random;
 
+import ru.explead.breakpassword.HackCallback;
 import ru.explead.breakpassword.beans.Cell;
 import ru.explead.breakpassword.beans.Data;
 
@@ -43,8 +44,10 @@ public class Controller {
     public static int NO_ACTIVE = 0, ACTIVE = 1, FINISH = 2;
     private int status;
 
+    private HackCallback hackCallback;
 
-    public Controller() {
+    public Controller(HackCallback hackCallback) {
+        this.hackCallback = hackCallback;
         level = MEDIUM;
         status = ACTIVE;
         numberCells = level;
@@ -118,7 +121,10 @@ public class Controller {
 
     public void checkWin() {
         if(numberCells == data.get(0).getOnPlace()) {
+            hackCallback.win();
             status = FINISH;
+        } else {
+            hackCallback.wrong();
         }
     }
 

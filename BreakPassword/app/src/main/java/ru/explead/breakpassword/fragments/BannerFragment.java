@@ -25,7 +25,8 @@ public class BannerFragment extends Fragment {
     private Runnable run = new Runnable() {
         @Override
         public void run() {
-            ((MainActivity)(MainActivity.getActivity())).openGameFragment();
+            ((MainActivity)getContext()).openGameFragment();
+            ((MainActivity)getContext()).openAdvertiseFragment();
         }
     };
 

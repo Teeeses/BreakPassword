@@ -17,6 +17,7 @@ import com.google.android.gms.analytics.Tracker;
 
 import ru.explead.breakpassword.app.App;
 import ru.explead.breakpassword.app.Utils;
+import ru.explead.breakpassword.fragments.AdvertiseFragment;
 import ru.explead.breakpassword.fragments.BannerFragment;
 import ru.explead.breakpassword.fragments.GameFragment;
 import ru.explead.breakpassword.logic.Controller;
@@ -40,8 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         Appodeal.disableNetwork(this, "cheetah");
         String appKey = "4b89eb3c54472eb7feb0577f0a463c6fc72415bd402aab9f";
-        Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL);
-        Appodeal.initialize(this, appKey, Appodeal.NON_SKIPPABLE_VIDEO);
+        Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL | Appodeal.REWARDED_VIDEO);
 
         activity = this;
         res = this.getResources();
@@ -55,8 +55,6 @@ public class MainActivity extends AppCompatActivity {
         App.setWidthScreen(displaymetrics.widthPixels);
         App.setHeightScreen(displaymetrics.heightPixels);
 
-        App.setController(new Controller());
-
         openBannerFragment();
     }
 
@@ -64,6 +62,15 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         fragment = new GameFragment();
         transaction.replace(R.id.fragmentContainer, fragment);
+        transaction.commit();
+    }
+
+    public void openAdvertiseFragment() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        fragment = new AdvertiseFragment();
+        transaction.add(R.id.fragmentContainer, fragment);
+        transaction.setCustomAnimations(R.anim.scale_enter, R.anim.scale_exit);
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 
@@ -102,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 alert.show();
             } else {
                 super.onBackPressed();
+                fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
             }
         }
 

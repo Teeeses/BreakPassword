@@ -52,4 +52,7 @@
     <string name="example_you_input">Вы ввели: 6328</string>
     <string name="example_on_place">На месте: \n1 (2)</string>
     <string name="example_matches">Совпадений: \n2 (6, 8)</string>
+
+    <string name="no_thanks">Нет, спасибо</string>
+    <string name="install">Установить</string>
 </resources>

@@ -2,6 +2,7 @@ package ru.explead.breakpassword.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.TextView;
@@ -16,16 +17,16 @@ import ru.explead.breakpassword.app.Utils;
 
 public class DialogResultGame extends Dialog {
 
-    private Activity activity;
+    private Context context;
 
     private TextView tvEasyResult;
     private TextView tvMediumResult;
     private TextView tvHardResult;
     private TextView tvVeryHardResult;
 
-    public DialogResultGame(Activity activity) {
-        super(activity);
-        this.activity = activity;
+    public DialogResultGame(Context context) {
+        super(context);
+        this.context = context;
     }
 
     @Override

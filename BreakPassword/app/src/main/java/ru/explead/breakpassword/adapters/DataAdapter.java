@@ -46,6 +46,10 @@ public class DataAdapter extends BaseAdapter {
             viewHolder.tvOnPlace = (TextView) convertView.findViewById(R.id.tvOnPlace);
             viewHolder.tvMatches = (TextView) convertView.findViewById(R.id.tvMatches);
 
+            viewHolder.tvpProbablePassword.setTypeface(Utils.getTypeFaceLevel());
+            viewHolder.tvOnPlace.setTypeface(Utils.getTypeFaceLevel());
+            viewHolder.tvMatches.setTypeface(Utils.getTypeFaceLevel());
+
             convertView.setTag(viewHolder);
 
         } else viewHolder = (ViewHolder) convertView.getTag();
@@ -57,10 +61,6 @@ public class DataAdapter extends BaseAdapter {
         viewHolder.tvMatches.setText(String.format(res.getString(R.string.matches), object.getMatches()));
 
         viewHolder.tvpProbablePassword.setText(object.getProbable());
-
-        viewHolder.tvpProbablePassword.setTypeface(Utils.getTypeFaceLevel());
-        viewHolder.tvOnPlace.setTypeface(Utils.getTypeFaceLevel());
-        viewHolder.tvMatches.setTypeface(Utils.getTypeFaceLevel());
 
         return convertView;
     }

@@ -2,6 +2,7 @@ package ru.explead.breakpassword.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -19,7 +20,7 @@ import ru.explead.breakpassword.logic.Controller;
 
 public class DialogMenu extends Dialog {
 
-    private Activity activity;
+    private Context context;
     private Controller controller;
 
     private Button btnEasy;
@@ -30,9 +31,9 @@ public class DialogMenu extends Dialog {
     private int changeLevel;
 
 
-    public DialogMenu(Activity activity, Controller controller) {
-        super(activity);
-        this.activity = activity;
+    public DialogMenu(Activity context, Controller controller) {
+        super(context);
+        this.context = context;
         this.controller = controller;
         changeLevel = controller.getLevel();
     }
@@ -61,7 +62,7 @@ public class DialogMenu extends Dialog {
                     str = "hard";
                 if(changeLevel == controller.VERY_HARD)
                     str = "very hard";
-                ((MainActivity)activity).sendAction("New Game " + str);
+                ((MainActivity)context).sendAction("New Game " + str);
                 dismiss();
             }
         });
@@ -120,7 +121,7 @@ public class DialogMenu extends Dialog {
         btnResults.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogResultGame dialog = new DialogResultGame(activity);
+                DialogResultGame dialog = new DialogResultGame(context);
                 dialog.show();
             }
         });
