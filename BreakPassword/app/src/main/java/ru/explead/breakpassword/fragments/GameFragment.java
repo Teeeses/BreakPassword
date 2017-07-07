@@ -111,9 +111,8 @@ public class GameFragment extends Fragment implements HackCallback {
             @Override
             public void onClick(View view) {
                 layoutWin.setVisibility(View.GONE);
-                if(Appodeal.isLoaded(Appodeal.NON_SKIPPABLE_VIDEO)) {
-                    Appodeal.show(getActivity(), Appodeal.NON_SKIPPABLE_VIDEO);
-                    countClick = 0;
+                if(Appodeal.isLoaded(Appodeal.INTERSTITIAL)) {
+                    Appodeal.show(getActivity(), Appodeal.INTERSTITIAL);
                 }
             }
         });
@@ -240,11 +239,8 @@ public class GameFragment extends Fragment implements HackCallback {
         @Override
         public void onClick(View view) {
             countClick++;
-            /*if(Appodeal.isLoaded(Appodeal.INTERSTITIAL) && countClick % 5 == 0) {
+            if(Appodeal.isLoaded(Appodeal.INTERSTITIAL) && countClick % 5 == 0) {
                 Appodeal.show(getActivity(), Appodeal.INTERSTITIAL);
-            }*/
-            if(countClick % 5 == 0) {
-                ((MainActivity) getContext()).openAdvertiseFragment();
             }
 
             if(controller.getStatus() == controller.FINISH) {
@@ -426,10 +422,6 @@ public class GameFragment extends Fragment implements HackCallback {
         addCellsOnLayout();
         adapter.notifyDataSetChanged();
         setBestResult();
-
-        if(Appodeal.isLoaded(Appodeal.BANNER_VIEW)) {
-            Appodeal.show(getActivity(), Appodeal.INTERSTITIAL);
-        }
     }
 
     @Override
