@@ -105,6 +105,7 @@ public class GameFragment extends Fragment implements HackCallback {
 
         soundPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 100);
         soundPool.load(getActivity(), R.raw.one, 1);
+        soundPool.load(getActivity(), R.raw.sound_win, 2);
 
         layoutWin = (LinearLayout) view.findViewById(R.id.layoutWin);
         layoutWin.setOnClickListener(new View.OnClickListener() {
@@ -245,7 +246,6 @@ public class GameFragment extends Fragment implements HackCallback {
 
             if(controller.getStatus() == controller.FINISH) {
                 onRestart();
-                ((MainActivity)getActivity()).sendAction("New Game " + getStringLevel());
                 return;
             }
             if(controller.toStringPasswordProbable().equals(lastAttempt)) {
@@ -279,12 +279,12 @@ public class GameFragment extends Fragment implements HackCallback {
      * Показывает победный слой
      */
     public void setVisibilityLayoutWin() {
+        soundPool.play(2, 0.5f, 0.5f, 1, 0, 1f);
         tvWin.setText(UtilsWinText.getWinText(controller.getLevel(), controller.getNumberAttempts()));
         layoutWin.setVisibility(View.VISIBLE);
 
         Animation win = AnimationUtils.loadAnimation(getContext(), R.anim.image_win_animation);
         ivWin.startAnimation(win);
-        ((MainActivity)getActivity()).sendAction("Win " + getStringLevel());
     }
 
     /**

@@ -24,9 +24,9 @@ public class UtilsWinText {
                 return res.getString(R.string.win_1);
             }
             if(times == 2 || times == 3) {
-                return String.format(res.getString(R.string.win_2), times);
+                return String.format(res.getString(R.string.win_2));
             }
-            if(times >= 4 && times <= 6) {
+            if(times >= 4 && times <= 8) {
                 int count = rand.nextInt(2);
                 if(count == 0)
                     return res.getString(R.string.win_3);
@@ -34,7 +34,7 @@ public class UtilsWinText {
                     return res.getString(R.string.win_4);
 
             }
-            if(times > 6 && times < 12) {
+            if(times > 8) {
                 int count = rand.nextInt(3);
                 if(count == 0)
                     return res.getString(R.string.win_8);
@@ -42,15 +42,6 @@ public class UtilsWinText {
                     return res.getString(R.string.win_9);
                 else
                     return res.getString(R.string.win_10);
-            }
-            if(times >= 12) {
-                int count = rand.nextInt(3);
-                if(count == 0)
-                    return res.getString(R.string.win_5);
-                else if(count == 1)
-                    return res.getString(R.string.win_6);
-                else
-                    return res.getString(R.string.win_7);
             }
         }
 
@@ -60,7 +51,7 @@ public class UtilsWinText {
                 return res.getString(R.string.win_1);
             }
             if(times == 2 || times == 3) {
-                return String.format(res.getString(R.string.win_2), times);
+                return String.format(res.getString(R.string.win_2));
             }
             if(times >= 4 && times <= 8) {
                 int count = rand.nextInt(2);
@@ -70,7 +61,7 @@ public class UtilsWinText {
                     return res.getString(R.string.win_4);
 
             }
-            if(times > 8 && times < 15) {
+            if(times > 8) {
                 int count = rand.nextInt(3);
                 if(count == 0)
                     return res.getString(R.string.win_8);
@@ -78,15 +69,6 @@ public class UtilsWinText {
                     return res.getString(R.string.win_9);
                 else
                     return res.getString(R.string.win_10);
-            }
-            if(times >= 15) {
-                int count = rand.nextInt(3);
-                if(count == 0)
-                    return res.getString(R.string.win_5);
-                else if(count == 1)
-                    return res.getString(R.string.win_6);
-                else
-                    return res.getString(R.string.win_7);
             }
         }
 
@@ -96,7 +78,7 @@ public class UtilsWinText {
                 return res.getString(R.string.win_1);
             }
             if(times == 2 || times == 3) {
-                return String.format(res.getString(R.string.win_2), times);
+                return String.format(res.getString(R.string.win_2));
             }
             if(times >= 4 && times <= 8) {
                 int count = rand.nextInt(2);
@@ -106,7 +88,7 @@ public class UtilsWinText {
                     return res.getString(R.string.win_4);
 
             }
-            if(times > 8 && times < 15) {
+            if(times > 8) {
                 int count = rand.nextInt(3);
                 if(count == 0)
                     return res.getString(R.string.win_8);
@@ -114,15 +96,6 @@ public class UtilsWinText {
                     return res.getString(R.string.win_9);
                 else
                     return res.getString(R.string.win_10);
-            }
-            if(times >= 15) {
-                int count = rand.nextInt(3);
-                if(count == 0)
-                    return res.getString(R.string.win_5);
-                else if(count == 1)
-                    return res.getString(R.string.win_6);
-                else
-                    return res.getString(R.string.win_7);
             }
         }
 
@@ -132,7 +105,7 @@ public class UtilsWinText {
                 return res.getString(R.string.win_1);
             }
             if(times == 2 || times == 3) {
-                return String.format(res.getString(R.string.win_2), times);
+                return String.format(res.getString(R.string.win_2));
             }
             if(times >= 4 && times <= 10) {
                 int count = rand.nextInt(2);
@@ -142,7 +115,7 @@ public class UtilsWinText {
                     return res.getString(R.string.win_4);
 
             }
-            if(times > 10 && times < 17) {
+            if(times > 10) {
                 int count = rand.nextInt(3);
                 if(count == 0)
                     return res.getString(R.string.win_8);
@@ -150,15 +123,6 @@ public class UtilsWinText {
                     return res.getString(R.string.win_9);
                 else
                     return res.getString(R.string.win_10);
-            }
-            if(times >= 17) {
-                int count = rand.nextInt(3);
-                if(count == 0)
-                    return res.getString(R.string.win_5);
-                else if(count == 1)
-                    return res.getString(R.string.win_6);
-                else
-                    return res.getString(R.string.win_7);
             }
         }
         return res.getString(R.string.win_0);

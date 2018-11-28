@@ -24,23 +24,8 @@ public class AdvertiseFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_advertise, container, false);
 
         Button no = (Button) view.findViewById(R.id.no);
-        no.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((MainActivity)getActivity()).sendAction("Install no");
-                ((MainActivity)getContext()).onBackPressed();
-            }
-        });
 
         Button yes = (Button) view.findViewById(R.id.yes);
-        yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((MainActivity)getActivity()).sendAction("Install yes");
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=guesscolor.explead.ru.guesscolor"));
-                startActivity(browserIntent);
-            }
-        });
         return view;
     }
 

@@ -62,7 +62,6 @@ public class DialogMenu extends Dialog {
                     str = "hard";
                 if(changeLevel == controller.VERY_HARD)
                     str = "very hard";
-                ((MainActivity)context).sendAction("New Game " + str);
                 dismiss();
             }
         });

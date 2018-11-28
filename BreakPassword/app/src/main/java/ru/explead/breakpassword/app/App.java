@@ -5,9 +5,6 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.Tracker;
-
 import ru.explead.breakpassword.R;
 import ru.explead.breakpassword.logic.Controller;
 
@@ -22,9 +19,6 @@ public class App extends MultiDexApplication {
 
     private static Controller controller;
 
-    private Tracker mTracker;
-
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -34,19 +28,6 @@ public class App extends MultiDexApplication {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
-    }
-
-    /**
-     * Получает счетчик {@link Tracker}, используемый по умолчанию для этого приложения {@link Application}.
-     * @return tracker
-     */
-    synchronized public Tracker getDefaultTracker() {
-        if (mTracker == null) {
-            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
-            // Чтобы включить ведение журнала отладки, используйте adb shell setprop log.tag.GAv4 DEBUG
-            mTracker = analytics.newTracker(R.xml.analytics);
-        }
-        return mTracker;
     }
 
     public static float getWidthScreen() {

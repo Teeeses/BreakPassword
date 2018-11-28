@@ -12,8 +12,6 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 
 import com.appodeal.ads.Appodeal;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 import ru.explead.breakpassword.app.App;
 import ru.explead.breakpassword.app.Utils;
@@ -31,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private static Resources res;
     private static SharedPreferences sPref;
 
-    private Tracker mTracker;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +42,6 @@ public class MainActivity extends AppCompatActivity {
         activity = this;
         res = this.getResources();
         sPref = getSharedPreferences(Utils.APP_PREFERENCES, MODE_PRIVATE);
-
-        // Получение экземпляра общедоступного счетчика.
-        App application = (App) getApplication();
-        mTracker = application.getDefaultTracker();
 
         DisplayMetrics displaymetrics = getResources().getDisplayMetrics();
         App.setWidthScreen(displaymetrics.widthPixels);
@@ -158,19 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        mTracker.setScreenName("Image~" + "MainActivity");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
         super.onResume();
     }
 
-    public Tracker getTracker() {
-        return mTracker;
-    }
-
-    public void sendAction(String str) {
-        mTracker.send(new HitBuilders.EventBuilder()
-                .setCategory("Action")
-                .setAction(str)
-                .build());
-    }
 }
