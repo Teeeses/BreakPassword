@@ -1,5 +1,7 @@
 package ru.explead.breakpassword.app;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 
 import ru.explead.breakpassword.MainActivity;
@@ -17,7 +19,7 @@ public class Utils {
 
     public static final String APP_PREFERENCES = "mysettings";
 
-    public static Typeface getTypeFaceLevel() {
-        return Typeface.createFromAsset(MainActivity.getActivity().getAssets(),"fonts/level_personal.ttf");
+    public static Typeface getTypeFaceLevel(Context context) {
+        return Typeface.createFromAsset(context.getAssets(),"fonts/level_personal.ttf");
     }
 }

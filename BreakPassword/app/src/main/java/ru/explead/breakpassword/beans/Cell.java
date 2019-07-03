@@ -58,7 +58,7 @@ public class Cell {
     /**
      * Устанавливаем текст внутри клетки
      */
-    public void setText() {
+    private void setText() {
         tvCell.setText((value != NO_ACTIVE) ? Integer.toString(value) : "");
     }
 

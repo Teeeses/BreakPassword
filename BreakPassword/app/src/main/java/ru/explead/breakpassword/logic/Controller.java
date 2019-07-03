@@ -7,8 +7,6 @@ import ru.explead.breakpassword.HackCallback;
 import ru.explead.breakpassword.beans.Cell;
 import ru.explead.breakpassword.beans.Data;
 
-import static android.R.attr.id;
-
 /**
  * Created by develop on 13.01.2017.
  */
@@ -68,7 +66,7 @@ public class Controller {
      * Генерируем пароль
      * @param numberCells - количество цифр
      */
-    public void generatePassword(int numberCells) {
+    private void generatePassword(int numberCells) {
         password.clear();
         this.numberCells = numberCells;
         for(int i = 0; i < numberCells; i++) {
@@ -83,9 +81,8 @@ public class Controller {
 
     /**
      * Совершить попытку взлома
-     * @return - объект Data
      */
-    public Data toAttempt() {
+    public void toAttempt() {
         numberAttempts++;
 
         ArrayList<Integer> resultOnPlace = getNumberOnPlace();
@@ -105,7 +102,6 @@ public class Controller {
 
         checkWin();
 
-        return resultData;
     }
 
     /**
@@ -119,7 +115,7 @@ public class Controller {
         }
     }
 
-    public void checkWin() {
+    private void checkWin() {
         if(numberCells == data.get(0).getOnPlace()) {
             hackCallback.win();
             status = FINISH;
@@ -132,7 +128,7 @@ public class Controller {
      * Находим цифры которые стоят на своих местах
      * @return - массив индексов цифр на своих местах
      */
-    public ArrayList<Integer> getNumberOnPlace() {
+    private ArrayList<Integer> getNumberOnPlace() {
         ArrayList<Integer> result = new ArrayList<>();
         for(int i = 0; i < numberCells; i++) {
             if(password.get(i) == cells.get(i).getValue()) {
@@ -146,7 +142,7 @@ public class Controller {
      * Метод для вывода пароля
      * @return - строка(пароль)
      */
-    public String arrayToString(ArrayList<Integer> array) {
+    private String arrayToString(ArrayList<Integer> array) {
         StringBuilder builder = new StringBuilder();
         for(int i = 0; i < array.size(); i++) {
             builder.append(array.get(i));
@@ -225,10 +221,6 @@ public class Controller {
 
     public int getNumberCells() {
         return numberCells;
-    }
-
-    public void setNumberCells(int numberCells) {
-        this.numberCells = numberCells;
     }
 
     public void setCells(ArrayList<Cell> cells) {

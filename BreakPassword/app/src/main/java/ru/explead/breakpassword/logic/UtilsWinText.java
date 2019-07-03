@@ -18,13 +18,12 @@ public class UtilsWinText {
         Random rand = new Random();
         Resources res = MainActivity.getRes();
 
-
         if(level == Controller.EASY) {
             if(times == 1) {
                 return res.getString(R.string.win_1);
             }
             if(times == 2 || times == 3) {
-                return String.format(res.getString(R.string.win_2));
+                return res.getString(R.string.win_2);
             }
             if(times >= 4 && times <= 8) {
                 int count = rand.nextInt(2);
@@ -51,7 +50,7 @@ public class UtilsWinText {
                 return res.getString(R.string.win_1);
             }
             if(times == 2 || times == 3) {
-                return String.format(res.getString(R.string.win_2));
+                return res.getString(R.string.win_2);
             }
             if(times >= 4 && times <= 8) {
                 int count = rand.nextInt(2);
@@ -105,7 +104,7 @@ public class UtilsWinText {
                 return res.getString(R.string.win_1);
             }
             if(times == 2 || times == 3) {
-                return String.format(res.getString(R.string.win_2));
+                return res.getString(R.string.win_2);
             }
             if(times >= 4 && times <= 10) {
                 int count = rand.nextInt(2);

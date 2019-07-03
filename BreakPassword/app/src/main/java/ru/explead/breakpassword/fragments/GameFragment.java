@@ -4,9 +4,10 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +48,6 @@ import ru.explead.breakpassword.logic.UtilsWinText;
 
 public class GameFragment extends Fragment implements HackCallback {
 
-
     private Controller controller;
     private UtilsDesign utilsDesign;
 
@@ -59,7 +59,6 @@ public class GameFragment extends Fragment implements HackCallback {
      * Главный слой клавиатуры
      */
     private LinearLayout rootKeyboard;
-    private RelativeLayout rootGameFragment;
     private Button btnHack;
     private TextView tvAttempts;
     private TextView tvPassword;
@@ -67,7 +66,6 @@ public class GameFragment extends Fragment implements HackCallback {
     private TextView tvWin;
     private ImageView ivWin;
 
-    private ListView listView;
     private DataAdapter adapter;
 
     /**
@@ -80,20 +78,16 @@ public class GameFragment extends Fragment implements HackCallback {
      */
     private int width;
 
-    /**
-     * Массив кнопок из кстомной клавиатуры
-     */
-    private KeyButton[] keyButtons;
-
     private String lastAttempt = "";
     private SoundPool soundPool;
 
     private Animation wrong;
 
     private int countClick = 0;
+    private boolean showingAdvertise = false;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
         controller = new Controller(this);
@@ -107,29 +101,26 @@ public class GameFragment extends Fragment implements HackCallback {
         soundPool.load(getActivity(), R.raw.one, 1);
         soundPool.load(getActivity(), R.raw.sound_win, 2);
 
-        layoutWin = (LinearLayout) view.findViewById(R.id.layoutWin);
+        layoutWin = view.findViewById(R.id.layoutWin);
         layoutWin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 layoutWin.setVisibility(View.GONE);
-                if(Appodeal.isLoaded(Appodeal.INTERSTITIAL)) {
-                    Appodeal.show(getActivity(), Appodeal.INTERSTITIAL);
-                }
             }
         });
-        tvWin = (TextView) view.findViewById(R.id.tvWin);
-        ivWin = (ImageView) view.findViewById(R.id.ivWin);
-        tvPassword = (TextView) view.findViewById(R.id.tvPassword);
-        rootKeyboard = (LinearLayout) view.findViewById(R.id.rootKeyboard);
-        tvAttempts = (TextView) view.findViewById(R.id.tvAttempts);
-        btnHack = (Button) view.findViewById(R.id.btnHack);
-        ImageView btnMenu = (ImageView) view.findViewById(R.id.btnMenu);
-        cellsLayout = (LinearLayout) view.findViewById(R.id.cellsLayout);
-        listView = (ListView) view.findViewById(R.id.listView);
-        adapter = new DataAdapter(controller);
+        tvWin = view.findViewById(R.id.tvWin);
+        ivWin = view.findViewById(R.id.ivWin);
+        tvPassword = view.findViewById(R.id.tvPassword);
+        rootKeyboard = view.findViewById(R.id.rootKeyboard);
+        tvAttempts = view.findViewById(R.id.tvAttempts);
+        btnHack = view.findViewById(R.id.btnHack);
+        ImageView btnMenu = view.findViewById(R.id.btnMenu);
+        cellsLayout = view.findViewById(R.id.cellsLayout);
+        ListView listView = view.findViewById(R.id.listView);
+        adapter = new DataAdapter(requireActivity(), controller);
         listView.setAdapter(adapter);
 
-        rootGameFragment = (RelativeLayout) view.findViewById(R.id.rootGameFragment);
+        RelativeLayout rootGameFragment = view.findViewById(R.id.rootGameFragment);
         rootGameFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -166,7 +157,7 @@ public class GameFragment extends Fragment implements HackCallback {
 
         btnHack.setOnClickListener(btnHackClick);
 
-        final RelativeLayout layoutHelper = (RelativeLayout) view.findViewById(R.id.layoutHelper);
+        final RelativeLayout layoutHelper = view.findViewById(R.id.layoutHelper);
         layoutHelper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -178,7 +169,7 @@ public class GameFragment extends Fragment implements HackCallback {
         setBestResult();
         createKeyboard(view);
         setTypeFace();
-
+        showAdvertise();
         return view;
     }
 
@@ -215,42 +206,29 @@ public class GameFragment extends Fragment implements HackCallback {
     }
 
     private void setTypeFace() {
-        btnHack.setTypeface(Utils.getTypeFaceLevel());
-        tvAttempts.setTypeface(Utils.getTypeFaceLevel());
-        tvPassword.setTypeface(Utils.getTypeFaceLevel());
-        tvWin.setTypeface(Utils.getTypeFaceLevel());
-    }
-
-    public String getStringLevel() {
-        if(controller.getLevel() == Controller.EASY)
-            return "easy";
-        if(controller.getLevel() == Controller.MEDIUM)
-            return "medium";
-        if(controller.getLevel() == Controller.HARD)
-            return "hard";
-        if(controller.getLevel() == Controller.VERY_HARD)
-            return "very hard";
-        return "";
+        btnHack.setTypeface(Utils.getTypeFaceLevel(requireActivity()));
+        tvAttempts.setTypeface(Utils.getTypeFaceLevel(requireActivity()));
+        tvPassword.setTypeface(Utils.getTypeFaceLevel(requireActivity()));
+        tvWin.setTypeface(Utils.getTypeFaceLevel(requireActivity()));
     }
 
     /**
      * Обработчик нажатия на кнопку попытки взлома
      */
-    View.OnClickListener btnHackClick = new View.OnClickListener() {
+    private View.OnClickListener btnHackClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             countClick++;
-            if(Appodeal.isLoaded(Appodeal.INTERSTITIAL) && countClick % 5 == 0) {
-                Appodeal.show(getActivity(), Appodeal.INTERSTITIAL);
+            if(!showingAdvertise || (countClick % 10 == 0)) {
+                showAdvertise();
             }
 
-            if(controller.getStatus() == controller.FINISH) {
+            if(controller.getStatus() == Controller.FINISH) {
                 onRestart();
                 return;
             }
             if(controller.toStringPasswordProbable().equals(lastAttempt)) {
                 showSnackBar(view, MainActivity.getRes().getString(R.string.changeValues));
-                return;
             } else if(controller.isEmptyCells()) {
                 controller.toAttempt();
                 setBestResult();
@@ -258,10 +236,16 @@ public class GameFragment extends Fragment implements HackCallback {
                 adapter.notifyDataSetChanged();
             } else {
                 showSnackBar(view, MainActivity.getRes().getString(R.string.cellIsEmpty));
-                return;
             }
         }
     };
+
+    private void showAdvertise() {
+        if(Appodeal.isLoaded(Appodeal.INTERSTITIAL)) {
+            Appodeal.show(requireActivity(), Appodeal.INTERSTITIAL);
+            showingAdvertise = true;
+        }
+    }
 
     @Override
     public void win() {
@@ -278,7 +262,7 @@ public class GameFragment extends Fragment implements HackCallback {
     /**
      * Показывает победный слой
      */
-    public void setVisibilityLayoutWin() {
+    private void setVisibilityLayoutWin() {
         soundPool.play(2, 0.5f, 0.5f, 1, 0, 1f);
         tvWin.setText(UtilsWinText.getWinText(controller.getLevel(), controller.getNumberAttempts()));
         layoutWin.setVisibility(View.VISIBLE);
@@ -296,7 +280,7 @@ public class GameFragment extends Fragment implements HackCallback {
         Snackbar customBar = Snackbar.make(view , str, Snackbar.LENGTH_LONG);
         customBar.setDuration(1000);
         View viewSnackBar = customBar.getView();
-        TextView tvSnackBar = (TextView) viewSnackBar.findViewById(android.support.design.R.id.snackbar_text);
+        TextView tvSnackBar = viewSnackBar.findViewById(R.id.snackbar_text);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
             tvSnackBar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         else
@@ -309,7 +293,7 @@ public class GameFragment extends Fragment implements HackCallback {
      * @param view - экранная view
      */
     private void createKeyboard(View view) {
-        keyButtons = new KeyButton[10];
+        KeyButton[] keyButtons = new KeyButton[10];
         keyButtons[0] = new KeyButton(0, (Button)view.findViewById(R.id.btn0));
         keyButtons[1] = new KeyButton(1, (Button)view.findViewById(R.id.btn1));
         keyButtons[2] = new KeyButton(2, (Button)view.findViewById(R.id.btn2));
@@ -322,7 +306,7 @@ public class GameFragment extends Fragment implements HackCallback {
         keyButtons[9] = new KeyButton(9, (Button)view.findViewById(R.id.btn9));
 
         for(final KeyButton button : keyButtons) {
-            button.getButton().setTypeface(Utils.getTypeFaceLevel());
+            button.getButton().setTypeface(Utils.getTypeFaceLevel(requireActivity()));
             button.getButton().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -331,7 +315,7 @@ public class GameFragment extends Fragment implements HackCallback {
                         controller.getFocusCell().setValue(button.getValue());
                         controller.removeAllFocusCells();
                         controller.changeFocusCell();
-                        if (controller.getIdFocusCell() == controller.NO_ACTIVE) {
+                        if (controller.getIdFocusCell() == Controller.NO_ACTIVE) {
                             closeKeyboard();
                         }
                     }
@@ -347,21 +331,21 @@ public class GameFragment extends Fragment implements HackCallback {
         ArrayList<Cell> cells = new ArrayList<>();
         int size = width/controller.getNumberCells();
         for(int i = 0; i < controller.getNumberCells(); i++) {
-            LayoutInflater inflater = getActivity().getLayoutInflater();
+            LayoutInflater inflater = requireActivity().getLayoutInflater();
             View view = inflater.inflate(R.layout.cell, null, false);
-            RelativeLayout layout = (RelativeLayout) view.findViewById(R.id.root);
+            RelativeLayout layout = view.findViewById(R.id.root);
             layout.setLayoutParams(new RelativeLayout.LayoutParams(size, size));
-            TextView tvCell = (TextView) view.findViewById(R.id.tvCell);
+            TextView tvCell = view.findViewById(R.id.tvCell);
             tvCell.setTextSize(utilsDesign.getTextSize(controller.getLevel()));
             final Cell cell = new Cell(i, layout, tvCell);
             cells.add(cell);
 
 
-            cell.getTvCell().setTypeface(Utils.getTypeFaceLevel());
+            cell.getTvCell().setTypeface(Utils.getTypeFaceLevel(requireActivity()));
             cell.getTvCell().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(controller.getStatus() == controller.ACTIVE) {
+                    if(controller.getStatus() == Controller.ACTIVE) {
                         controller.removeAllFocusCells();
                         controller.setFocusCell(cell);
                         showKeyboard();
@@ -391,7 +375,7 @@ public class GameFragment extends Fragment implements HackCallback {
     public void closeKeyboard() {
         if(isShowKeyboard) {
             isShowKeyboard = false;
-            controller.setIdFocusCell(controller.NO_ACTIVE);
+            controller.setIdFocusCell(Controller.NO_ACTIVE);
             controller.removeAllFocusCells();
 
             Animation bottomUp = AnimationUtils.loadAnimation(getContext(),
@@ -404,7 +388,7 @@ public class GameFragment extends Fragment implements HackCallback {
     /**
      * Добавляем клетки на layout
      */
-    public void addCellsOnLayout() {
+    private void addCellsOnLayout() {
         for(int i = 0; i < controller.getNumberCells(); i++) {
             cellsLayout.addView(controller.getCells().get(i).getLayout());
         }

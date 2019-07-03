@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import ru.explead.breakpassword.MainActivity;
 import ru.explead.breakpassword.R;
 import ru.explead.breakpassword.app.Utils;
 import ru.explead.breakpassword.beans.Data;
@@ -25,36 +24,36 @@ public class DataAdapter extends BaseAdapter {
     /**
      * Список объектов в адапторе
      */
-    private ArrayList<Data> data = new ArrayList<Data>();
+    private ArrayList<Data> data;
     private LayoutInflater lInflater;
-    private ViewHolder viewHolder;
+    private Context context;
 
-
-    public DataAdapter(Controller controller) {
+    public DataAdapter(Context context, Controller controller) {
+        this.context = context;
         this.data = controller.getData();
-        lInflater = (LayoutInflater) MainActivity.getActivity()
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        lInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
         if (convertView == null) {
             convertView = lInflater.inflate(R.layout.item_data, parent, false);
             viewHolder = new ViewHolder();
 
-            viewHolder.tvpProbablePassword = (TextView) convertView.findViewById(R.id.tvpProbablePassword);
-            viewHolder.tvOnPlace = (TextView) convertView.findViewById(R.id.tvOnPlace);
-            viewHolder.tvMatches = (TextView) convertView.findViewById(R.id.tvMatches);
+            viewHolder.tvpProbablePassword = convertView.findViewById(R.id.tvpProbablePassword);
+            viewHolder.tvOnPlace = convertView.findViewById(R.id.tvOnPlace);
+            viewHolder.tvMatches = convertView.findViewById(R.id.tvMatches);
 
-            viewHolder.tvpProbablePassword.setTypeface(Utils.getTypeFaceLevel());
-            viewHolder.tvOnPlace.setTypeface(Utils.getTypeFaceLevel());
-            viewHolder.tvMatches.setTypeface(Utils.getTypeFaceLevel());
+            viewHolder.tvpProbablePassword.setTypeface(Utils.getTypeFaceLevel(context));
+            viewHolder.tvOnPlace.setTypeface(Utils.getTypeFaceLevel(context));
+            viewHolder.tvMatches.setTypeface(Utils.getTypeFaceLevel(context));
 
             convertView.setTag(viewHolder);
 
         } else viewHolder = (ViewHolder) convertView.getTag();
 
-        Resources res = MainActivity.getActivity().getResources();
+        Resources res = context.getResources();
         final Data object = data.get(position);
 
         viewHolder.tvOnPlace.setText(String.format(res.getString(R.string.onPlace), object.getOnPlace()));

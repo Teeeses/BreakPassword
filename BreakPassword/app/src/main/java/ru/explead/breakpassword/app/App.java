@@ -1,11 +1,9 @@
 package ru.explead.breakpassword.app;
 
-import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 
-import ru.explead.breakpassword.R;
 import ru.explead.breakpassword.logic.Controller;
 
 /**

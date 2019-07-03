@@ -1,29 +1,25 @@
 package ru.explead.breakpassword;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 
 import com.appodeal.ads.Appodeal;
 
 import ru.explead.breakpassword.app.App;
 import ru.explead.breakpassword.app.Utils;
-import ru.explead.breakpassword.fragments.AdvertiseFragment;
 import ru.explead.breakpassword.fragments.BannerFragment;
 import ru.explead.breakpassword.fragments.GameFragment;
 import ru.explead.breakpassword.logic.Controller;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    private static Activity activity;
     private static Fragment fragment;
 
     private static Resources res;
@@ -39,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         String appKey = "4b89eb3c54472eb7feb0577f0a463c6fc72415bd402aab9f";
         Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL | Appodeal.REWARDED_VIDEO);
 
-        activity = this;
         res = this.getResources();
         sPref = getSharedPreferences(Utils.APP_PREFERENCES, MODE_PRIVATE);
 
@@ -54,15 +49,6 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         fragment = new GameFragment();
         transaction.replace(R.id.fragmentContainer, fragment);
-        transaction.commit();
-    }
-
-    public void openAdvertiseFragment() {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        fragment = new AdvertiseFragment();
-        transaction.add(R.id.fragmentContainer, fragment);
-        transaction.setCustomAnimations(R.anim.scale_enter, R.anim.scale_exit);
-        transaction.addToBackStack(null);
         transaction.commit();
     }
 
@@ -134,10 +120,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static SharedPreferences getPref() {
         return sPref;
-    }
-
-    public static Activity getActivity() {
-        return activity;
     }
 
     public static Fragment getFragment() {

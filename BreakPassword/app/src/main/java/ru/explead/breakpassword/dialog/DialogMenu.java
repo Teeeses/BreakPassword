@@ -45,8 +45,8 @@ public class DialogMenu extends Dialog {
         setContentView(R.layout.dialog_menu);
         setCancelable(false);
 
-        Button btnRestart = (Button) findViewById(R.id.btnRestart);
-        btnRestart.setTypeface(Utils.getTypeFaceLevel());
+        Button btnRestart = findViewById(R.id.btnRestart);
+        btnRestart.setTypeface(Utils.getTypeFaceLevel(context));
         btnRestart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,61 +54,61 @@ public class DialogMenu extends Dialog {
                 ((GameFragment)MainActivity.getFragment()).onRestart();
 
                 String str = "";
-                if(changeLevel == controller.EASY)
+                if(changeLevel == Controller.EASY)
                     str = "easy";
-                if(changeLevel == controller.MEDIUM)
+                if(changeLevel == Controller.MEDIUM)
                     str = "medium";
-                if(changeLevel == controller.HARD)
+                if(changeLevel == Controller.HARD)
                     str = "hard";
-                if(changeLevel == controller.VERY_HARD)
+                if(changeLevel == Controller.VERY_HARD)
                     str = "very hard";
                 dismiss();
             }
         });
 
-        btnEasy = (Button) findViewById(R.id.btnEasy);
+        btnEasy = findViewById(R.id.btnEasy);
         btnEasy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeLevel = controller.EASY;
+                changeLevel = Controller.EASY;
                 returnBackgroundColor();
                 setBackgroundColor();
             }
         });
 
-        btnMedium = (Button) findViewById(R.id.btnMedium);
+        btnMedium = findViewById(R.id.btnMedium);
         btnMedium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeLevel = controller.MEDIUM;
+                changeLevel = Controller.MEDIUM;
                 returnBackgroundColor();
                 setBackgroundColor();
 
             }
         });
 
-        btnHard = (Button) findViewById(R.id.btnHard);
+        btnHard = findViewById(R.id.btnHard);
         btnHard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeLevel = controller.HARD;
+                changeLevel = Controller.HARD;
                 returnBackgroundColor();
                 setBackgroundColor();
             }
         });
 
-        btnVeryHard = (Button) findViewById(R.id.btnVeryHard);
+        btnVeryHard = findViewById(R.id.btnVeryHard);
         btnVeryHard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeLevel = controller.VERY_HARD;
+                changeLevel = Controller.VERY_HARD;
                 returnBackgroundColor();
                 setBackgroundColor();
             }
         });
 
-        Button btnCancel = (Button) findViewById(R.id.btnCancel);
-        btnCancel.setTypeface(Utils.getTypeFaceLevel());
+        Button btnCancel = findViewById(R.id.btnCancel);
+        btnCancel.setTypeface(Utils.getTypeFaceLevel(context));
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,7 +116,7 @@ public class DialogMenu extends Dialog {
             }
         });
 
-        Button btnResults = (Button) findViewById(R.id.btnResults);
+        Button btnResults = findViewById(R.id.btnResults);
         btnResults.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,23 +131,23 @@ public class DialogMenu extends Dialog {
     }
 
     private void setTypeFace() {
-        btnEasy.setTypeface(Utils.getTypeFaceLevel());
-        btnMedium.setTypeface(Utils.getTypeFaceLevel());
-        btnHard.setTypeface(Utils.getTypeFaceLevel());
-        btnVeryHard.setTypeface(Utils.getTypeFaceLevel());
+        btnEasy.setTypeface(Utils.getTypeFaceLevel(context));
+        btnMedium.setTypeface(Utils.getTypeFaceLevel(context));
+        btnHard.setTypeface(Utils.getTypeFaceLevel(context));
+        btnVeryHard.setTypeface(Utils.getTypeFaceLevel(context));
     }
 
     private void setBackgroundColor() {
-        if(changeLevel == controller.EASY) {
+        if(changeLevel == Controller.EASY) {
             btnEasy.setBackgroundColor(MainActivity.getRes().getColor(android.R.color.holo_green_dark));
         }
-        if(changeLevel == controller.MEDIUM) {
+        if(changeLevel == Controller.MEDIUM) {
             btnMedium.setBackgroundColor(MainActivity.getRes().getColor(android.R.color.holo_green_dark));
         }
-        if(changeLevel == controller.HARD) {
+        if(changeLevel == Controller.HARD) {
             btnHard.setBackgroundColor(MainActivity.getRes().getColor(android.R.color.holo_green_dark));
         }
-        if(changeLevel == controller.VERY_HARD) {
+        if(changeLevel == Controller.VERY_HARD) {
             btnVeryHard.setBackgroundColor(MainActivity.getRes().getColor(android.R.color.holo_green_dark));
         }
     }
