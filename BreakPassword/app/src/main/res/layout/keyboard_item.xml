@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/mini_margin"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-</LinearLayout>
+    <Button
+        android:id="@+id/item"
+        android:layout_width="@dimen/key_size"
+        android:layout_height="@dimen/key_size"
+        android:textColor="@android:color/white"
+        android:background="@color/colorPrimary"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textSize="@dimen/big_text"
+        android:text="1" />
+</RelativeLayout>

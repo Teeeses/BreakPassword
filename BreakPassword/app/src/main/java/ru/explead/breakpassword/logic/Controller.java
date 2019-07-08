@@ -215,10 +215,6 @@ public class Controller {
         return numberAttempts;
     }
 
-    public ArrayList<Integer> getPassword() {
-        return password;
-    }
-
     public int getNumberCells() {
         return numberCells;
     }
