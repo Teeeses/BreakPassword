@@ -24,12 +24,7 @@ public class BannerFragment extends Fragment {
 
     private Handler handler = new Handler();
 
-    private Runnable run = new Runnable() {
-        @Override
-        public void run() {
-            ((MainActivity)requireContext()).openGameFragment();
-        }
-    };
+    private Runnable run = () -> ((MainActivity)requireContext()).openGameFragment();
 
 
     @Override

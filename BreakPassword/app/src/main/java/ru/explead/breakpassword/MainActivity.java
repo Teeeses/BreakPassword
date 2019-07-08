@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         Appodeal.disableNetwork(this, "cheetah");
         String appKey = "4b89eb3c54472eb7feb0577f0a463c6fc72415bd402aab9f";
-        Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL | Appodeal.REWARDED_VIDEO);
+        Appodeal.initialize(this, appKey, Appodeal.REWARDED_VIDEO);
 
         res = this.getResources();
         sPref = getSharedPreferences(Utils.APP_PREFERENCES, MODE_PRIVATE);
@@ -71,18 +71,11 @@ public class MainActivity extends AppCompatActivity {
                 //Диалог подтверждения выхода
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage("Действительно выйти из игры?");
-                builder.setPositiveButton("ДА", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        finish();
-                    }
+                builder.setPositiveButton("ДА", (dialog, which) -> {
+                    dialog.dismiss();
+                    finish();
                 });
-                builder.setNegativeButton("НЕТ", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+                builder.setNegativeButton("НЕТ", (dialog, which) -> dialog.dismiss());
                 AlertDialog alert = builder.create();
                 alert.show();
             } else {

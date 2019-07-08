@@ -6,10 +6,6 @@ import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.fragment.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -26,8 +21,12 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.appodeal.ads.Appodeal;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -40,7 +39,6 @@ import ru.explead.breakpassword.app.App;
 import ru.explead.breakpassword.app.Utils;
 import ru.explead.breakpassword.app.UtilsDesign;
 import ru.explead.breakpassword.beans.Cell;
-import ru.explead.breakpassword.beans.KeyButton;
 import ru.explead.breakpassword.dialog.DialogMenu;
 import ru.explead.breakpassword.logic.Controller;
 import ru.explead.breakpassword.logic.UtilsWinText;
@@ -65,7 +63,6 @@ public class GameFragment extends Fragment implements HackCallback {
     private LinearLayout layoutWin;
     private TextView tvWin;
     private ImageView ivWin;
-    private ImageView btnSeasons;
 
     private DataAdapter adapter;
 
@@ -105,15 +102,10 @@ public class GameFragment extends Fragment implements HackCallback {
         soundPool.load(getActivity(), R.raw.sound_win, 2);
 
         layoutWin = view.findViewById(R.id.layoutWin);
-        layoutWin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                layoutWin.setVisibility(View.GONE);
-            }
-        });
+        layoutWin.setOnClickListener(view16 -> layoutWin.setVisibility(View.GONE));
         tvWin = view.findViewById(R.id.tvWin);
         ivWin = view.findViewById(R.id.ivWin);
-        btnSeasons = view.findViewById(R.id.btnSeasons);
+        ImageView btnSeasons = view.findViewById(R.id.btnSeasons);
         tvPassword = view.findViewById(R.id.tvPassword);
         keyboard = view.findViewById(R.id.keyboard);
         tvAttempts = view.findViewById(R.id.tvAttempts);
@@ -125,27 +117,14 @@ public class GameFragment extends Fragment implements HackCallback {
         listView.setAdapter(adapter);
 
         RelativeLayout rootGameFragment = view.findViewById(R.id.rootGameFragment);
-        rootGameFragment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                closeKeyboard();
-            }
-        });
+        rootGameFragment.setOnClickListener(view15 -> closeKeyboard());
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                closeKeyboard();
-            }
-        });
+        listView.setOnItemClickListener((adapterView, view14, i, l) -> closeKeyboard());
 
-        btnMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogMenu dialogMenu = new DialogMenu(getActivity(), controller);
-                dialogMenu.show();
-                closeKeyboard();
-            }
+        btnMenu.setOnClickListener(view13 -> {
+            DialogMenu dialogMenu = new DialogMenu(getActivity(), controller);
+            dialogMenu.show();
+            closeKeyboard();
         });
 
         ViewTreeObserver vto = cellsLayout.getViewTreeObserver();
@@ -162,20 +141,12 @@ public class GameFragment extends Fragment implements HackCallback {
         btnHack.setOnClickListener(btnHackClick);
 
         final RelativeLayout layoutHelper = view.findViewById(R.id.layoutHelper);
-        layoutHelper.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                layoutHelper.setVisibility(View.GONE);
-            }
-        });
+        layoutHelper.setOnClickListener(view1 -> layoutHelper.setVisibility(View.GONE));
 
-        btnSeasons.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("market://details?id=com.explead.seasons"));
-                startActivity(intent);
-            }
+        btnSeasons.setOnClickListener(view12 -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("market://details?id=com.explead.seasons"));
+            startActivity(intent);
         });
 
         setBestResult();
@@ -253,8 +224,8 @@ public class GameFragment extends Fragment implements HackCallback {
     };
 
     private void showAdvertise() {
-        if(Appodeal.isLoaded(Appodeal.INTERSTITIAL)) {
-            Appodeal.show(requireActivity(), Appodeal.INTERSTITIAL);
+        if(Appodeal.isLoaded(Appodeal.REWARDED_VIDEO)) {
+            Appodeal.show(requireActivity(), Appodeal.REWARDED_VIDEO);
             showingAdvertise = true;
         }
     }
@@ -304,17 +275,14 @@ public class GameFragment extends Fragment implements HackCallback {
      * Создаем кастомную клавиатуру
      */
     private void createKeyboard() {
-        KeyboardAdapter adapter = new KeyboardAdapter(requireContext(), new KeyboardAdapter.OnClickButtonKeyboard() {
-            @Override
-            public void onClick(Integer value) {
-                if(isShowKeyboard) {
-                    soundPool.play(1, 0.5f, 0.5f, 1, 0, 1f);
-                    controller.getFocusCell().setValue(value);
-                    controller.removeAllFocusCells();
-                    controller.changeFocusCell();
-                    if (controller.getIdFocusCell() == Controller.NO_ACTIVE) {
-                        closeKeyboard();
-                    }
+        KeyboardAdapter adapter = new KeyboardAdapter(requireContext(), value -> {
+            if(isShowKeyboard) {
+                soundPool.play(1, 0.5f, 0.5f, 1, 0, 1f);
+                controller.getFocusCell().setValue(value);
+                controller.removeAllFocusCells();
+                controller.changeFocusCell();
+                if (controller.getIdFocusCell() == Controller.NO_ACTIVE) {
+                    closeKeyboard();
                 }
             }
         });
@@ -340,14 +308,11 @@ public class GameFragment extends Fragment implements HackCallback {
 
 
             cell.getTvCell().setTypeface(Utils.getTypeFaceLevel(requireActivity()));
-            cell.getTvCell().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if(controller.getStatus() == Controller.ACTIVE) {
-                        controller.removeAllFocusCells();
-                        controller.setFocusCell(cell);
-                        showKeyboard();
-                    }
+            cell.getTvCell().setOnClickListener(view1 -> {
+                if(controller.getStatus() == Controller.ACTIVE) {
+                    controller.removeAllFocusCells();
+                    controller.setFocusCell(cell);
+                    showKeyboard();
                 }
             });
         }
