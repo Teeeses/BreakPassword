@@ -26,6 +26,7 @@
                 android:textColor="@android:color/white"
                 android:background="@color/colorPrimary"
                 android:textSize="@dimen/standard_text"
+                style="@style/CustomFontStyle"
                 android:text="Easy" />
         </RelativeLayout>
 
@@ -45,6 +46,7 @@
                 android:textColor="@android:color/white"
                 android:background="@color/colorPrimary"
                 android:textSize="@dimen/standard_text"
+                style="@style/CustomFontStyle"
                 android:text="Medium" />
         </RelativeLayout>
 
@@ -64,6 +66,7 @@
                 android:textColor="@android:color/white"
                 android:background="@color/colorPrimary"
                 android:textSize="@dimen/standard_text"
+                style="@style/CustomFontStyle"
                 android:text="Hard" />
         </RelativeLayout>
 
@@ -82,6 +85,7 @@
                 android:background="@color/colorPrimary"
                 android:padding="@dimen/radius"
                 android:textSize="@dimen/standard_text"
+                style="@style/CustomFontStyle"
                 android:text="Very hard" />
         </RelativeLayout>
     </LinearLayout>
@@ -101,6 +105,7 @@
             android:background="@color/colorPrimary"
             android:textAllCaps="false"
             android:padding="@dimen/standard_margin"
+            style="@style/CustomFontStyle"
             android:text="@string/restart" />
 
     </LinearLayout>
@@ -140,6 +145,7 @@
             android:background="@color/colorPrimary"
             android:textAllCaps="false"
             android:padding="@dimen/standard_margin"
+            style="@style/CustomFontStyle"
             android:text="@string/cancel" />
 
     </LinearLayout>

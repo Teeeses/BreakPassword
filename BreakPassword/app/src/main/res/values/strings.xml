@@ -48,6 +48,7 @@
     <string name="example_you_input">You entered: 6328</string>
     <string name="example_on_place">Figures on the spot: \n1 (2)</string>
     <string name="example_matches">Matches: \n2 (6, 8)</string>
+    <string name="play_super_hard_game">Play a super hard game!</string>
 
     <string name="no_thanks">No thanks</string>
     <string name="install">Install</string>

@@ -1,22 +1,22 @@
 package ru.explead.breakpassword;
 
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+import android.util.DisplayMetrics;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import android.util.DisplayMetrics;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.appodeal.ads.Appodeal;
 
 import ru.explead.breakpassword.app.App;
 import ru.explead.breakpassword.app.Utils;
+import ru.explead.breakpassword.beans.Complexity;
 import ru.explead.breakpassword.fragments.BannerFragment;
 import ru.explead.breakpassword.fragments.GameFragment;
-import ru.explead.breakpassword.logic.Controller;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,10 +30,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         Appodeal.disableNetwork(this, "cheetah");
         String appKey = "4b89eb3c54472eb7feb0577f0a463c6fc72415bd402aab9f";
-        Appodeal.initialize(this, appKey, Appodeal.REWARDED_VIDEO);
+        Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL | Appodeal.REWARDED_VIDEO, true);
 
         res = this.getResources();
         sPref = getSharedPreferences(Utils.APP_PREFERENCES, MODE_PRIVATE);
@@ -91,22 +90,17 @@ public class MainActivity extends AppCompatActivity {
      * @param level - уровень
      * @param times - количество попыток
      */
-    public static void saveSettings(int level, int times) {
-        SharedPreferences.Editor editor = sPref.edit();
-        if(level == Controller.EASY && times < sPref.getInt(Utils.BEST_EASY, 999999)) {
-            editor.putInt(Utils.BEST_EASY, times);
-            editor.apply();
-        }
-        if(level == Controller.MEDIUM && times < sPref.getInt(Utils.BEST_MEDIUM, 999999)) {
-            editor.putInt(Utils.BEST_MEDIUM, times);
-            editor.apply();
-        }
-        if(level == Controller.HARD && times < sPref.getInt(Utils.BEST_HARD, 999999)) {
-            editor.putInt(Utils.BEST_HARD, times);
-            editor.apply();
-        }
-        if(level == Controller.VERY_HARD && times < sPref.getInt(Utils.BEST_VERY_HARD, 999999)) {
-            editor.putInt(Utils.BEST_VERY_HARD, times);
+    public static void saveSettings(Complexity level, int times) {
+        saveSettingsChoice(level, times, Utils.BEST_EASY, Complexity.EASY);
+        saveSettingsChoice(level, times, Utils.BEST_EASY, Complexity.MEDIUM);
+        saveSettingsChoice(level, times, Utils.BEST_EASY, Complexity.HARD);
+        saveSettingsChoice(level, times, Utils.BEST_EASY, Complexity.VERY_HARD);
+    }
+
+    public static void saveSettingsChoice(Complexity level, int times, final String saver, Complexity forLevel) {
+        if(level == forLevel && times < sPref.getInt(saver, Integer.MAX_VALUE)) {
+            SharedPreferences.Editor editor = sPref.edit();
+            editor.putInt(saver, times);
             editor.apply();
         }
     }

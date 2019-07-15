@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ru.explead.breakpassword.R;
-import ru.explead.breakpassword.app.Utils;
 import ru.explead.breakpassword.beans.Data;
 import ru.explead.breakpassword.logic.Controller;
 
@@ -44,10 +43,6 @@ public class DataAdapter extends BaseAdapter {
             viewHolder.tvpProbablePassword = convertView.findViewById(R.id.tvpProbablePassword);
             viewHolder.tvOnPlace = convertView.findViewById(R.id.tvOnPlace);
             viewHolder.tvMatches = convertView.findViewById(R.id.tvMatches);
-
-            viewHolder.tvpProbablePassword.setTypeface(Utils.getTypeFaceLevel(context));
-            viewHolder.tvOnPlace.setTypeface(Utils.getTypeFaceLevel(context));
-            viewHolder.tvMatches.setTypeface(Utils.getTypeFaceLevel(context));
 
             convertView.setTag(viewHolder);
 

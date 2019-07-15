@@ -5,6 +5,7 @@ import java.util.Random;
 
 import ru.explead.breakpassword.HackCallback;
 import ru.explead.breakpassword.beans.Cell;
+import ru.explead.breakpassword.beans.Complexity;
 import ru.explead.breakpassword.beans.Data;
 
 /**
@@ -33,8 +34,7 @@ public class Controller {
     private int numberAttempts = 0;
     private Random random = new Random();
 
-    public static int EASY = 3, MEDIUM = 4, HARD = 5, VERY_HARD = 6;
-    private int level;
+    private Complexity level;
 
     private Cell focusCell;
     private int idFocusCell;
@@ -46,15 +46,15 @@ public class Controller {
 
     public Controller(HackCallback hackCallback) {
         this.hackCallback = hackCallback;
-        level = MEDIUM;
+        level = Complexity.MEDIUM;
         status = ACTIVE;
-        numberCells = level;
+        numberCells = level.getCount();
         generatePassword(numberCells);
     }
 
     public void restart() {
         status = ACTIVE;
-        numberCells = level;
+        numberCells = level.getCount();
         numberAttempts = 0;
         password.clear();
         data.clear();
@@ -172,7 +172,7 @@ public class Controller {
      */
     public boolean isEmptyCells() {
         for(int i = 0; i < numberCells; i++) {
-            if(cells.get(i).getValue() == Cell.NO_ACTIVE) {
+            if(cells.get(i).getValue() == Cell.Companion.getNO_ACTIVE()) {
                 return false;
             }
         }
@@ -203,11 +203,11 @@ public class Controller {
         return data;
     }
 
-    public int getLevel() {
+    public Complexity getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(Complexity level) {
         this.level = level;
     }
 

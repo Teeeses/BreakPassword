@@ -1,6 +1,5 @@
 package ru.explead.breakpassword.dialog;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -17,16 +16,8 @@ import ru.explead.breakpassword.app.Utils;
 
 public class DialogResultGame extends Dialog {
 
-    private Context context;
-
-    private TextView tvEasyResult;
-    private TextView tvMediumResult;
-    private TextView tvHardResult;
-    private TextView tvVeryHardResult;
-
-    public DialogResultGame(Context context) {
+    DialogResultGame(Context context) {
         super(context);
-        this.context = context;
     }
 
     @Override
@@ -35,10 +26,10 @@ public class DialogResultGame extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_result);
 
-        tvEasyResult = (TextView) findViewById(R.id.tvEasyResult);
-        tvMediumResult = (TextView) findViewById(R.id.tvMediumResult);
-        tvHardResult = (TextView) findViewById(R.id.tvHardResult);
-        tvVeryHardResult = (TextView) findViewById(R.id.tvVeryHardResult);
+        TextView tvEasyResult = findViewById(R.id.tvEasyResult);
+        TextView tvMediumResult = findViewById(R.id.tvMediumResult);
+        TextView tvHardResult = findViewById(R.id.tvHardResult);
+        TextView tvVeryHardResult = findViewById(R.id.tvVeryHardResult);
 
         int easy = MainActivity.getPref().getInt(Utils.BEST_EASY, 0);
         int medium = MainActivity.getPref().getInt(Utils.BEST_MEDIUM, 0);

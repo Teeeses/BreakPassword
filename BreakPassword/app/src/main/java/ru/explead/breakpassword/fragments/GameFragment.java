@@ -1,6 +1,7 @@
 package ru.explead.breakpassword.fragments;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.net.Uri;
@@ -39,6 +40,7 @@ import ru.explead.breakpassword.app.App;
 import ru.explead.breakpassword.app.Utils;
 import ru.explead.breakpassword.app.UtilsDesign;
 import ru.explead.breakpassword.beans.Cell;
+import ru.explead.breakpassword.beans.Complexity;
 import ru.explead.breakpassword.dialog.DialogMenu;
 import ru.explead.breakpassword.logic.Controller;
 import ru.explead.breakpassword.logic.UtilsWinText;
@@ -106,6 +108,7 @@ public class GameFragment extends Fragment implements HackCallback {
         tvWin = view.findViewById(R.id.tvWin);
         ivWin = view.findViewById(R.id.ivWin);
         ImageView btnSeasons = view.findViewById(R.id.btnSeasons);
+        RelativeLayout playSeasonsContainer = view.findViewById(R.id.playSeasonsContainer);
         tvPassword = view.findViewById(R.id.tvPassword);
         keyboard = view.findViewById(R.id.keyboard);
         tvAttempts = view.findViewById(R.id.tvAttempts);
@@ -143,56 +146,42 @@ public class GameFragment extends Fragment implements HackCallback {
         final RelativeLayout layoutHelper = view.findViewById(R.id.layoutHelper);
         layoutHelper.setOnClickListener(view1 -> layoutHelper.setVisibility(View.GONE));
 
-        btnSeasons.setOnClickListener(view12 -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse("market://details?id=com.explead.seasons"));
-            startActivity(intent);
-        });
+        btnSeasons.setOnClickListener(view12 -> openSeasonsGame());
+        playSeasonsContainer.setOnClickListener(view17 -> openSeasonsGame());
 
         setBestResult();
         createKeyboard();
-        setTypeFace();
         showAdvertise();
         return view;
     }
 
-    private  void setBestResult() {
-        if(App.getController().getLevel() == Controller.EASY) {
-            int easy = MainActivity.getPref().getInt(Utils.BEST_EASY, 0);
-            if(easy != 0) {
-                tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttemptsAndBest), controller.getNumberAttempts(), easy));
-            } else {
-                tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
-            }
-        } else if(App.getController().getLevel() == Controller.MEDIUM) {
-            int medium = MainActivity.getPref().getInt(Utils.BEST_MEDIUM, 0);
-            if(medium != 0) {
-                tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttemptsAndBest), controller.getNumberAttempts(), medium));
-            } else {
-                tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
-            }
-        }else if(App.getController().getLevel() == Controller.HARD) {
-            int hard = MainActivity.getPref().getInt(Utils.BEST_HARD, 0);
-            if(hard != 0) {
-                tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttemptsAndBest), controller.getNumberAttempts(), hard));
-            } else {
-                tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
-            }
-        } else if(App.getController().getLevel() == Controller.VERY_HARD) {
-            int veryHard = MainActivity.getPref().getInt(Utils.BEST_VERY_HARD, 0);
-            if(veryHard != 0) {
-                tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttemptsAndBest), controller.getNumberAttempts(), veryHard));
-            } else {
-                tvAttempts.setText(String.format(getActivity().getResources().getString(R.string.committedAttempts), controller.getNumberAttempts()));
-            }
+    private void openSeasonsGame() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("market://details?id=com.explead.seasons"));
+        startActivity(intent);
+    }
+
+    private void setBestResult() {
+        if(App.getController().getLevel() == Complexity.EASY) {
+            setBestResultText(MainActivity.getPref().getInt(Utils.BEST_EASY, 0));
+        } else if(App.getController().getLevel() == Complexity.MEDIUM) {
+            setBestResultText(MainActivity.getPref().getInt(Utils.BEST_MEDIUM, 0));
+        }else if(App.getController().getLevel() == Complexity.HARD) {
+            setBestResultText(MainActivity.getPref().getInt(Utils.BEST_HARD, 0));
+        } else if(App.getController().getLevel() == Complexity.VERY_HARD) {
+            setBestResultText(MainActivity.getPref().getInt(Utils.BEST_VERY_HARD, 0));
         }
     }
 
-    private void setTypeFace() {
-        btnHack.setTypeface(Utils.getTypeFaceLevel(requireActivity()));
-        tvAttempts.setTypeface(Utils.getTypeFaceLevel(requireActivity()));
-        tvPassword.setTypeface(Utils.getTypeFaceLevel(requireActivity()));
-        tvWin.setTypeface(Utils.getTypeFaceLevel(requireActivity()));
+    private void setBestResultText(int bestValue) {
+        Resources res = requireActivity().getResources();
+        if(bestValue != 0) {
+            tvAttempts.setText(String.format(res.getString(R.string.committedAttemptsAndBest),
+                    controller.getNumberAttempts(), bestValue));
+        } else {
+            tvAttempts.setText(String.format(res.getString(R.string.committedAttempts),
+                    controller.getNumberAttempts()));
+        }
     }
 
     /**
@@ -202,7 +191,7 @@ public class GameFragment extends Fragment implements HackCallback {
         @Override
         public void onClick(View view) {
             countClick++;
-            if(!showingAdvertise || (countClick % 10 == 0)) {
+            if(!showingAdvertise || (countClick % 5 == 0)) {
                 showAdvertise();
             }
 
@@ -224,7 +213,10 @@ public class GameFragment extends Fragment implements HackCallback {
     };
 
     private void showAdvertise() {
-        if(Appodeal.isLoaded(Appodeal.REWARDED_VIDEO)) {
+        if(Appodeal.isLoaded(Appodeal.INTERSTITIAL)) {
+            Appodeal.show(requireActivity(), Appodeal.INTERSTITIAL);
+            showingAdvertise = true;
+        } else if(Appodeal.isLoaded(Appodeal.REWARDED_VIDEO)) {
             Appodeal.show(requireActivity(), Appodeal.REWARDED_VIDEO);
             showingAdvertise = true;
         }

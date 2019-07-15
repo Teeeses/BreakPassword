@@ -42,6 +42,7 @@
             android:textSize="@dimen/big_text"
             android:gravity="center_horizontal"
             android:textStyle="bold"
+            style="@style/CustomFontStyle"
             android:text="@string/password"/>
 
         <LinearLayout
@@ -84,6 +85,7 @@
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/more_standard_text"
                     android:gravity="center_horizontal"
+                    style="@style/CustomFontStyle"
                     android:textStyle="bold"/>
 
 
@@ -100,6 +102,7 @@
                     android:paddingRight="@dimen/big_margin"
                     android:layout_marginTop="@dimen/standard_margin"
                     android:background="@drawable/bg_button"
+                    style="@style/CustomFontStyle"
                     android:text="@string/hack" />
             </LinearLayout>
 
@@ -143,6 +146,7 @@
             android:textStyle="bold"
             android:textColor="@android:color/white"
             android:layout_margin="@dimen/standard_margin"
+            style="@style/CustomFontStyle"
             android:textSize="@dimen/more_standard_text" />
     </LinearLayout>
 
@@ -159,67 +163,109 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:orientation="vertical"
-            android:textColor="@android:color/white"
             android:layout_margin="@dimen/standard_margin"
-            android:background="@android:color/white"
-            android:textSize="@dimen/more_standard_text">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/big_text"
-                android:padding="@dimen/mini_margin"
-                android:textColor="@android:color/black"
-                android:layout_gravity="center"
-                android:text="@string/how_play"/>
+            android:background="@android:color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/mini_margin"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/standard_text"
-                    android:text="@string/example"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/standard_text"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:text="@string/example_you_input"/>
+                    android:textSize="@dimen/big_text"
+                    android:padding="@dimen/mini_margin"
+                    android:textColor="@android:color/black"
+                    android:layout_gravity="center"
+                    android:text="@string/how_play"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:orientation="horizontal" >
+                    android:padding="@dimen/mini_margin"
+                    android:orientation="vertical" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/standard_text"
-                        android:layout_marginLeft="@dimen/mini_margin"
-                        android:gravity="center"
-                        android:text="@string/example_on_place"
-                        android:layout_weight="1"
-                        android:layout_marginStart="@dimen/mini_margin" />
+                        android:text="@string/example"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/standard_text"
-                        android:layout_marginRight="@dimen/mini_margin"
-                        android:gravity="center"
-                        android:text="@string/example_matches"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="@dimen/mini_margin" />
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:text="@string/example_you_input"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/standard_text"
+                            android:layout_marginLeft="@dimen/mini_margin"
+                            android:gravity="center"
+                            android:text="@string/example_on_place"
+                            android:layout_weight="1"
+                            android:layout_marginStart="@dimen/mini_margin" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/standard_text"
+                            android:layout_marginRight="@dimen/mini_margin"
+                            android:gravity="center"
+                            android:text="@string/example_matches"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="@dimen/mini_margin" />
+                    </LinearLayout>
+
+                    <VideoView
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:background="@color/mintegral_reward_six_black_transparent"/>
+
+                    <RelativeLayout
+                        android:id="@+id/playSeasonsContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/mini_margin">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:src="@drawable/icon2"
+                                android:padding="@dimen/mini_margin"/>
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/more_standard_text"
+                                android:padding="@dimen/mini_margin"
+                                android:textColor="@android:color/black"
+                                android:layout_gravity="center"
+                                android:text="@string/play_super_hard_game"/>
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
                 </LinearLayout>
-
             </LinearLayout>
+
 
         </LinearLayout>
 

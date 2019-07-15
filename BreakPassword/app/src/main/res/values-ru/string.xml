@@ -25,6 +25,7 @@
     <string name="empty_hard_level">Сложный уровень: пусто</string>
     <string name="very_hard_level">Очень сложный уровень: %d</string>
     <string name="empty_very_hard_level">Очень сложный уровень: пусто</string>
+    <string name="play_super_hard_game">Сыграй в супер сложную игру!</string>
 
 
     <string name="win_1">Вы это серьезно? Один вопрос - как??? Как вы это сделали с одного раза? Вы мой герой!</string>

@@ -4,7 +4,7 @@ import android.content.res.Resources;
 
 import ru.explead.breakpassword.MainActivity;
 import ru.explead.breakpassword.R;
-import ru.explead.breakpassword.logic.Controller;
+import ru.explead.breakpassword.beans.Complexity;
 
 /**
  * Created by develop on 17.01.2017.
@@ -12,33 +12,17 @@ import ru.explead.breakpassword.logic.Controller;
 
 public class UtilsDesign {
 
-    private int textSize;
-    private int marginCells;
-
-    public float getTextSize(int level) {
+    public float getTextSize(Complexity level) {
         Resources res = MainActivity.getRes();
-        if(level == Controller.EASY)
+        if(level == Complexity.EASY)
             return res.getDimension(R.dimen.more_standard_text);
-        if(level == Controller.MEDIUM)
+        if(level == Complexity.MEDIUM)
             return res.getDimension(R.dimen.standard_text);
-        if(level  == Controller.HARD)
+        if(level  == Complexity.HARD)
             return res.getDimension(R.dimen.more_mini_text);
-        if(level  == Controller.VERY_HARD)
+        if(level  == Complexity.VERY_HARD)
             return res.getDimension(R.dimen.mini_text);
 
         return res.getDimension(R.dimen.giant_text);
     }
-
-    public float getMarginCells(int level) {
-        Resources res = MainActivity.getRes();
-        if(level == Controller.EASY)
-            return res.getDimension(R.dimen.level_margin_easy);
-        if(level  == Controller.HARD)
-            return res.getDimension(R.dimen.level_margin_hard);
-        if(level  == Controller.VERY_HARD)
-            return res.getDimension(R.dimen.level_margin_very_hard);
-
-        return res.getDimension(R.dimen.level_margin_medium);
-    }
-
 }

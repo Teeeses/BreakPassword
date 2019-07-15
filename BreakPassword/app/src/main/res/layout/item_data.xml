@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/more_standard_text"
             android:padding="@dimen/radius"
+            style="@style/CustomFontStyle"
             android:textColor="@android:color/white"/>
     </RelativeLayout>
 
@@ -35,6 +36,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/radius"
             android:textSize="@dimen/standard_text"
+            style="@style/CustomFontStyle"
             android:textColor="@android:color/white"/>
 
         <TextView
@@ -43,6 +45,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/radius"
             android:textSize="@dimen/standard_text"
+            style="@style/CustomFontStyle"
             android:textColor="@android:color/white" />
     </LinearLayout>
 </RelativeLayout>

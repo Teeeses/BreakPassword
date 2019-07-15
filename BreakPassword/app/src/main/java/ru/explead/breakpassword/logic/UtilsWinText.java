@@ -6,6 +6,7 @@ import java.util.Random;
 
 import ru.explead.breakpassword.MainActivity;
 import ru.explead.breakpassword.R;
+import ru.explead.breakpassword.beans.Complexity;
 
 /**
  * Created by develop on 18.01.2017.
@@ -14,11 +15,11 @@ import ru.explead.breakpassword.R;
 public class UtilsWinText {
 
 
-    public static String getWinText(int level, int times) {
+    public static String getWinText(Complexity level, int times) {
         Random rand = new Random();
         Resources res = MainActivity.getRes();
 
-        if(level == Controller.EASY) {
+        if(level == Complexity.EASY) {
             if(times == 1) {
                 return res.getString(R.string.win_1);
             }
@@ -45,7 +46,7 @@ public class UtilsWinText {
         }
 
 
-        if(level == Controller.MEDIUM) {
+        if(level == Complexity.MEDIUM) {
             if(times == 1) {
                 return res.getString(R.string.win_1);
             }
@@ -72,7 +73,7 @@ public class UtilsWinText {
         }
 
 
-        if(level == Controller.HARD) {
+        if(level == Complexity.HARD) {
             if(times == 1) {
                 return res.getString(R.string.win_1);
             }
@@ -99,7 +100,7 @@ public class UtilsWinText {
         }
 
 
-        if(level == Controller.VERY_HARD) {
+        if(level == Complexity.VERY_HARD) {
             if(times == 1) {
                 return res.getString(R.string.win_1);
             }

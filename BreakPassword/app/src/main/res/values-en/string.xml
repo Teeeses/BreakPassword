@@ -25,6 +25,7 @@
     <string name="empty_hard_level">Hard level: empty</string>
     <string name="very_hard_level">Very hard level: %d</string>
     <string name="empty_very_hard_level">Very hard level: empty</string>
+    <string name="play_super_hard_game">Play a super hard game!</string>
 
 
 
