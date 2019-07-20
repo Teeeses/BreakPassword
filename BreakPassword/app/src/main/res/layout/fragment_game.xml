@@ -226,11 +226,11 @@
                             android:layout_marginEnd="@dimen/mini_margin" />
                     </LinearLayout>
 
-                    <VideoView
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
+                        android:layout_height="1dp"
                         android:layout_marginTop="@dimen/standard_margin"
-                        android:background="@color/mintegral_reward_six_black_transparent"/>
+                        android:background="@android:color/black"/>
 
                     <RelativeLayout
                         android:id="@+id/playSeasonsContainer"
