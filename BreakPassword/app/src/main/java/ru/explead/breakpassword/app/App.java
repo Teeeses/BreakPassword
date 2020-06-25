@@ -1,5 +1,6 @@
 package ru.explead.breakpassword.app;
 
+import android.app.Application;
 import android.content.Context;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
@@ -10,7 +11,7 @@ import ru.explead.breakpassword.logic.Controller;
  * Created by develop on 13.01.2017.
  */
 
-public class App extends MultiDexApplication {
+public class App extends Application {
 
     private static float widthScreen;
     private static float heightScreen;
@@ -25,7 +26,6 @@ public class App extends MultiDexApplication {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        MultiDex.install(this);
     }
 
     public static float getWidthScreen() {

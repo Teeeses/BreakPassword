@@ -15,7 +15,6 @@ import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -25,6 +24,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.appodeal.ads.Appodeal;
 import com.google.android.material.snackbar.Snackbar;
@@ -50,7 +51,7 @@ import ru.explead.breakpassword.logic.UtilsWinText;
  * Created by develop on 13.01.2017.
  */
 
-public class GameFragment extends Fragment implements HackCallback {
+public class GameFragment extends Fragment implements HackCallback, KeyboardAdapter.OnKeyboardClickListener {
 
     private Controller controller;
     private UtilsDesign utilsDesign;
@@ -86,7 +87,7 @@ public class GameFragment extends Fragment implements HackCallback {
     private int countClick = 0;
     private boolean showingAdvertise = false;
 
-    private GridView keyboard;
+    private RecyclerView keyboard;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -267,19 +268,22 @@ public class GameFragment extends Fragment implements HackCallback {
      * Создаем кастомную клавиатуру
      */
     private void createKeyboard() {
-        KeyboardAdapter adapter = new KeyboardAdapter(requireContext(), value -> {
-            if(isShowKeyboard) {
-                soundPool.play(1, 0.5f, 0.5f, 1, 0, 1f);
-                controller.getFocusCell().setValue(value);
-                controller.removeAllFocusCells();
-                controller.changeFocusCell();
-                if (controller.getIdFocusCell() == Controller.NO_ACTIVE) {
-                    closeKeyboard();
-                }
-            }
-        });
-
+        KeyboardAdapter adapter = new KeyboardAdapter(requireContext(), this);
+        keyboard.setLayoutManager(new GridLayoutManager(requireContext(), 5));
         keyboard.setAdapter(adapter);
+    }
+
+    @Override
+    public void onKeyboardItemClick(int value) {
+        if(isShowKeyboard) {
+            soundPool.play(1, 0.5f, 0.5f, 1, 0, 1f);
+            controller.getFocusCell().setValue(value);
+            controller.removeAllFocusCells();
+            controller.changeFocusCell();
+            if (controller.getIdFocusCell() == Controller.NO_ACTIVE) {
+                closeKeyboard();
+            }
+        }
     }
 
     /**
@@ -361,10 +365,5 @@ public class GameFragment extends Fragment implements HackCallback {
         addCellsOnLayout();
         adapter.notifyDataSetChanged();
         setBestResult();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
     }
 }

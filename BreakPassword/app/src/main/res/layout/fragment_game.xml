@@ -109,13 +109,12 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <GridView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/keyboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:layout_alignParentBottom="true"
-        android:numColumns="5"
         android:visibility="invisible"/>
 
     <LinearLayout
