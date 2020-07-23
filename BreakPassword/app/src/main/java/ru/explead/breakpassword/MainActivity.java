@@ -10,8 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.appodeal.ads.Appodeal;
-
 import ru.explead.breakpassword.app.App;
 import ru.explead.breakpassword.app.Utils;
 import ru.explead.breakpassword.beans.Complexity;
@@ -29,10 +27,6 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Appodeal.disableNetwork(this, "cheetah");
-        String appKey = "4b89eb3c54472eb7feb0577f0a463c6fc72415bd402aab9f";
-        Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL | Appodeal.REWARDED_VIDEO, true);
 
         res = this.getResources();
         sPref = getSharedPreferences(Utils.APP_PREFERENCES, MODE_PRIVATE);

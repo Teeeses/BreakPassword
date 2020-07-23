@@ -26,8 +26,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.appodeal.ads.Appodeal;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -83,9 +81,6 @@ public class GameFragment extends Fragment implements HackCallback, KeyboardAdap
     private SoundPool soundPool;
 
     private Animation wrong;
-
-    private int countClick = 0;
-    private boolean showingAdvertise = false;
 
     private RecyclerView keyboard;
 
@@ -152,7 +147,6 @@ public class GameFragment extends Fragment implements HackCallback, KeyboardAdap
 
         setBestResult();
         createKeyboard();
-        showAdvertise();
         return view;
     }
 
@@ -191,10 +185,6 @@ public class GameFragment extends Fragment implements HackCallback, KeyboardAdap
     private View.OnClickListener btnHackClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            countClick++;
-            if(!showingAdvertise || (countClick % 5 == 0)) {
-                showAdvertise();
-            }
 
             if(controller.getStatus() == Controller.FINISH) {
                 onRestart();
@@ -212,16 +202,6 @@ public class GameFragment extends Fragment implements HackCallback, KeyboardAdap
             }
         }
     };
-
-    private void showAdvertise() {
-        if(Appodeal.isLoaded(Appodeal.INTERSTITIAL)) {
-            Appodeal.show(requireActivity(), Appodeal.INTERSTITIAL);
-            showingAdvertise = true;
-        } else if(Appodeal.isLoaded(Appodeal.REWARDED_VIDEO)) {
-            Appodeal.show(requireActivity(), Appodeal.REWARDED_VIDEO);
-            showingAdvertise = true;
-        }
-    }
 
     @Override
     public void win() {
