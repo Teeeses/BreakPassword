@@ -1,10 +1,8 @@
 package ru.explead.breakpassword.fragments;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.media.AudioManager;
 import android.media.SoundPool;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -26,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -103,8 +102,6 @@ public class GameFragment extends Fragment implements HackCallback, KeyboardAdap
         layoutWin.setOnClickListener(view16 -> layoutWin.setVisibility(View.GONE));
         tvWin = view.findViewById(R.id.tvWin);
         ivWin = view.findViewById(R.id.ivWin);
-        ImageView btnSeasons = view.findViewById(R.id.btnSeasons);
-        RelativeLayout playSeasonsContainer = view.findViewById(R.id.playSeasonsContainer);
         tvPassword = view.findViewById(R.id.tvPassword);
         keyboard = view.findViewById(R.id.keyboard);
         tvAttempts = view.findViewById(R.id.tvAttempts);
@@ -142,18 +139,9 @@ public class GameFragment extends Fragment implements HackCallback, KeyboardAdap
         final RelativeLayout layoutHelper = view.findViewById(R.id.layoutHelper);
         layoutHelper.setOnClickListener(view1 -> layoutHelper.setVisibility(View.GONE));
 
-        btnSeasons.setOnClickListener(view12 -> openSeasonsGame());
-        playSeasonsContainer.setOnClickListener(view17 -> openSeasonsGame());
-
         setBestResult();
         createKeyboard();
         return view;
-    }
-
-    private void openSeasonsGame() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("market://details?id=com.explead.seasons"));
-        startActivity(intent);
     }
 
     private void setBestResult() {
