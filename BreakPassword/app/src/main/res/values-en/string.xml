@@ -29,17 +29,17 @@
 
 
 
-    <string name="win_1">You are a fucking genius!!!</string>
-    <string name="win_2">You are a fucking genius!!!</string>
+    <string name="win_1">You are a genius!</string>
+    <string name="win_2">You are a genius!</string>
 
 
-    <string name="win_3">Are you a professional?? It was probably difficult...</string>
-    <string name="win_4">It was cool, great, incredible...</string>
+    <string name="win_3">Are you a professional?? It was probably difficult…</string>
+    <string name="win_4">It was cool, great, incredible…</string>
 
 
     <string name="win_8">It was a long, very bad!</string>
     <string name="win_9">Train more to improve the result!</string>
-    <string name="win_10">You are not a hacker...</string>
+    <string name="win_10">You are not a hacker…</string>
 
     <string name="win_0">Well, but you can do better!</string>
 
