@@ -5,7 +5,7 @@
     <string name="onPlace">Цифр на местах: %d</string>
     <string name="matches">Совпадений: %d</string>
     <string name="password">Пароль</string>
-    <string name="hack">Взломать</string>
+    <string name="hack">Взлом</string>
     <string name="new_game">Новая игра</string>
     <string name="restart">Новая игра</string>
     <string name="cancel">Отменить</string>
@@ -35,19 +35,26 @@
     <string name="win_3">Это было шикарно! Сразу видно - за делом профи, а слабо улучшить свой результат?</string>
     <string name="win_4">Вы приложили много усилий чтобы добиться такого результата, но, мне кажется, вы способны на большее</string>
 
-
     <string name="win_8">Это было достаточно долго, но не растраивайтесь, опыт приходит не сразу!</string>
     <string name="win_9">Вам нужно больше тренироваться и вы улучшите свой результат</string>
     <string name="win_10">Взломщиком вас назвать сложно, но не растраивайтесь, может вы человек хороший...</string>
 
     <string name="win_0">Неплохо сыграно, но явно можно лучше!</string>
 
-
     <string name="how_play">Как играть?</string>
     <string name="example">Пример: загадан пароль 8426</string>
     <string name="example_you_input">Вы ввели: 6328</string>
     <string name="example_on_place">На месте: \n1 (2)</string>
     <string name="example_matches">Совпадений: \n2 (6, 8)</string>
+
+    <string name="info_empty_cell">Такой цифры в пароле нет.</string>
+    <string name="info_it_has">Цифра в пароле есть, но она стоит не на своем месте.</string>
+    <string name="info_on_place">Вы правильно расположили цифру.</string>
+
+    <string name="info_rules">Вам необходимо угадать пароль.</string>
+    <string name="rules">Правила:</string>
+
+    <string name="again">Снова</string>
 
     <string name="no_thanks">Нет, спасибо</string>
     <string name="install">Установить</string>

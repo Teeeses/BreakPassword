@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.9"
+        android:background="@drawable/bg_gradient"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/ivWin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/giant_margin"
+            android:layout_marginTop="@dimen/giant_margin"
+            android:layout_marginRight="@dimen/giant_margin"
+            android:adjustViewBounds="true"
+            android:src="@drawable/win" />
+
+        <TextView
+            android:id="@+id/tvWin"
+            style="@style/CustomFontStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:layout_marginRight="@dimen/standard_margin"
+            android:layout_marginLeft="@dimen/standard_margin"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/more_standard_text"
+            android:textStyle="bold"
+            tools:text="@string/win_8" />
+
+        <TextView
+            android:id="@+id/tvAttempts"
+            style="@style/CustomFontStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/mini_margin"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/more_standard_text"
+            android:textStyle="bold"
+            tools:text="@string/committedAttemptsAndBest" />
+    </LinearLayout>
+</layout>

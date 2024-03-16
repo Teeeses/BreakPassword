@@ -49,6 +49,14 @@
     <string name="example_on_place">Figures on the spot: \n1 (2)</string>
     <string name="example_matches">Matches: \n2 (6, 8)</string>
 
+    <string name="info_empty_cell">This number is not in the password.</string>
+    <string name="info_it_has">There is a number in the password, but it is in the wrong place.</string>
+    <string name="info_on_place">You got the number right.</string>
+
+    <string name="info_rules">You need to guess the password.</string>
+    <string name="rules">Rules:</string>
+
+    <string name="again">Again</string>
 
     <string name="no_thanks">No thanks</string>
     <string name="install">Install</string>

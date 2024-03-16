@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.breakpasswordnew.presentation.GameScreenViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_gradient">
+
+        <ImageView
+            android:id="@+id/menu_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/menuxa"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="@dimen/standard_margin" />
+
+        <ImageView
+            android:id="@+id/info_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/info_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="@dimen/standard_margin" />
+
+        <TextView
+            android:id="@+id/attempts_title"
+            style="@style/CustomFontStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/mini_margin"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/more_standard_text"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/menu_icon"
+            tools:text="@string/committedAttempts" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/password_list_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/passwords_view_side_margin"
+            android:layout_marginRight="@dimen/passwords_view_side_margin"
+            android:layout_marginBottom="@dimen/mini_margin"
+            app:layout_constraintBottom_toTopOf="@+id/keyboard_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/attempts_title" />
+
+        <com.example.breakpasswordnew.presentation.views.KeyboardView
+            android:id="@+id/keyboard_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:ActionHandler="@{viewModel}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="true">
+        <shape android:shape="oval">
+            <solid android:color="@color/noneCell" />
+            <stroke android:width="2dp" android:color="@android:color/white" />
+            <padding android:bottom="@dimen/mini_margin" android:left="@dimen/mini_margin" android:right="@dimen/mini_margin" android:top="@dimen/mini_margin" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/noneCell" />
+
+            <padding android:bottom="@dimen/mini_margin" android:left="@dimen/mini_margin" android:right="@dimen/mini_margin" android:top="@dimen/mini_margin" />
+        </shape>
+    </item>
+</selector>

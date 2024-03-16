@@ -18,8 +18,20 @@
         <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
     </style>
 
+    <style name="DialogButtonStyle" parent="CustomFontStyle">
+        <item name="android:background">@drawable/menu_button_bg</item>
+    </style>
+
     <style name="CustomFontStyle" parent="@android:style/TextAppearance.Small">
         <item name="android:fontFamily">@font/level_personal</item>
     </style>
+
+    <style name="KeyboardTextStyle" parent="CustomFontStyle">
+        <item name="android:fontFamily">@font/level_personal</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/keyboard_item_text_size</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 
 </resources>

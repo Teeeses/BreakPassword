@@ -3,150 +3,85 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="@dimen/mini_margin" >
+    android:padding="@dimen/mini_margin">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/btnEasy"
+            style="@style/DialogButtonStyle"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:layout_marginRight="@dimen/radius"
-            android:layout_weight="1" >
-
-            <Button
-                android:id="@+id/btnEasy"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:padding="@dimen/radius"
-                android:textColor="@android:color/white"
-                android:background="@color/colorPrimary"
-                android:textSize="@dimen/standard_text"
-                style="@style/CustomFontStyle"
-                android:text="Easy" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginRight="@dimen/radius"
-            android:layout_marginLeft="@dimen/radius"
-            android:layout_weight="1" >
-
-            <Button
-                android:id="@+id/btnMedium"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:padding="@dimen/radius"
-                android:textColor="@android:color/white"
-                android:background="@color/colorPrimary"
-                android:textSize="@dimen/standard_text"
-                style="@style/CustomFontStyle"
-                android:text="Medium" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginRight="@dimen/radius"
-            android:layout_marginLeft="@dimen/radius"
-            android:layout_weight="1" >
-
-            <Button
-                android:id="@+id/btnHard"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:padding="@dimen/radius"
-                android:textColor="@android:color/white"
-                android:background="@color/colorPrimary"
-                android:textSize="@dimen/standard_text"
-                style="@style/CustomFontStyle"
-                android:text="Hard" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginLeft="@dimen/radius"
-            android:layout_weight="1" >
-
-            <Button
-                android:id="@+id/btnVeryHard"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:textColor="@android:color/white"
-                android:background="@color/colorPrimary"
-                android:padding="@dimen/radius"
-                android:textSize="@dimen/standard_text"
-                style="@style/CustomFontStyle"
-                android:text="Very hard" />
-        </RelativeLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/standard_margin"
-        android:orientation="vertical" >
-
-        <Button
-            android:id="@+id/btnRestart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/more_standard_text"
+            android:padding="@dimen/radius"
+            android:text="Easy"
             android:textColor="@android:color/white"
-            android:background="@color/colorPrimary"
-            android:textAllCaps="false"
-            android:padding="@dimen/standard_margin"
-            style="@style/CustomFontStyle"
-            android:text="@string/restart" />
+            android:textSize="@dimen/standard_text" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/standard_margin"
-        android:visibility="gone"
-        android:orientation="vertical" >
-
-        <Button
-            android:id="@+id/btnResults"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/more_standard_text"
+        <TextView
+            android:id="@+id/btnMedium"
+            style="@style/DialogButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="@dimen/radius"
+            android:layout_marginRight="@dimen/radius"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/radius"
+            android:text="Medium"
             android:textColor="@android:color/white"
-            android:background="@color/colorPrimary"
-            android:textAllCaps="false"
-            android:padding="@dimen/standard_margin"
-            android:text="@string/results" />
+            android:textSize="@dimen/standard_text" />
 
+        <TextView
+            android:id="@+id/btnHard"
+            style="@style/DialogButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="@dimen/radius"
+            android:layout_marginRight="@dimen/radius"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/radius"
+            android:text="Hard"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/standard_text" />
+
+        <TextView
+            android:id="@+id/btnVeryHard"
+            style="@style/DialogButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="@dimen/radius"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/radius"
+            android:text="Very hard"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/standard_text" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/standard_margin"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/btnCancel"
+            style="@style/DialogButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/more_standard_text"
-            android:textColor="@android:color/white"
             android:background="@color/colorPrimary"
-            android:textAllCaps="false"
             android:padding="@dimen/standard_margin"
-            style="@style/CustomFontStyle"
-            android:text="@string/cancel" />
+            android:text="@string/cancel"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/more_standard_text" />
 
     </LinearLayout>
 </LinearLayout>
